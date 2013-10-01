@@ -65,3 +65,20 @@ Log files are available here :
 
 * :download:`xrootd.log </_static/C01_Q0004/xrootd.log>`
 * :download:`qserv-master.log </_static/C01_Q0004/qserv-master.log>`
+
+Here the description of qservMeta.LSST__Source table :
+
+.. code-block:: bash
+  :emphasize-lines: 1
+
+  mysql> desc LSST__Source;
+  +------------+------------+------+-----+---------+-------+
+  | Field      | Type       | Null | Key | Default | Extra |
+  +------------+------------+------+-----+---------+-------+
+  | sourceId   | bigint(20) | NO   | PRI | NULL    |       |
+  | chunkId    | int(11)    | YES  |     | NULL    |       |
+  | subChunkId | int(11)    | YES  |     | NULL    |       |
+  +------------+------------+------+-----+---------+-------+
+  3 rows in set (0.00 sec)
+
+Could you please give me the exact structure of LSST_Source table ?
