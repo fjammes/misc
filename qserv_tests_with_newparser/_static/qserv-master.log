@@ -1,0 +1,94 @@
+Configuration:
+[frontend]
+xrootd = clrlsst-dbmaster-vm.in2p3.fr:1094
+scratch_path = /dev/shm/qserv-fjammes-b837a53c36d3d0537e3940ab9b7b62831a875c440a4ab1309d31585f
+port = 7080
+xrootd_user = qsmaster
+
+[tuning]
+memoryengine = yes
+
+[partitioner]
+emptychunklistfile = /opt/qserv-dev/etc/emptyChunks.txt
+
+[mgmtdb]
+db = qservMeta
+
+[mysql]
+mysqlclient = 
+
+[debug]
+chunklimit = -1
+
+[metaServer]
+passwd = qmsPass
+host = localhost
+port = 7082
+user = qms
+
+[resultdb]
+dropmem = 
+passwd = 
+db = qservResult
+unix_socket = /opt/qserv-dev/var/lib/mysql/mysql.sock
+host = 
+user = qsmaster
+port = 0
+
+contents: xmlrpc_check xmlrpc_echo xmlrpc_help xmlrpc_initMetadataCache xmlrpc_joinQuery xmlrpc_query xmlrpc_queryNow xmlrpc_reset xmlrpc_resultTableString xmlrpc_results xmlrpc_stop xmlrpc_submitQuery xmlrpc_submitQueryPlain xmlrpc_submitQueryWithLock
+/usr/lib64/python2.6/xmlrpclib.py:612: DeprecationWarning: The xmllib module is obsolete.  Use xml.sax instead.
+  import xmllib # lazy subclassing (!)
+
+
+Metadata Cache in C++:
+db: LSST: is partitioned (nStripes=85, nSubStripes=12, defOvF=0, defOvNN=0.025).
+  Tables:
+   Filter: is not partitioned.
+
+   LeapSeconds: is not partitioned.
+
+   Logs: is not partitioned.
+
+   Object: is partitioned (overlap=0, phiCol=ra_PS, thetaCol=decl_PS, objIdCol=objectId, phiColNo=2, thetaColNo=4, objIdColNo=0, logPart=1, physChunking=33).
+
+   RefSrcMatch: is not partitioned.
+
+   Science_Ccd_Exposure: is not partitioned.
+
+   SimRefObject: is not partitioned.
+
+   Source: is partitioned (overlap=0, phiCol=raObject, thetaCol=declObject, objIdCol=objectId, phiColNo=33, thetaColNo=34, objIdColNo=3, logPart=1, physChunking=33).
+
+   sdqa_Metric: is not partitioned.
+
+
+
+Starting Qserv interface on port: 7080
+AliasMap fwd()    rev()
+Found ref:Table(.Source)
+Adding orsibs: COMP_PREDICATE FACTOR COLUMN_REF objectId = FACTOR 402412665835716 AND COMP_PREDICATE FACTOR COLUMN_REF filterName = FACTOR 'r'
+Parsed value expression for select list.
+taiMidPoint
+psfFlux
+psfFluxSigma
+ra
+decl
+SELECT taiMidPoint,psfFlux,psfFluxSigma,ra,decl FROM Source WHERE objectId=402412665835716 AND filterName='r'
+Testing 
+Testing 
+aggr origlist: taiMidPoint, psfFlux, psfFluxSigma, ra, decl, 
+pass: taiMidPoint,psfFlux,psfFluxSigma,ra,decl
+fixup: 
+parallel: SELECT taiMidPoint,psfFlux,psfFluxSigma,ra,decl FROM LSST.Source_%CC% AS QST_1_ WHERE objectId=402412665835716 AND filterName='r'
+merge: SELECT
+Using 85 stripes and 12 substripes.
+constraint= <lsst.qserv.master.masterLib.Constraint; proxy of <Swig Object of type 'lsst::qserv::master::Constraint *' at 0x1bd2600> >
+Looking for indexhints in  [('sIndex', ['LSST', 'Source', 'objectId', '402412665835716'])]
+Using /opt/qserv-dev/etc/emptyChunks.txt as default empty chunks file.
+operational error, retrying (1054, "Unknown column 'objectId' in 'where clause'")
+operational error, retrying (1054, "Unknown column 'objectId' in 'where clause'")
+operational error, retrying (1054, "Unknown column 'objectId' in 'where clause'")
+operational error, retrying (1054, "Unknown column 'objectId' in 'where clause'")
+operational error, retrying (1054, "Unknown column 'objectId' in 'where clause'")
+Too many SQL failures, not retrying.
+cids are  None

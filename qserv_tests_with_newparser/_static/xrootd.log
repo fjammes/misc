@@ -1,0 +1,51 @@
+131001 11:15:51 2432 Scalla is starting. . .
+Copr.  2010 Stanford University, xrd version qsPatch4
+++++++ xrootd worker@clrlsst-dbmaster-vm.in2p3.fr initialization started.
+Config using configuration file /opt/qserv-dev/etc/lsp.cf
+=====> all.adminpath /opt/qserv-dev/tmp
+=====> xrd.port 1094
+=====> xrd.network nodnr
+Config maximum number of connections restricted to 4096
+Copr.  2007 Stanford University, xrootd version 2.9.7 build qsPatch4
+++++++ xrootd protocol initialization started.
+=====> xrootd.fslib /opt/qserv-dev/qserv/worker/dist/libqserv_worker.so
+=====> xrootd.async force
+=====> all.pidpath /opt/qserv-dev/var/run
+=====> all.export /q/ nolock
+=====> all.export /result/ nolock
+Config exporting /q/
+Config exporting /result/
+Config warning: 'xrootd.seclib' not specified; strong authentication disabled!
+++++++ File system initialization started.
+=====> all.role server
+=====> ofs.osslib /opt/qserv-dev/qserv/worker/dist/libqserv_workerCmsd.so 
+QservOss Init
+Launching query : SELECT db FROM qservw_.Dbs
+TEST : No databases found to export.SELECT db FROM qservw_.Dbs
+Valid paths: 
+QservOss Init
+Launching query : SELECT db FROM qservw_worker.Dbs
+Valid paths: LSST1234567890**keyLSST6630**key, LSST6631**key, LSST6800**key, LSST6801**key, LSST6968**key, LSST6970**key, LSST6971**key, LSST7138**key, LSST7140**key, LSST7308**key, LSST7310**key, LSST7478**key, LSST7648**key, 
+QservOss (Qserv Oss for server cmsd) "worker"
+++++++ Configuring server role. . .
+=====> all.adminpath /opt/qserv-dev/tmp
+Config effective /opt/qserv-dev/etc/lsp.cf ofs configuration:
+       ofs.role server
+       ofs.maxdelay   60
+       ofs.osslib /opt/qserv-dev/qserv/worker/dist/libqserv_workerCmsd.so
+       ofs.persist    manual hold 600 logdir /opt/qserv-dev/tmp/worker/.ofs/posc.log
+       ofs.trace      0
+------ File system server initialization completed.
+No XRDLCLROOT set. Bug in xrootd?
+Launching query : SELECT db FROM qservw_worker.Dbs
+MySqlFs (MySQL File System)
+$Id$
+Config warning: 'xrootd.prepare logdir' not specified; prepare tracking disabled.
+------ xrootd protocol initialization completed.
+------ xrootd worker@clrlsst-dbmaster-vm.in2p3.fr:1094 initialization completed.
+131001 11:16:51 2451 cms_Finder: Waiting for cms path /opt/qserv-dev/tmp/worker/.olb/olbd.admin
+131001 11:18:01 2451 cms_Finder: Waiting for cms path /opt/qserv-dev/tmp/worker/.olb/olbd.admin
+131001 11:19:11 2451 cms_Finder: Waiting for cms path /opt/qserv-dev/tmp/worker/.olb/olbd.admin
+131001 11:20:21 2451 cms_Finder: Waiting for cms path /opt/qserv-dev/tmp/worker/.olb/olbd.admin
+131001 11:21:31 2451 cms_Finder: Waiting for cms path /opt/qserv-dev/tmp/worker/.olb/olbd.admin
+131001 11:22:41 2451 cms_Finder: Waiting for cms path /opt/qserv-dev/tmp/worker/.olb/olbd.admin
