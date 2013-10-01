@@ -1,0 +1,161 @@
+130930 17:19:08 31384 Scalla is starting. . .
+Copr.  2010 Stanford University, xrd version qsPatch4
+++++++ xrootd worker@clrlsst-dbmaster-vm.in2p3.fr initialization started.
+Config using configuration file /opt/qserv-dev/etc/lsp.cf
+=====> all.adminpath /opt/qserv-dev/tmp
+=====> xrd.port 1094
+=====> xrd.network nodnr
+Config maximum number of connections restricted to 4096
+Copr.  2007 Stanford University, xrootd version 2.9.7 build qsPatch4
+++++++ xrootd protocol initialization started.
+=====> xrootd.fslib /opt/qserv-dev/qserv/worker/dist/libqserv_worker.so
+=====> xrootd.async force
+=====> all.pidpath /opt/qserv-dev/var/run
+=====> all.export /q/ nolock
+=====> all.export /result/ nolock
+Config exporting /q/
+Config exporting /result/
+Config warning: 'xrootd.seclib' not specified; strong authentication disabled!
+++++++ File system initialization started.
+=====> all.role server
+=====> ofs.osslib /opt/qserv-dev/qserv/worker/dist/libqserv_workerCmsd.so 
+QservOss Init
+Launching query : SELECT db FROM qservw_.Dbs
+TEST : No databases found to export.SELECT db FROM qservw_.Dbs
+Valid paths: 
+QservOss Init
+Launching query : SELECT db FROM qservw_worker.Dbs
+Valid paths: LSST1234567890**keyLSST6630**key, LSST6631**key, LSST6800**key, LSST6801**key, LSST6968**key, LSST6970**key, LSST6971**key, LSST7138**key, LSST7140**key, LSST7308**key, LSST7310**key, LSST7478**key, LSST7648**key, 
+QservOss (Qserv Oss for server cmsd) "worker"
+++++++ Configuring server role. . .
+=====> all.adminpath /opt/qserv-dev/tmp
+Config effective /opt/qserv-dev/etc/lsp.cf ofs configuration:
+       ofs.role server
+       ofs.maxdelay   60
+       ofs.osslib /opt/qserv-dev/qserv/worker/dist/libqserv_workerCmsd.so
+       ofs.persist    manual hold 600 logdir /opt/qserv-dev/tmp/worker/.ofs/posc.log
+       ofs.trace      0
+------ File system server initialization completed.
+No XRDLCLROOT set. Bug in xrootd?
+Launching query : SELECT db FROM qservw_worker.Dbs
+MySqlFs (MySQL File System)
+$Id$
+Config warning: 'xrootd.prepare logdir' not specified; prepare tracking disabled.
+------ xrootd protocol initialization completed.
+------ xrootd worker@clrlsst-dbmaster-vm.in2p3.fr:1094 initialization completed.
+130930 17:20:08 31403 cms_Finder: Waiting for cms path /opt/qserv-dev/tmp/worker/.olb/olbd.admin
+130930 17:21:18 31403 cms_Finder: Waiting for cms path /opt/qserv-dev/tmp/worker/.olb/olbd.admin
+130930 17:22:28 31403 cms_Finder: Waiting for cms path /opt/qserv-dev/tmp/worker/.olb/olbd.admin
+130930 17:22:30 31390 XrootdXeq: qsmaster.31420:20@134.158.127.130 login
+File write(0) at 0 for 201 by qsmaster
+File write(0) Added.
+File write(0) Flushing.
+Flush ok, ready to return good.
+File write(0) at 0 for 201 by qsmaster --FINISH--
+0 WriteSpawn Mon Sep 30 17:22:30 2013 0.000767
+File write(0) at 0 for 201 by qsmaster
+Runner running Task: msg: session=1 chunk=7310 db=LSST frag: q=SELECT s.ra,s.decl,o.raRange,o.declRange FROM LSST.Object_7310 AS o WHERE o.objectId=390034570102582 AND o.latestObsTime=s.taiMidPoint, sc= rt=r_1e01fa2d9ea14d542987c2af43bb3645f_7310_0 
+File write(0) Added.
+File write(0) Flushing.
+Flush ok, ready to return good.
+File write(0) at 0 for 201 by qsmaster --FINISH--
+0 WriteSpawn Mon Sep 30 17:22:30 2013 0.000265
+Exec in flight for Db = q_91a5c8633782abe027562eb79b3b212e, dump = /opt/qserv-dev/xrootd-run/result/91a5c8633782abe027562eb79b3b212e
+File write(0) at 0 for 201 by qsmaster
+(fileobj:0x7f0722ba5cc0) Db = q_91a5c8633782abe027562eb79b3b212e, dump = /opt/qserv-dev/xrootd-run/result/91a5c8633782abe027562eb79b3b212e
+TIMING,q_91a5ScriptStart,1380554550
+File write(0) Added.
+File write(0) Flushing.
+Flush ok, ready to return good.
+File write(0) at 0 for 201 by qsmaster --FINISH--
+0 WriteSpawn Mon Sep 30 17:22:30 2013 0.000279
+File close(7310) by qsmaster
+Runner running Task: msg: session=1 chunk=7648 db=LSST frag: q=SELECT s.ra,s.decl,o.raRange,o.declRange FROM LSST.Object_7648 AS o WHERE o.objectId=390034570102582 AND o.latestObsTime=s.taiMidPoint, sc= rt=r_1e01fa2d9ea14d542987c2af43bb3645f_7648_0 
+File close(7648) by qsmaster
+Exec in flight for Db = q_639cecf75aae026e7854d202937b84d3, dump = /opt/qserv-dev/xrootd-run/result/639cecf75aae026e7854d202937b84d3
+(fileobj:0x7f0721d7dcc0) Db = q_639cecf75aae026e7854d202937b84d3, dump = /opt/qserv-dev/xrootd-run/result/639cecf75aae026e7854d202937b84d3
+TIMING,q_639cScriptStart,1380554550
+File close(7478) by qsmaster
+Runner running Task: msg: session=1 chunk=7478 db=LSST frag: q=SELECT s.ra,s.decl,o.raRange,o.declRange FROM LSST.Object_7478 AS o WHERE o.objectId=390034570102582 AND o.latestObsTime=s.taiMidPoint, sc= rt=r_1e01fa2d9ea14d542987c2af43bb3645f_7478_0 
+Exec in flight for Db = q_f04e3192eadbe08e21e5c0235bff8fd7, dump = /opt/qserv-dev/xrootd-run/result/f04e3192eadbe08e21e5c0235bff8fd7
+(fileobj:0x7f072137ccc0) Db = q_f04e3192eadbe08e21e5c0235bff8fd7, dump = /opt/qserv-dev/xrootd-run/result/f04e3192eadbe08e21e5c0235bff8fd7
+TIMING,q_f04eScriptStart,1380554550
+TIMING,q_f04eQueryBuildSubStart,1380554550
+TIMING,q_f04eQueryBuildSubFinish,1380554550
+TIMING,q_f04eQueryExecStart,1380554550
+TIMING,q_91a5QueryBuildSubStart,1380554550
+TIMING,q_91a5QueryBuildSubFinish,1380554550
+TIMING,q_91a5QueryExecStart,1380554550
+>>Unknown column 's.ra' in 'field list' Unable to execute query: CREATE TABLE r_1e01fa2d9ea14d542987c2af43bb3645f_7478_0 SELECT s.ra,s.decl,o.raRange,o.declRange FROM LSST.Object_7478 AS o WHERE o.objectId=390034570102582 AND o.latestObsTime=s.taiMidPoint;
+<<---Error with piece 0 complete (size=1).
+TIMING,q_639cQueryBuildSubStart,1380554550
+TIMING,q_f04eQueryExecFinish,1380554550
+TIMING,q_639cQueryBuildSubFinish,1380554550
+Broken! ,q_f04eQueryExec---Unknown column 's.ra' in 'field list' Unable to execute query: CREATE TABLE r_1e01fa2d9ea14d542987c2af43bb3645f_7478_0 SELECT s.ra,s.decl,o.raRange,o.declRange FROM LSST.Object_7478 AS o WHERE o.objectId=390034570102582 AND o.latestObsTime=s.taiMidPoint;
+ (during QueryExec)
+QueryFragment: CREATE TABLE r_1e01fa2d9ea14d542987c2af43bb3645f_7478_0 SELECT s.ra,s.decl,o.raRange,o.declRange FROM LSST.Object_7478 AS o WHERE o.objectId=390034570102582 AND o.latestObsTime=s.taiMidPoint;
+
+TIMING,q_639cQueryExecStart,1380554550
+Fail QueryExec phase for q_f04e: Unknown column 's.ra' in 'field list' Unable to execute query: CREATE TABLE r_1e01fa2d9ea14d542987c2af43bb3645f_7478_0 SELECT s.ra,s.decl,o.raRange,o.declRange FROM LSST.Object_7478 AS o WHERE o.objectId=390034570102582 AND o.latestObsTime=s.taiMidPoint;
+ (during QueryExec)
+QueryFragment: CREATE TABLE r_1e01fa2d9ea14d542987c2af43bb3645f_7478_0 SELECT s.ra,s.decl,o.raRange,o.declRange FROM LSST.Object_7478 AS o WHERE o.objectId=390034570102582 AND o.latestObsTime=s.taiMidPoint;
+
+>>Unknown column 's.ra' in 'field list' Unable to execute query: CREATE TABLE r_1e01fa2d9ea14d542987c2af43bb3645f_7310_0 SELECT s.ra,s.decl,o.raRange,o.declRange FROM LSST.Object_7310 AS o WHERE o.objectId=390034570102582 AND o.latestObsTime=s.taiMidPoint;
+<<---Error with piece 0 complete (size=1).
+TIMING,q_91a5QueryExecFinish,1380554550
+Broken! ,q_91a5QueryExec---Unknown column 's.ra' in 'field list' Unable to execute query: CREATE TABLE r_1e01fa2d9ea14d542987c2af43bb3645f_7310_0 SELECT s.ra,s.decl,o.raRange,o.declRange FROM LSST.Object_7310 AS o WHERE o.objectId=390034570102582 AND o.latestObsTime=s.taiMidPoint;
+ (during QueryExec)
+QueryFragment: CREATE TABLE r_1e01fa2d9ea14d542987c2af43bb3645f_7310_0 SELECT s.ra,s.decl,o.raRange,o.declRange FROM LSST.Object_7310 AS o WHERE o.objectId=390034570102582 AND o.latestObsTime=s.taiMidPoint;
+
+(FinishFail:0x7f072137ccc0) Db = q_f04e3192eadbe08e21e5c0235bff8fd7, dump = /opt/qserv-dev/xrootd-run/result/f04e3192eadbe08e21e5c0235bff8fd7 hash=f04e3192eadbe08e21e5c0235bff8fd7
+Fail QueryExec phase for q_91a5: Unknown column 's.ra' in 'field list' Unable to execute query: CREATE TABLE r_1e01fa2d9ea14d542987c2af43bb3645f_7310_0 SELECT s.ra,s.decl,o.raRange,o.declRange FROM LSST.Object_7310 AS o WHERE o.objectId=390034570102582 AND o.latestObsTime=s.taiMidPoint;
+ (during QueryExec)
+QueryFragment: CREATE TABLE r_1e01fa2d9ea14d542987c2af43bb3645f_7310_0 SELECT s.ra,s.decl,o.raRange,o.declRange FROM LSST.Object_7310 AS o WHERE o.objectId=390034570102582 AND o.latestObsTime=s.taiMidPoint;
+
+(FinishFail:0x7f0722ba5cc0) Db = q_91a5c8633782abe027562eb79b3b212e, dump = /opt/qserv-dev/xrootd-run/result/91a5c8633782abe027562eb79b3b212e hash=91a5c8633782abe027562eb79b3b212e
+>>Unknown column 's.ra' in 'field list' Unable to execute query: CREATE TABLE r_1e01fa2d9ea14d542987c2af43bb3645f_7648_0 SELECT s.ra,s.decl,o.raRange,o.declRange FROM LSST.Object_7648 AS o WHERE o.objectId=390034570102582 AND o.latestObsTime=s.taiMidPoint;
+<<---Error with piece 0 complete (size=1).
+TIMING,q_639cQueryExecFinish,1380554550
+Broken! ,q_639cQueryExec---Unknown column 's.ra' in 'field list' Unable to execute query: CREATE TABLE r_1e01fa2d9ea14d542987c2af43bb3645f_7648_0 SELECT s.ra,s.decl,o.raRange,o.declRange FROM LSST.Object_7648 AS o WHERE o.objectId=390034570102582 AND o.latestObsTime=s.taiMidPoint;
+ (during QueryExec)
+QueryFragment: CREATE TABLE r_1e01fa2d9ea14d542987c2af43bb3645f_7648_0 SELECT s.ra,s.decl,o.raRange,o.declRange FROM LSST.Object_7648 AS o WHERE o.objectId=390034570102582 AND o.latestObsTime=s.taiMidPoint;
+
+Fail QueryExec phase for q_639c: Unknown column 's.ra' in 'field list' Unable to execute query: CREATE TABLE r_1e01fa2d9ea14d542987c2af43bb3645f_7648_0 SELECT s.ra,s.decl,o.raRange,o.declRange FROM LSST.Object_7648 AS o WHERE o.objectId=390034570102582 AND o.latestObsTime=s.taiMidPoint;
+ (during QueryExec)
+QueryFragment: CREATE TABLE r_1e01fa2d9ea14d542987c2af43bb3645f_7648_0 SELECT s.ra,s.decl,o.raRange,o.declRange FROM LSST.Object_7648 AS o WHERE o.objectId=390034570102582 AND o.latestObsTime=s.taiMidPoint;
+
+(FinishFail:0x7f0721d7dcc0) Db = q_639cecf75aae026e7854d202937b84d3, dump = /opt/qserv-dev/xrootd-run/result/639cecf75aae026e7854d202937b84d3 hash=639cecf75aae026e7854d202937b84d3
+Started!
+Started!
+Started!
+130930 17:22:30 31389 XrootdXeq: qsmaster.31420:22@134.158.127.130 login
+File open /result/91a5c8633782abe027562eb79b3b212e fail. Query error: Script exec failure 1054: Unknown column 's.ra' in 'field list' Unable to execute query: CREATE TABLE r_1e01fa2d9ea14d542987c2af43bb3645f_7310_0 SELECT s.ra,s.decl,o.raRange,o.declRange FROM LSST.Object_7310 AS o WHERE o.objectId=390034570102582 AND o.latestObsTime=s.taiMidPoint;
+ (during QueryExec)
+QueryFragment: CREATE TABLE r_1e01fa2d9ea14d542987c2af43bb3645f_7310_0 SELECT s.ra,s.decl,o.raRange,o.declRange FROM LSST.Object_7310 AS o WHERE o.objectId=390034570102582 AND o.latestObsTime=s.taiMidPoint;
+.
+File open /result/f04e3192eadbe08e21e5c0235bff8fd7 fail. Query error: Script exec failure 1054: Unknown column 's.ra' in 'field list' Unable to execute query: CREATE TABLE r_1e01fa2d9ea14d542987c2af43bb3645f_7478_0 SELECT s.ra,s.decl,o.raRange,o.declRange FROM LSST.Object_7478 AS o WHERE o.objectId=390034570102582 AND o.latestObsTime=s.taiMidPoint;
+ (during QueryExec)
+QueryFragment: CREATE TABLE r_1e01fa2d9ea14d542987c2af43bb3645f_7478_0 SELECT s.ra,s.decl,o.raRange,o.declRange FROM LSST.Object_7478 AS o WHERE o.objectId=390034570102582 AND o.latestObsTime=s.taiMidPoint;
+.
+File open /result/639cecf75aae026e7854d202937b84d3 fail. Query error: Script exec failure 1054: Unknown column 's.ra' in 'field list' Unable to execute query: CREATE TABLE r_1e01fa2d9ea14d542987c2af43bb3645f_7648_0 SELECT s.ra,s.decl,o.raRange,o.declRange FROM LSST.Object_7648 AS o WHERE o.objectId=390034570102582 AND o.latestObsTime=s.taiMidPoint;
+ (during QueryExec)
+QueryFragment: CREATE TABLE r_1e01fa2d9ea14d542987c2af43bb3645f_7648_0 SELECT s.ra,s.decl,o.raRange,o.declRange FROM LSST.Object_7648 AS o WHERE o.objectId=390034570102582 AND o.latestObsTime=s.taiMidPoint;
+.
+File close(6801) by qsmaster
+File close(6630) by qsmaster
+File close(7308) by qsmaster
+File close(6800) by qsmaster
+File close(7138) by qsmaster
+File close(6970) by qsmaster
+File close(6971) by qsmaster
+File close(6968) by qsmaster
+File close(6631) by qsmaster
+File close(7140) by qsmaster
+130930 17:23:38 31403 cms_Finder: Waiting for cms path /opt/qserv-dev/tmp/worker/.olb/olbd.admin
+130930 17:24:48 31403 cms_Finder: Waiting for cms path /opt/qserv-dev/tmp/worker/.olb/olbd.admin
+130930 17:25:58 31403 cms_Finder: Waiting for cms path /opt/qserv-dev/tmp/worker/.olb/olbd.admin
+130930 17:27:08 31403 cms_Finder: Waiting for cms path /opt/qserv-dev/tmp/worker/.olb/olbd.admin
+130930 17:28:00 31390 XrootdXeq: qsmaster.31420:20@134.158.127.130 disc 0:05:30
+130930 17:28:00 31389 XrootdXeq: qsmaster.31420:22@134.158.127.130 disc 0:05:30
+130930 17:28:18 31403 cms_Finder: Waiting for cms path /opt/qserv-dev/tmp/worker/.olb/olbd.admin
+130930 17:29:28 31403 cms_Finder: Waiting for cms path /opt/qserv-dev/tmp/worker/.olb/olbd.admin
