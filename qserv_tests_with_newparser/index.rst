@@ -17,7 +17,7 @@ SQL queries
 Case 01, Query 0003_selectMetadataForOneGalaxy.sql :
 ****************************************************
 
-Join between Source an Object.
+Join between Source an Object :
 
 .. code-block:: bash
   :emphasize-lines: 1
@@ -32,6 +32,13 @@ Log files are available here :
 * :download:`xrootd.log </_static/C01_Q0003/xrootd.log>`
 * :download:`qserv-master.log </_static/C01_Q0003/qserv-master.log>`
 
+Here's an extract of qserv-master.log :
+
+.. literalinclude:: /_static/C01_Q0003/qserv-master.log
+   :language: python
+   :lines: 69-82
+   :emphasize-lines: 7
+
 Here's an extract of xrootd.log :
 
 .. literalinclude:: /_static/C01_Q0003/xrootd.log
@@ -39,4 +46,22 @@ Here's an extract of xrootd.log :
    :lines: 49-60
    :emphasize-lines: 9
 
-It seems that the parser rewrited the query without adding Source table to the FROM clause.
+It seems that the parser forgot to add the Source table in the FROM clause while rewriting the query.
+
+
+Case 01, Query 0004_lightCurve.sql
+**********************************
+
+Join between Source and Filter :
+
+.. code-block:: bash
+  :emphasize-lines: 1
+
+  mysql> SELECT taiMidPoint, psfFlux, psfFluxSigma, ra, decl FROM   Source JOIN   Filter USING (filterId) WHERE  objectId = 402412665835716    AND filterName = 'r';
+  ERROR 4110 (Proxy): Qserv error: 'mysqld error during index lookup q=SELECT chunkId FROM qservMeta.LSST__Source WHERE objectId IN (402412665835716)'
+
+
+Log files are available here :
+
+* :download:`xrootd.log </_static/C01_Q0004/xrootd.log>`
+* :download:`qserv-master.log </_static/C01_Q0004/qserv-master.log>`
