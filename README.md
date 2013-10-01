@@ -1,4 +1,4 @@
 misc
 ====
 
-small projects doc to version
+small projects/docs to version
