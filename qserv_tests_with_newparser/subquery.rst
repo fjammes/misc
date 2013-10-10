@@ -1,7 +1,7 @@
 Case 01, Query 0010_leapSec.sql :
 *********************************
 
-Join between Source an Object :
+Sub-query in WHERE clause :
 
 .. code-block:: bash
   :emphasize-lines: 1
