@@ -11,6 +11,7 @@ Qserv test queries in error with new parser
 
    using_syntax
    subquery
+   paren_in_where_clause
 
 .. contents::
 
