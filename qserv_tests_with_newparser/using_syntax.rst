@@ -30,7 +30,6 @@ Here's an extract of xrootd.log :
 
 It seems that the parser forgot to add the Source table in the FROM clause while rewriting the query.
 
-
 Case 01, Query 0004_lightCurve.sql
 **********************************
 
