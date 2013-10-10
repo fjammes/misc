@@ -29,7 +29,23 @@ Here's some interesting extracts of xrootd.log :
    :lines: 103-111
    :emphasize-lines: 2
 
-
 It looks like the parser hasn't completely re-written the sub-query.
+
+The same type of error happen for **3009_subquery.sql** :
+ 
+.. code-block:: bash
+  :emphasize-lines: 1
+
+  mysql> SELECT src.sourceId FROM Source src WHERE src.objectId IN (   SELECT objectId   FROM Object o   WHERE ra_PS  BETWEEN 0. AND 1.    AND decl_PS BETWEEN 0. AND 1.  );
+  ERROR 4120 (Proxy): Error during execution: 'read failed for chunk(s): 7140 6971 7308 7310 7478 6970 6631 6630 6801 7138 7648 6800 6968'
+
+.. code-block:: bash
+  :emphasize-lines: 2
+
+  0 WriteSpawn Thu Oct 10 16:34:38 2013 0.000103
+  >>You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1 Unable to execute query: CREATE TABLE r_1d28893fddbeec5969fb3cc95df28d3d8_6970_0 SELECT src.sourceId,objectId FROM LSST.Object_6970 AS o WHERE src.objectId IN();
+  <<---Error with piece 0 complete (size=1).
+  File write(0) at 0 for 144 by qsmaster
+  TIMING,q_3421QueryBuildSubFinish,1381415678
 
 
