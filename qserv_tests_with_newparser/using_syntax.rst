@@ -9,8 +9,6 @@ Join between Source an Object :
   mysql> SELECT s.ra, s.decl, o.raRange, o.declRange FROM   Object o JOIN   Source s USING (objectId) WHERE  o.objectId = 390034570102582 AND    o.latestObsTime = s.taiMidPoint;
   ERROR 4120 (Proxy): Error during execution: 'open failed for chunk(s): 6801 6630 6800 7138 7308 6970 6971 6968 6631 7140read failed for chunk(s): 7478 7648 7310'
 
-xrootd and qserv-master logs are attached and it seems the errors are reported in xrootd.log with SQL sentence like this one :
-
 Log files are available here :
 
 * :download:`xrootd.log </_static/C01_Q0003/xrootd.log>`
@@ -31,7 +29,6 @@ Here's an extract of xrootd.log :
    :emphasize-lines: 9
 
 It seems that the parser forgot to add the Source table in the FROM clause while rewriting the query.
-
 
 Case 01, Query 0004_lightCurve.sql
 **********************************
