@@ -24,7 +24,10 @@ class build_scons(build_ext):
 
 class clean_scons(clean):
     def run(self):
-	print "cleaning scons and swig"
+	print "cleaning swig"
+	cmd = ["rm","-f","*.py","*_wrap.c"]
+	commons.run_command(cmd)
+	print "cleaning scons"
 	cmd = ["./lib/clean.sh"]
 	commons.run_command(cmd)
 	#run_command("./lib/gcc-so.sh")
