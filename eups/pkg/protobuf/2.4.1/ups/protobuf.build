@@ -1,16 +1,20 @@
 # lsst build script for protobuf
 # # 
-
-set -e
-
-fetch external/${product}/${release}/${product}-${release}.tar.gz
-
-unpack_tar_and_enter ${product}-${release}.tar.gz
-
-echo "Installing ${product} from source."
-./configure --prefix=$installdir &&
+curl -L http://www.slac.stanford.edu/exp/lsst/qserv/download/current/protobuf-@VERSION@.tar.gz > @PRODUCT@-@VERSION@.tar.gz &&
+gunzip < @PRODUCT@-@VERSION@.tar.gz | tar -xf - &&
+product_dir=$(eups path 0)/$(eups flavor)/@PRODUCT@/@VERSION@ &&
+python_version=$(python -c "import distutils.sysconfig as ds; print ds.get_python_version()") &&
+if [ ! -d $product_dir ]; then
+	mkdir -p $product_dir
+	mkdir -p $product_dir/lib/python$python_version/site-packages
+fi &&
+cd @PRODUCT@-@VERSION@ &&
+./configure --prefix=$product_dir &&
 make &&
 make install &&
 cd python &&
 python setup.py install &&
-echo "${product}-${version} successfully installed"
+if [ ! -d $product_dir/lib/python ]; then
+   mkdir -p $product_dir/lib/python
+fi &&
+ln -fs $product_dir/lib/python$python_version/site-packages  $product_dir/lib/python
