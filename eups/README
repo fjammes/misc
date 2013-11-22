@@ -1,29 +1,13 @@
-setup lssteups
-mkdir -p /opt/lsst/Linux64/external/protobuf/2.4.1/
-
-
+# removal of all /opt/lsst, and reinstall of eups
 # content of misc/eups is available on github : https://github.com/fjammes/misc/tree/master/eups
-cp -r . ~/misc/eups/pkg/protobuf/2.4.1/ups/ /opt/lsst/Linux64/external/protobuf/2.4.1/
-cd /opt/lsst/Linux64/external/protobuf/2.4.1/
+cd ~/misc/eups/pkg/protobuf/2.4.1/
 setup -r .
 eups declare --force -r . protobuf 2.4.1
+eups expandbuild -V 2.4.1 ups/protobuf.build > protobuf-2.4.1.build
+# pthon dep has been removed
+eups expandtable -V 2.4.1 ups/protobuf.table > protobuf-2.4.1.table
 
-mkdir -p ~/tmp/pkgroot
-cd ~/tmp/pkgroot
-wget http://sw.lsstcorp.org/pkgs/config.txt
-
-cd /opt/lsst/Linux64/external/protobuf/2.4.1/
-
-# with or without --force
-eups distrib create --force -v --server-dir=~/tmp/pkgroot/ -d builder -S buildFilePath=:ups/ protobuf 2.4.1
-
-eups distrib create --debug=  -j -v --server-dir=~/tmp/pkgroot/ --use-flavor=generic -d builder -S buildFilePath=:ups/ protobuf 2.4.1
-
-# what are .bld files ??
-
-[eups@clrlsst-dbmaster-vm ~]$ eups distrib install --force -j --repository=/home/eups/tmp/pkgroot/ protobuf 2.4.1
-Required product protobuf 2.4.1 is already installed; forcing a reinstall
-Installing protobuf 2.4.1 for generic...
-Failed to install protobuf 2.4.1: /home/eups/tmp/pkgroot//protobuf-2.4.1.build: file not found
-eups distrib: /home/eups/tmp/pkgroot//protobuf-2.4.1.build: file not found
-
+[eups@clrlsst-dbmaster-vm 2.4.1]$ eups distrib create  protobuf 2.4.1 --force -v --server-dir=~/tmp/pkgroot/ -d builder -S buildFilePath=:ups/ 
+Overwriting existing dependency, protobuf 2.4.1
+[eups@clrlsst-dbmaster-vm 2.4.1]$ eups distrib install --force -j --repository=/home/eups/tmp/pkgroot/ protobuf 2.4.1
+eups distrib: Product protobuf 2.4.1 not found in any package repository
