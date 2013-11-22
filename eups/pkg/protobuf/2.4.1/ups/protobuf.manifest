@@ -1,0 +1,5 @@
+EUPS distribution manifest for protobuf (2.4.1). Version 1.0
+#
+# pkg   flavor  version tablefile                            installation_directory   installID
+#------ ------- ------- ------------------------------------ ------------------
+doxygen generic 2.4.1   external/protobuf/2.4.1/protobuf.table external/protobuf/2.4.1 lsstbuild:external/protobuf/2.4.1/protobuf.bld

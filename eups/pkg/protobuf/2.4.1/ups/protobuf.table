@@ -1,0 +1,4 @@
+setupRequired(python >=2.6.6)
+
+envPrepend(PATH, ${PRODUCT_DIR}/bin)
+envPrepend(MANPATH, ${PRODUCT_DIR}/man)

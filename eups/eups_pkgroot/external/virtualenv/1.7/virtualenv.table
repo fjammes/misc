@@ -1,8 +1,0 @@
-if (type == exact) {
-   setupRequired(python          -j 2.7.2+3)
-   setupRequired(tcltk           -j 8.5.9+1)
-} else {
-   setupRequired(python 2.7.2+3 [>= 2.5.2])
-}
-envPrepend(PATH, ${PRODUCT_DIR}/bin)
-envPrepend(MANPATH, ${PRODUCT_DIR}/man)

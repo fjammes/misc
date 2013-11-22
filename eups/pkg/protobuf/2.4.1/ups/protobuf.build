@@ -1,0 +1,16 @@
+# lsst build script for protobuf
+# # 
+
+set -e
+
+fetch external/${product}/${release}/${product}-${release}.tar.gz
+
+unpack_tar_and_enter ${product}-${release}.tar.gz
+
+echo "Installing ${product} from source."
+./configure --prefix=$installdir &&
+make &&
+make install &&
+cd python &&
+python setup.py install &&
+echo "${product}-${version} successfully installed"
