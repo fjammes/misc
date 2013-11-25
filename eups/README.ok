@@ -1,0 +1,47 @@
+rm -rf ~/tmp/pkgroot/*
+rm -rf /opt/lsst/ups_db/*
+# TODO : overloading distrib options doesn't seem to be supported
+rm -rf ~/.eups/*
+
+git clone https://github.com/fjammes/misc/
+cd misc/eups/pkg/protobuf/2.4.1/
+
+setup -r .
+eups declare --force -r . protobuf 2.4.1
+## Warning: path /home/eups/tmp/misc/eups/pkg/protobuf/2.4.1 is absolute, not relative to EUPS_PATH
+
+# TODO flavors in manifest PATH (see MANIFEST_URL) isn't supported, using --use-flavor=generic force to have a config.txt file 
+eups distrib create  protobuf 2.4.1 --force -vvvvvvvvvvvvvvvvvvvvvvvv --server-dir=~/tmp/pkgroot/ --use-flavor=generic -d builder -S buildFilePath=:
+## Acquiring exclusive locks for command "distrib create"
+## Creating lock directory /opt/lsst/.lockDir
+## Creating lockfile /opt/lsst/.lockDir/exclusive-eups.22908
+## Using VRO for "default": ['type:exact', 'commandLine', 'version', 'versionExpr', 'current']
+## Using VRO for "default": ['type:exact', 'commandLine', 'version', 'versionExpr', 'current']
+## Caching configuration for /home/eups/tmp/pkgroot/
+## ...as /opt/lsst/ups_db/_servers_/home/eups/tmp/pkgroot/config.txt
+## Pulling configuration for /home/eups/tmp/pkgroot/ from server
+## Warning: No configuration available from server; assuming "vanilla" server
+## createDistribServer() None
+## ConfigurableDistribServer : initial config : {}
+## ConfigurableDistribServer : config : {'MANIFEST_FILE_RE': '^(?P<product>[^\\-\\s]+)(-(?P<version>\\S+))?(@(?P<flavor>[^\\-\\s]+))?.manifest$', 'PRODUCT_FILE_URL': '%(base)s/%(product)s/%(version)s/%(path)s', 'MANIFEST_DIR_URL': '%(base)s/manifests', 'FILE_URL': '%(base)s/%(path)s', 'TABLE_URL': '%(base)s/tables/%(product)s-%(version)s.table', 'LIST_URL': '%(base)s/%(tag)s.list', 'MANIFEST_URL': '%(base)s/manifests/%(product)s-%(version)s.manifest', 'DIST_URL': '%(base)s/%(path)s'}
+## Distrib.__init__ Linux64
+## Looking for mapping for protobuf 2.4.1 Linux64
+## Found protobuf.build (/home/eups/tmp/misc/eups/pkg/protobuf/2.4.1/ups/protobuf.build)
+## Writing /home/eups/tmp/pkgroot/builds/protobuf-2.4.1.build
+## Overwriting existing dependency, protobuf 2.4.1
+## Looking for mapping for protobuf 2.4.1 Linux64
+## Found protobuf.build (/home/eups/tmp/misc/eups/pkg/protobuf/2.4.1/ups/protobuf.build)
+## Writing /home/eups/tmp/pkgroot/builds/protobuf-2.4.1.build
+## Copying /home/eups/tmp/misc/eups/pkg/protobuf/2.4.1/ups/protobuf.table to /home/eups/tmp/pkgroot/tables/protobuf-2.4.1.table
+## Looking for mapping for protobuf 2.4.1 Linux64
+## Tablefile protobuf-2.4.1.table doesn't exist; omitting
+## Removing lockfile /opt/lsst/.lockDir/exclusive-eups.22908
+
+
+
+# copying to a web based pkgroot
+# TODO : local repos does not seem to be supported with eups distrib install (debug server.py)
+scp -r ~/tmp/pkgroot/* fjammes@clrinfopc04:/home/fjammes/www/eups_pkgroot
+
+eups distrib install --force -j -vvv --repository=http://clrinfopc04/fjammes/eups_pkgroot/ protobuf 2.4.1
+
