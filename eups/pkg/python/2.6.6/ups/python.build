@@ -114,14 +114,6 @@ EOF
 
 cp Modules/Setup.lsst Modules/Setup &&
 
-
-# The following patch allows us to find sqlite, specified via CFLAGS and LDFLAGS.
-git archive --format=tar --remote=git://hsca.ipmu.jp/repos/devenv/buildFiles.git HEAD python-sqlite.patch | tar --extract --verbose &&
-patch -p0 setup.py < python-sqlite.patch &&
-CFLAGS="-I$SQLITE_DIR/include $CFLAGS" &&
-LDFLAGS="-L$SQLITE_DIR/lib $LDFLAGS" &&
-
-
 ### Now we can just install in the regular way...
 export CFLAGS &&
 export LDFLAGS &&

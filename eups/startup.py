@@ -28,12 +28,13 @@ lsst_ups() {
     versionname=$2
     installdir=$3
     githash=$4
-    gitrepo="git@github.com:fjammes/misc.git"
+    gitrepo="https://github.com/fjammes/misc.git"
     if [ -z "$githash" ]; then
         githash="HEAD"
     fi
     currentdir=$(pwd)
-    git archive --verbose --format=tar --remote=$gitrepo --prefix=ups/ ${githash} ${productname}.build | tar --extract --verbose --directory $installdir &&
+    build_files="eups/pkg/${productname}/${versionname}/ups"
+    git archive --verbose --format=tar --remote=$gitrepo --prefix=ups/ ${githash} ${build_files} | tar --extract --verbose --directory $installdir &&
     eups expandbuild -i ${installdir}/ups/${productname}.build -V $versionname
     git archive --verbose --format=tar --remote=$gitrepo --prefix=ups/ ${githash}:${productname} | tar --extract --verbose --directory $installdir || echo "No additional files required: ignore error"
 }
