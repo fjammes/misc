@@ -82,18 +82,6 @@ lib_dirs=`standardLibPaths` &&
 # customize the Setup file
 grep -v '^#' Modules/Setup.dist | grep -v -E '^\s*$' > Modules/Setup.lsst &&
 
-# configure Tcl/Tk support:
-tk_base_version=`echo $SETUP_TCLTK | awk '{print $2}' | sed -e 's/[a-zA-Z_\-].*//' -e 's/\./ /g' | awk '{printf("%s %s\n", $1,$2)}' | sed -e 's/ /./g'` &&
-cat >> Modules/Setup.lsst <<EOF
-
-# The _tkinter module
-
-_tkinter _tkinter.c tkappinit.c -DWITH_APPINIT \
-	-L$TCLTK_DIR/lib -I$TCLTK_DIR/include -I/usr/X11R6/include \
-	-ltk$tk_base_version -ltcl$tk_base_version -lX11
-
-EOF
-
 # configure readline support 
 if [ "$EUPS_FLAVOR" != Darwin* ]; then
     libloc=

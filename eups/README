@@ -4,12 +4,10 @@ DEPRECATED :
 
 # removal of all /opt/lsst, and reinstall of eups
 # content of misc/eups is available on github : https://github.com/fjammes/misc/tree/master/eups
-cd ~/misc/eups/pkg/protobuf/2.4.1/
-setup -r .
-eups declare --force -r . protobuf 2.4.1
-eups expandbuild -V 2.4.1 ups/protobuf.build > protobuf-2.4.1.build
-# python dep has been removed
-#eups expandtable ups/protobuf.table > protobuf-2.4.1.table
+cd ~/misc/eups/pkg
+eups declare --force -r . python 2.6.6
+export EUPS_PKGROOT=~/tmp/pkgroot/
+eups distrib create  python 2.6.6 -v -S buildFilePath=:
 
 [eups@clrlsst-dbmaster-vm 2.4.1]$ eups distrib create  protobuf 2.4.1 --force -v --server-dir=~/tmp/pkgroot/ -d builder -S buildFilePath=:
 Overwriting existing dependency, protobuf 2.4.1
