@@ -21,10 +21,14 @@ eups_dist() {
 
 cd pkg
 
-eups_dist python 2.6.6
-eups_dist protobuf 2.4.1
+eups_dist xrootd qs5
+#eups_dist python 2.6.6
+#eups_dist protobuf 2.4.1
 
+# test this on remote machine
 
 # for test purpose only
 # eups undeclare ${PRODUCT} ${VERSION} 
 # eups distrib install ${PRODUCT} ${VERSION}
+# log acces
+# tail -f ${EUPS_PATH}/EupsBuildDir/Linux64/protobuf-2.4.1/protobuf-2.4.1.build.log
