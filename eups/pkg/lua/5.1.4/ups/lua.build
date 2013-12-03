@@ -4,9 +4,9 @@ curl -L http://www.slac.stanford.edu/exp/lsst/qserv/download/current/@PRODUCT@-@
 tar zxvf @PRODUCT@-@VERSION@.tar.gz &&
 product_dir=$(eups path 0)/$(eups flavor)/@PRODUCT@/@VERSION@ &&
 cd @PRODUCT@-@VERSION@ &&
-perl -pi -e "s/PLAT= none/PLAT= linux/" Makefile &&
-perl -pi -e "s,INSTALL_TOP= /usr/local,INSTALL_TOP= ${product_dir}," Makefile &&
-perl -pi -e "s,CFLAGS= -O2,CFLAGS= -I${product_dir}/include -fPIC -O2," src/Makefile &&
-perl -pi -e "s,LIBS= -lm,LIBS= -L${product_dir}/lib -lm," src/Makefile &&
+sed -i "s/PLAT= none/PLAT= linux/" Makefile &&
+sed -i "s,INSTALL_TOP= /usr/local,INSTALL_TOP= ${product_dir}," Makefile &&
+sed -i "s,CFLAGS= -O2,CFLAGS= -I${product_dir}/include -fPIC -O2," src/Makefile &&
+sed -i "s,LIBS= -lm,LIBS= -L${product_dir}/lib -lm," src/Makefile &&
 make &&
 make install
