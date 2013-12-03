@@ -9,4 +9,4 @@ perl -pi -e "s,INSTALL_TOP= /usr/local,INSTALL_TOP= ${product_dir}," Makefile &&
 perl -pi -e "s,CFLAGS= -O2,CFLAGS= -I${product_dir}/include -fPIC -O2," src/Makefile &&
 perl -pi -e "s,LIBS= -lm,LIBS= -L${product_dir}/lib -lm," src/Makefile &&
 make &&
-make install && 
+make install
