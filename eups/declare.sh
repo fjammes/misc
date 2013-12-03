@@ -21,7 +21,9 @@ eups_dist() {
 
 cd pkg
 
-eups_dist xrootd qs5
+eups_dist lua 5.1.4
+#eups_dist mysql 5.1.61
+#eups_dist xrootd qs5
 #eups_dist python 2.6.6
 #eups_dist protobuf 2.4.1
 

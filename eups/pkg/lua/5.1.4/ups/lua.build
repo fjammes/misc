@@ -8,6 +8,6 @@ sed -i "s/PLAT= none/PLAT= linux/" Makefile &&
 sed -i "s,INSTALL_TOP= /usr/local,INSTALL_TOP= ${product_dir}," Makefile &&
 sed -i "s,CFLAGS= -O2,CFLAGS= -I${product_dir}/include -fPIC -O2," src/Makefile &&
 sed -i "s,LIBS= -lm,LIBS= -L${product_dir}/lib -lm," src/Makefile &&
-sed -i "s,#define LUA_ROOT        \"/usr/local/\"\n,#define LUA_ROOT        \"${product_dir}\"\n," src/luaconf.h &&
+sed -i "s,#define LUA_ROOT\t\"/usr/local/\",#define LUA_ROOT\t\"${product_dir}\"," src/luaconf.h &&
 make &&
 make install
