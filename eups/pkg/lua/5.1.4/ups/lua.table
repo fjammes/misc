@@ -1,2 +1,2 @@
 envPrepend(PATH, ${PRODUCT_DIR}/bin)
-envPrepend(MANPATH, ${PRODUCT_DIR}/share/man)
+envPrepend(MANPATH, ${PRODUCT_DIR}/man)
