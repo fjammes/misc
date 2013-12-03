@@ -1,4 +1,4 @@
-# lsst build script for protobuf
+# qserv build script
 # # 
 curl -L http://www.slac.stanford.edu/exp/lsst/qserv/download/current/xrootd-@VERSION@.tar.gz > @PRODUCT@-@VERSION@.tar.gz &&
 gunzip < @PRODUCT@-@VERSION@.tar.gz | tar -xf - &&

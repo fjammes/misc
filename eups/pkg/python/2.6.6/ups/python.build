@@ -1,3 +1,6 @@
+# Qserv build script
+##
+
 @LSST UPS@ &&
 curl -L \
     http://python.org/ftp/python/@VERSION@/Python-@VERSION@.tgz \

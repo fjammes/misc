@@ -1,0 +1,9 @@
+# qserv build script 
+# # 
+curl -L http://www.slac.stanford.edu/exp/lsst/qserv/download/current/@PRODUCT@-@VERSION@.tar.gz > @PRODUCT@-@VERSION@.tar.gz &&
+gunzip < @PRODUCT@-@VERSION@.tar.gz | tar -xf - &&
+product_dir=$(eups path 0)/$(eups flavor)/@PRODUCT@/@VERSION@ &&
+cd @PRODUCT@-@VERSION@ &&
+./configure --prefix=${product_dir} --enable-local-infile --with-mysqld-user=${USER} &&
+make &&
+make install
