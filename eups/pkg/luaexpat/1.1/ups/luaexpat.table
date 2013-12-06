@@ -1,0 +1,4 @@
+# luasocket build file relies strongly
+# on lua 5.1
+setupRequired(lua 5.1.4)
+setupRequired(expat)

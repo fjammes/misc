@@ -1,0 +1,16 @@
+# qserv build script 
+# # 
+curl -L http://www.slac.stanford.edu/exp/lsst/qserv/download/current/@PRODUCT@-@VERSION@.tar.gz > @PRODUCT@-@VERSION@.tar.gz &&
+tar zxvf @PRODUCT@-@VERSION@.tar.gz &&
+product_dir=$(eups path 0)/$(eups flavor)/@PRODUCT@/@VERSION@ &&
+cd @PRODUCT@-@VERSION@ &&
+sed -e "s,LUA_LIBDIR= /usr/local/,LUA_LIBDIR= $LUA_DIR/," config
+sed -e "s,LUA_DIR= /usr/local/,LUA_DIR= $LUA_DIR/," config
+sed -e "s,LUA_INC= /usr/local/,LUA_INC= $LUA_DIR/," config
+sed -e "s,5\.0,5\.1," config
+sed -e "s,-O2,-O2 -fPIC," config
+sed -e "s,LUA_VERSION_NUM= 500,LUA_VERSION_NUM= 514," config
+sed -e "s,EXPAT_INC=(.*),EXPAT_INC=\1\nEXPAT_LIBDIR= $EXPAT_DIR/lib," config
+sed -e "s,-lexpat,-L\\\$\\(EXPAT_LIBDIR\\) -lexpat," makefile
+make &&
+make install
