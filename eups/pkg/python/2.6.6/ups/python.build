@@ -1,7 +1,7 @@
+@QSERV UPS@
 # Qserv build script
 ##
 
-@LSST UPS@ &&
 curl -L \
     http://python.org/ftp/python/@VERSION@/Python-@VERSION@.tgz \
 > @PRODUCT@-@VERSION@.tar.gz &&
@@ -133,4 +133,4 @@ LD_LIBRARY_PATH=${product_dir}/lib:$LD_LIBRARY_PATH &&
 DYLD_LIBRARY_PATH=${product_dir}/lib:$DYLD_LIBRARY_PATH &&
 python ez_setup.py &&
 
-lsst_ups @PRODUCT@ @VERSION@ $product_dir
+qserv_ups @PRODUCT@ @VERSION@ ${product_dir}

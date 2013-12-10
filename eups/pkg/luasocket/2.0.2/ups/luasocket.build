@@ -1,10 +1,11 @@
 # qserv build script 
-# # 
-curl -L http://www.slac.stanford.edu/exp/lsst/qserv/download/current/@PRODUCT@-@VERSION@.tar.gz > @PRODUCT@-@VERSION@.tar.gz &&
-tar zxvf @PRODUCT@-@VERSION@.tar.gz &&
-product_dir=$(eups path 0)/$(eups flavor)/@PRODUCT@/@VERSION@ &&
-cd @PRODUCT@-@VERSION@ &&
+# # # # 
+@QSERV PREPARE@
+@QSERV UPS@
+
+qserv_prepare @PRODUCT@ @VERSION@ &&
 sed -i "s,INSTALL_TOP_SHARE=/usr/local/share/lua/5.1,LUAINC=-I${LUA_DIR}/include\nINSTALL_TOP_SHARE=${LUA_DIR}/share/lua/5.1," config &&
 sed -i "s,INSTALL_TOP_LIB=/usr/local/lib/lua/5.1,INSTALL_TOP_LIB=${LUA_DIR}/lib/lua/5.1," config &&
 make &&
-make install
+make install &&
+qserv_ups @PRODUCT@ @VERSION@ ${product_dir}

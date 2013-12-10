@@ -1,14 +1,9 @@
-# qserv build script
-# # 
-curl -L http://www.slac.stanford.edu/exp/lsst/qserv/download/current/protobuf-@VERSION@.tar.gz > @PRODUCT@-@VERSION@.tar.gz &&
-gunzip < @PRODUCT@-@VERSION@.tar.gz | tar -xf - &&
-product_dir=$(eups path 0)/$(eups flavor)/@PRODUCT@/@VERSION@ &&
-python_version=$(python -c "import distutils.sysconfig as ds; print ds.get_python_version()") &&
-if [ ! -d $product_dir ]; then
-	mkdir -p $product_dir
-	mkdir -p $product_dir/lib/python$python_version/site-packages
-fi &&
-cd @PRODUCT@-@VERSION@ &&
+# qserv build script 
+# # # # 
+@QSERV PREPARE@
+@QSERV UPS@
+
+qserv_prepare @PRODUCT@ @VERSION@ &&
 ./configure --prefix=$product_dir &&
 make &&
 make install &&
@@ -17,4 +12,5 @@ python setup.py install &&
 if [ ! -d $product_dir/lib/python ]; then
    mkdir -p $product_dir/lib/python
 fi &&
-ln -fs $product_dir/lib/python$python_version/site-packages  $product_dir/lib/python
+ln -fs $product_dir/lib/python$python_version/site-packages  $product_dir/lib/python &&
+qserv_ups @PRODUCT@ @VERSION@ ${product_dir}

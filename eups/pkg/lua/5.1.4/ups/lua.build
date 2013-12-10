@@ -1,24 +1,8 @@
+# qserv build script 
+# # 
 @QSERV PREPARE@
 @QSERV UPS@
 
-qserv_prepare() {
-    if [ -z "$1" -o -z "$2" ]; then
-        echo "qserv_prepare requires at least two arguments"
-        exit 1
-    fi
-
-    productname=$1
-    versionname=$2
-
-    curl -L http://www.slac.stanford.edu/exp/lsst/qserv/download/current/${productname}-${versionname}.tar.gz > ${productname}-${versionname}.tar.gz &&
-    tar zxvf ${productname}-${versionname}.tar.gz &&
-    product_dir=$(eups path 0)/$(eups flavor)/${productname}/${versionname} &&
-    cd ${productname}-${versionname}
-}
-
-
-# qserv build script 
-# # 
 qserv_prepare @PRODUCT@ @VERSION@ &&
 sed -i "s/PLAT= none/PLAT= linux/" Makefile &&
 sed -i "s,INSTALL_TOP= /usr/local,INSTALL_TOP= ${product_dir}," Makefile &&
