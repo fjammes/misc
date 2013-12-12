@@ -1,0 +1,10 @@
+# qserv build script 
+# # # # 
+@QSERV PREPARE@ &&
+@QSERV UPS@ &&
+
+qserv_prepare @PRODUCT@ @VERSION@ "lua-xmlrpc" &&
+sed -i "s,LUA_DIR= /usr/local,LUA_DIR= ${LUA_DIR}," Makefile &&
+make &&
+make install &&
+qserv_ups @PRODUCT@ @VERSION@ ${product_dir}
