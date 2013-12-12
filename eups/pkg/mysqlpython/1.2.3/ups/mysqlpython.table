@@ -1,0 +1,2 @@
+setupRequired(virtualenv)
+setupRequired(mysql)
