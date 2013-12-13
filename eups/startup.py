@@ -15,13 +15,13 @@ eups.commandCallbacks.add(cmdHook)
 # How to install "ups" files for LSST third-party products (grab from git)
 #
 # Third-party products' build files should contain at the top:
-# @LSST UPS@
+# @QSERV UPS@
 # and then later:
-# lsst_ups @PRODUCT@ @VERSION@ <INSTALL-DIR> [GIT-HASH]
-hooks.config.distrib["builder"]["variables"]["LSST UPS"] = """
+# qserv_ups @PRODUCT@ @VERSION@ <INSTALL-DIR> [GIT-HASH]
+hooks.config.distrib["builder"]["variables"]["QSERV UPS"] = """
 # copy remote ups directory in installdir
 # after having expanded build file
-lsst_ups() {
+qserv_ups() {
     if [ -z "$1" -o -z "$2" -o -z "$3" ]; then
         echo "lsst_ups requires at least three arguments"
         exit 1
@@ -46,3 +46,36 @@ lsst_ups() {
 }
 """
 
+# @QSERV PREPARE@
+# and then later:
+# qserv_prepare @PRODUCT@ @VERSION@
+hooks.config.distrib["builder"]["variables"]["QSERV PREPARE"] = """
+# download and extract archive source file
+# and goes in its top directory
+qserv_prepare() {
+    if [ -z "$1" -o -z "$2" ]; then
+        echo "qserv_prepare requires at least two arguments"
+        exit 1
+    fi
+
+    url=http://www.slac.stanford.edu/exp/lsst/qserv/download/current
+    
+    productname=$1
+    versionname=$2
+
+    extractname=${productname}-${versionname}
+
+    if [ -z "$3" ]; 
+    then
+        archivename=${extractname}.tar.gz
+    else
+	archivename=$3-${versionname}.tar.gz
+    fi
+
+    curl -L ${url}/${archivename} > ${archivename} &&
+    mkdir ${extractname} && 
+    tar xf ${archivename} -C ${extractname} --strip-components 1 &&
+    product_dir=$(eups path 0)/$(eups flavor)/${productname}/${versionname} &&
+    cd ${extractname}
+}
+"""
