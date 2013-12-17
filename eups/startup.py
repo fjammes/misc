@@ -36,10 +36,10 @@ qserv_ups() {
     fi
     currentdir=$(pwd)
     eups_files="eups/pkg/${productname}/${versionname}/ups"
-    git archive --verbose --format=tar --remote=$gitrepo --prefix=tmp/ ${githash} ${eups_files} | tar --extract --verbose --directory $installdir &&
     mkdir -p $installdir/ups &&
+    git archive --verbose --format=tar --remote=$gitrepo --prefix=tmp/ ${githash} ${eups_files} | tar --extract --verbose --directory $installdir &&
     mv $installdir/tmp/$eups_files/* $installdir/ups/ &&
-    rm -rf $installdir/tmp &&
+    rm -r $installdir/tmp &&
     echo "eups expandbuild -i ${installdir}/ups/${productname}.build -V $versionname "
     eups expandbuild -i ${installdir}/ups/${productname}.build -V $versionname 
     git archive --verbose --format=tar --remote=$gitrepo --prefix=ups/ ${githash} ${productname} | tar --extract --verbose --directory $installdir || echo "No additional files required: ignore error"
