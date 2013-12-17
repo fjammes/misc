@@ -3,6 +3,6 @@
 @QSERV PREPARE@
 @QSERV UPS@
 
-qserv_prepare @PRODUCT@ @VERSION@ "Twisted" &&
+qserv_prepare @PRODUCT@ @VERSION@ "Twisted" "tar.bz2" &&
 python setup.py install &&
 qserv_ups @PRODUCT@ @VERSION@ ${product_dir}

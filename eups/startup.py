@@ -65,13 +65,34 @@ qserv_prepare() {
 
     extractname=${productname}-${versionname}
 
+    if [ -z "$4" ]; 
+    then
+        ext="tar.gz"
+    else
+	ext="$4"
+    fi
+    
+    # $3 is the name of the software in the archive file
     if [ -z "$3" ]; 
     then
-        archivename=${extractname}.tar.gz
+        archivename=${extractname}.${ext}
     else
-	archivename=$3-${versionname}.tar.gz
+	archivename=$3-${versionname}.${ext}
     fi
 
+    if [ "${ext}" == "tar.gz" ]
+    then
+        tar_opt="xvf"
+    elif [ "${ext}" == "tar.bz2" ]
+    then
+        tar_opt="jvf"
+    else
+        echo "qserv_prepare : Error, unable to define extension for ${archivename}"
+        return 1
+    fi
+
+    # empty install dir if needed
+    rm -rf * &&
     curl -L ${url}/${archivename} > ${archivename} &&
     mkdir ${extractname} && 
     tar xf ${archivename} -C ${extractname} --strip-components 1 &&
