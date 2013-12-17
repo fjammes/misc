@@ -1,2 +1,2 @@
-setupRequired(virtualenv)
+setupRequired(python)
 setupRequired(mysql)

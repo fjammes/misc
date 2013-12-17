@@ -9,8 +9,4 @@ make &&
 make install &&
 cd python &&
 python setup.py install &&
-if [ ! -d $product_dir/lib/python ]; then
-   mkdir -p $product_dir/lib/python
-fi &&
-ln -fs $product_dir/lib/python$python_version/site-packages  $product_dir/lib/python &&
 qserv_ups @PRODUCT@ @VERSION@ ${product_dir}
