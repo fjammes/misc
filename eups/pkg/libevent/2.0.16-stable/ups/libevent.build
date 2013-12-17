@@ -1,0 +1,10 @@
+# qserv build script 
+# # # # 
+@QSERV PREPARE@
+@QSERV UPS@
+
+qserv_prepare @PRODUCT@ @VERSION@ &&
+./configure --prefix="${product_dir}" &&
+make &&
+make install &&
+qserv_ups @PRODUCT@ @VERSION@ ${product_dir}

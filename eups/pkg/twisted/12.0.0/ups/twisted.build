@@ -1,0 +1,8 @@
+# qserv build script 
+# # # # 
+@QSERV PREPARE@
+@QSERV UPS@
+
+qserv_prepare @PRODUCT@ @VERSION@ "Twisted" &&
+python setup.py install &&
+qserv_ups @PRODUCT@ @VERSION@ ${product_dir}

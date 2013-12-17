@@ -1,0 +1,21 @@
+# qserv build script 
+# # # # 
+@QSERV PREPARE@
+@QSERV UPS@
+
+qserv_prepare @PRODUCT@ @VERSION@ &&
+#$ENV{'LDFLAGS'} = "-L$install_dir/lib";
+#$ENV{'LD_LIBRARY_PATH'} = "$install_dir/lib:$ENV{'LD_LIBRARY_PATH'}";
+#$ENV{'CFLAGS'} = "-I$install_dir/include";
+#$ENV{'LIBS'} = "-L$install_dir/lib -levent -llua -lm";
+#$ENV{'LUA_LIBS'} = "-llua";
+#$ENV{'LUA_CFLAGS'} = "-I${LUA_DIR}/include -L${LUA_DIR}/lib";
+./configure \
+LUA_CFLAGS="-I${LUA_DIR}/include" \
+LUA_LDFLAGS="-L${LUA_DIR}/lib -llua" \
+LDFLAGS="-L${LIBEVENT_DIR}/lib -levent" \
+CPPFLAGS="-I${LIBEVENT_DIR}/include" \
+--prefix="${product_dir}" --with-lua &&
+make &&
+make install &&
+qserv_ups @PRODUCT@ @VERSION@ ${product_dir}
