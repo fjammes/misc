@@ -3,7 +3,7 @@
 @QSERV PREPARE@
 @QSERV UPS@
 
-qserv_prepare @PRODUCT@ @VERSION@ &&
+qserv_prepare @PRODUCT@ @VERSION@ "mysql-proxy" &&
 
 export DEFAULT_MYSQL=${MYSQL_DIR} &&
 export MYSQL_LIBS="-L${DEFAULT_MYSQL} -lmysqlclient -lz -lm" &&
