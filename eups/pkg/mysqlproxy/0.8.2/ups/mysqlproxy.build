@@ -4,12 +4,13 @@
 @QSERV UPS@
 
 qserv_prepare @PRODUCT@ @VERSION@ &&
-#$ENV{'LDFLAGS'} = "-L$install_dir/lib";
-#$ENV{'LD_LIBRARY_PATH'} = "$install_dir/lib:$ENV{'LD_LIBRARY_PATH'}";
-#$ENV{'CFLAGS'} = "-I$install_dir/include";
-#$ENV{'LIBS'} = "-L$install_dir/lib -levent -llua -lm";
-#$ENV{'LUA_LIBS'} = "-llua";
-#$ENV{'LUA_CFLAGS'} = "-I${LUA_DIR}/include -L${LUA_DIR}/lib";
+
+export DEFAULT_MYSQL=${MYSQL_DIR} &&
+export MYSQL_LIBS="-L${DEFAULT_MYSQL} -lmysqlclient -lz -lm" &&
+export MYSQL_CFLAGS="-I${DEFAULT_MYSQL}/include" &&
+export MYSQL_CONFIG="${DEFAULT_MYSQL}/bin/mysql_config" &&
+export MYSQL_TEST_BIN="${DEFAULT_MYSQL}/bin/mysqltest" &&
+
 ./configure \
 LUA_CFLAGS="-I${LUA_DIR}/include" \
 LUA_LDFLAGS="-L${LUA_DIR}/lib -llua" \
