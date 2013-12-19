@@ -22,6 +22,9 @@ hooks.config.distrib["builder"]["variables"]["QSERV UPS"] = """
 # copy remote ups directory in installdir
 # after having expanded build file
 qserv_ups() {
+
+    gitrepo="~/misc/"
+
     if [ -z "$1" -o -z "$2" -o -z "$3" ]; then
         echo "lsst_ups requires at least three arguments"
         exit 1
@@ -30,7 +33,6 @@ qserv_ups() {
     versionname=$2
     installdir=$3
     githash=$4
-    gitrepo="~/misc/"
     if [ -z "$githash" ]; then
         githash="HEAD"
     fi
@@ -65,7 +67,7 @@ qserv_prepare() {
 
     extractname=${productname}-${versionname}
 
-    if [ -z "$4" ]; 
+    if [ -z "$4" ]
     then
         ext="tar.gz"
     else
@@ -73,7 +75,7 @@ qserv_prepare() {
     fi
     
     # $3 is the name of the software in the archive file
-    if [ -z "$3" ]; 
+    if [ -z "$3" ]
     then
         archivename=${extractname}.${ext}
     else
