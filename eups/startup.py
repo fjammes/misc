@@ -21,9 +21,11 @@ eups.commandCallbacks.add(cmdHook)
 hooks.config.distrib["builder"]["variables"]["QSERV UPS"] = """
 # copy remote ups directory in installdir
 # after having expanded build file
+# NOTE : *.build and .table file could be also retrieved from $EUPS_PKGROOT
+# but paths would then be harder to deduce
 qserv_ups() {
 
-    gitrepo="~/misc/"
+    gitrepo="~/src/misc/"
 
     if [ -z "$1" -o -z "$2" -o -z "$3" ]; then
         echo "lsst_ups requires at least three arguments"
@@ -60,7 +62,8 @@ qserv_prepare() {
         exit 1
     fi
 
-    url=http://www.slac.stanford.edu/exp/lsst/qserv/download/current
+    #url=http://www.slac.stanford.edu/exp/lsst/qserv/download/current
+    url=file:///opt/qserv-dev/build/
     
     productname=$1
     versionname=$2

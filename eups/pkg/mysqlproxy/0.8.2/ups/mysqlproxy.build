@@ -5,18 +5,14 @@
 
 qserv_prepare @PRODUCT@ @VERSION@ "mysql-proxy" &&
 
-export DEFAULT_MYSQL=${MYSQL_DIR} &&
-export MYSQL_LIBS="-L${DEFAULT_MYSQL} -lmysqlclient -lz -lm" &&
-export MYSQL_CFLAGS="-I${DEFAULT_MYSQL}/include" &&
-export MYSQL_CONFIG="${DEFAULT_MYSQL}/bin/mysql_config" &&
-export MYSQL_TEST_BIN="${DEFAULT_MYSQL}/bin/mysqltest" &&
-
+# Deduced from mysql-proxy-0.8.2 source, with ./configure --help
 ./configure \
-LUA_CFLAGS="-I${LUA_DIR}/include" \
-LUA_LDFLAGS="-L${LUA_DIR}/lib -llua" \
-LDFLAGS="-L${LIBEVENT_DIR}/lib -levent" \
+LDFLAGS="-L${LIBEVENT_DIR}/lib" \
+LIBS="-levent -lm" \
 CPPFLAGS="-I${LIBEVENT_DIR}/include" \
---prefix="${product_dir}" --with-lua &&
+LUA_CFLAGS="-I${LUA_DIR}/include" \
+LUA_LIBS="-L${LUA_DIR}/lib -llua" \
+--prefix="${product_dir}" --with-lua --with-mysql=${MYSQL_DIR}/bin/mysql_config &&
 make &&
 make install &&
 qserv_ups @PRODUCT@ @VERSION@ ${product_dir}
