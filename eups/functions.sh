@@ -16,5 +16,6 @@ eups_dist() {
 }
 
 eups_undeclare_all() {
+    echo "INFO : undeclaring all packages"
     eups list  | cut -f1 |  awk '{print "eups undeclare --force "$1"  "$2}' | bash
 }

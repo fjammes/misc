@@ -25,7 +25,10 @@ hooks.config.distrib["builder"]["variables"]["QSERV UPS"] = """
 # but paths would then be harder to deduce
 qserv_ups() {
 
-    gitrepo="~/src/misc/"
+
+    # TODO use by default git distant repos
+    # would it be possible to get the real EUPS_PKGROOT build files instead of re-generating them ?
+    gitrepo=${QSERV_BUILD_REPO}
 
     if [ -z "$1" -o -z "$2" -o -z "$3" ]; then
         echo "lsst_ups requires at least three arguments"
@@ -63,8 +66,21 @@ qserv_prepare() {
     fi
 
     #url=http://www.slac.stanford.edu/exp/lsst/qserv/download/current
-    url=file:///opt/qserv-dev/build/
+
+    pkgroot_url=${EUPS_PKGROOT}/tarballs
     
+    if [ -d ${EUPS_PKGROOT}/tarballs ]; then
+      # Hack to make curl work with a local repository, 
+      # note that :
+      # 1. {EUPS_PKGROOT} consistency should have already been checked by eups
+      #    => So it must exists.
+      # 2. eups doesn't support EUPS_PKGROOT starting with file:// protocol because : 
+      #    - LocalTransporter doesn't support this protocol 
+      #    - It couldn't be added to WebTransporter because urllib2.urlopen() fail while listing a directory with this protocol
+      pkgroot_url="file://"+${url}
+    fi
+    tarballs_url=${pkgroot_url}/tarballs    
+
     productname=$1
     versionname=$2
 
@@ -92,13 +108,13 @@ qserv_prepare() {
     then
         tar_opt="jvf"
     else
-        echo "qserv_prepare : Error, unable to define extension for ${archivename}"
+        echo "qserv_prepare : Error, unable to analyse extension of ${archivename}"
         return 1
     fi
 
     # empty install dir if needed
     rm -rf * &&
-    curl -L ${url}/${archivename} > ${archivename} &&
+    curl -L ${tarballs_url}/${archivename} > ${archivename} &&
     mkdir ${extractname} && 
     tar xf ${archivename} -C ${extractname} --strip-components 1 &&
     product_dir=$(eups path 0)/$(eups flavor)/${productname}/${versionname} &&

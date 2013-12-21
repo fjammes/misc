@@ -17,7 +17,8 @@ eups_dist mysqlproxy 0.8.2
 # undeclare everything
 eups_undeclare_all
 
-eups distrib install mysqlproxy 0.8.2
+echo "Installing"
+eups distrib install -vvvvvvvvvvvv mysqlproxy 0.8.2
 #eups distrib install xxqserv 533d661
 # log access
 # tail -f ${EUPS_PATH}/EupsBuildDir/Linux64/${PRODUCT}-${VERSION}/${PRODUCT}-${VERSION}.build.log
