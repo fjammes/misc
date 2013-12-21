@@ -12,47 +12,10 @@ def cmdHook(Eups, cmd, opts, args):
 
 eups.commandCallbacks.add(cmdHook)
 
-# How to install "ups" files for LSST third-party products (grab from git)
+# Download and extract archive source file
+# and goes in its top directory
 #
 # Third-party products' build files should contain at the top:
-# @QSERV UPS@
-# and then later:
-# qserv_ups @PRODUCT@ @VERSION@ <INSTALL-DIR> [GIT-HASH]
-hooks.config.distrib["builder"]["variables"]["QSERV UPS"] = """
-# copy remote ups directory in product_dir
-# after having expanded build file
-# NOTE : *.build and .table file could be also retrieved from $EUPS_PKGROOT
-# but paths would then be harder to deduce
-qserv_ups() {
-
-
-    # TODO use by default git distant repos
-    # would it be possible to get the real EUPS_PKGROOT build files instead of re-generating them ?
-    gitrepo=${QSERV_BUILD_REPO}
-
-    if [ -z "$1" -o -z "$2" ]; then
-        echo "lsst_ups requires at least two arguments"
-        exit 1
-    fi
-    productname=$1
-    versionname=$2
-    githash=$3
-    if [ -z "$githash" ]; then
-        githash="HEAD"
-    fi
-    currentdir=$(pwd)
-    eups_files="eups/pkg/${productname}/${versionname}/ups"
-    mkdir -p ${product_dir}/ups &&
-    buildfile=${productname}-${versionname}.build &&
-    echo "Downloading ${pkgroot_url}/builds/${buildfile}" &&  
-    curl -L ${pkgroot_url}/builds/${buildfile} > ${product_dir}/ups/${buildfile} &&
-    tablefile=${productname}-${versionname}.table && 
-    echo "Downloading ${pkgroot_url}/tables/${tablefile}" &&
-    curl -L ${pkgroot_url}/tables/${tablefile} > ${product_dir}/ups/${tablefile}
-    
-}
-"""
-
 # @QSERV PREPARE@
 # and then later:
 # qserv_prepare @PRODUCT@ @VERSION@
@@ -62,7 +25,8 @@ hooks.config.distrib["builder"]["variables"]["QSERV PREPARE"] = """
 qserv_prepare() {
     if [ -z "$1" -o -z "$2" ]; then
         echo "qserv_prepare requires at least two arguments"
-        exit 1
+        false
+	return
     fi
 
     #url=http://www.slac.stanford.edu/exp/lsst/qserv/download/current
@@ -109,16 +73,48 @@ qserv_prepare() {
         tar_opt="jvf"
     else
         echo "qserv_prepare : Error, unable to analyse extension of ${archivename}"
-        return 1
+        false 
+	return
     fi
 
     # empty install dir if needed
+    # but keep current build log file
     rm -rf ${archivename} ${extractname} &&
-    echo "Downloading ${tarballs_url}/${archivename}"
+    echo "Downloading ${tarballs_url}/${archivename}" &&
     curl -L ${tarballs_url}/${archivename} > ${archivename} &&
     mkdir ${extractname} && 
     tar xf ${archivename} -C ${extractname} --strip-components 1 &&
     product_dir=$(eups path 0)/$(eups flavor)/${productname}/${versionname} &&
-    cd ${extractname}
+    cd ${extractname} 
+}
+"""
+
+# How to install "ups" files for Qserv third-party products
+#
+# Third-party products' build files should contain at the top:
+# @QSERV UPS@
+# and then later:
+# qserv_ups @PRODUCT@ @VERSION@ <INSTALL-DIR> [GIT-HASH]
+hooks.config.distrib["builder"]["variables"]["QSERV UPS"] = """
+# copy remote ups directory in product_dir
+# after having expanded build file
+# NOTE : *.build and .table file could be also retrieved from $EUPS_PKGROOT
+# but paths would then be harder to deduce
+qserv_ups() {
+
+    if [ -z "$1" -o -z "$2" ]; then
+        echo "lsst_ups requires at least two arguments"
+	false
+	return
+    fi
+    productname=$1
+    versionname=$2
+    buildfile=${productname}-${versionname}.build
+    tablefile=${productname}-${versionname}.table
+    mkdir -p ${product_dir}/ups &&
+    echo "Downloading ${pkgroot_url}/builds/${buildfile}" &&  
+    curl -L ${pkgroot_url}/builds/${buildfile} > ${product_dir}/ups/${buildfile} &&
+    echo "Downloading ${pkgroot_url}/tables/${tablefile}" &&
+    curl -L ${pkgroot_url}/tables/${tablefile} > ${product_dir}/ups/${tablefile} 
 }
 """

@@ -1,51 +1,10 @@
 # qserv build script 
-# # # #
-qserv_prepare() {
-	    if [ -z "$1" -o -z "$2" ]; then
-	        echo "qserv_prepare requires at least two arguments"
-	        exit 1
-	    fi
-	    if [ -d "${EUPS_PKGROOT}" ]; then
-	      pkgroot_url="file://${EUPS_PKGROOT}"
-	    else
-	      pkgroot_url=${EUPS_PKGROOT}
-	    fi
-	    tarballs_url=${pkgroot_url}/tarballs
-	    productname=$1
-	    versionname=$2
-	    extractname=${productname}-${versionname}
-	    if [ -z "$4" ]
-	    then
-	        ext="tar.gz"
-	    else
-		ext="$4"
-	    fi
-	    if [ -z "$3" ]
-	    then
-	        archivename=${extractname}.${ext}
-	    else
-		archivename=$3-${versionname}.${ext}
-	    fi
-	    if [ "${ext}" == "tar.gz" ]
-	    then
-	        tar_opt="xvf"
-	    elif [ "${ext}" == "tar.bz2" ]
-	    then
-	        tar_opt="jvf"
-	    else
-	        echo "qserv_prepare : Error, unable to analyse extension of ${archivename}"
-	        return 1
-	    fi
-	    rm -rf ${archivename}  ${extractname} &&
-	    echo "Downloading ${tarballs_url}/${archivename}"
-	    curl -L ${tarballs_url}/${archivename} > ${archivename} &&
-	    mkdir ${extractname} && 
-	    tar xf ${archivename} -C ${extractname} --strip-components 1 &&
-	    product_dir=$(eups path 0)/$(eups flavor)/${productname}/${versionname} &&
-	    cd ${extractname}
-	}
-qserv_prepare libevent debug-eups &&
+# # # # 
+@QSERV PREPARE@
+@QSERV UPS@
+
+qserv_prepare @PRODUCT@ @VERSION@ &&
 ./configure --prefix="${product_dir}" &&
 make &&
-make install
- 
+make install &&
+qserv_ups @PRODUCT@ @VERSION@ ${product_dir}
