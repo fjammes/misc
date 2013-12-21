@@ -113,7 +113,7 @@ qserv_prepare() {
     fi
 
     # empty install dir if needed
-    rm -rf * &&
+    rm -rf ${archivename} ${extractname} &&
     echo "Downloading ${tarballs_url}/${archivename}"
     curl -L ${tarballs_url}/${archivename} > ${archivename} &&
     mkdir ${extractname} && 

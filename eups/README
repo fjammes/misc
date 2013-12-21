@@ -1,18 +1,1 @@
 see https://dev.lsstcorp.org/trac/wiki/EupsTutorial/HowToDistrib
-
-DEPRECATED :
-
-# removal of all /opt/lsst, and reinstall of eups
-# content of misc/eups is available on github : https://github.com/fjammes/misc/tree/master/eups
-cd ~/misc/eups/pkg
-eups declare --force -r . python 2.6.6
-export EUPS_PKGROOT=~/tmp/pkgroot/
-eups distrib create  python 2.6.6 -v -S buildFilePath=:
-
-[eups@clrlsst-dbmaster-vm 2.4.1]$ eups distrib create  protobuf 2.4.1 --force -v --server-dir=~/tmp/pkgroot/ -d builder -S buildFilePath=:
-Overwriting existing dependency, protobuf 2.4.1
-
-scp -r ~/tmp/pkgroot/* fjammes@clrinfopc04:/home/fjammes/www/eups_pkgroot
-
-[eups@clrlsst-dbmaster-vm 2.4.1]$ eups distrib install --force -j -vvv --repository=http://clrinfopc04/fjammes/eups_pkgroot/ protobuf 2.4.1
-eups distrib: Product protobuf 2.4.1 not found in any package repository
