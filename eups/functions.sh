@@ -1,3 +1,5 @@
+# TODO flatten pkg subdir and 
+# study declare/undeclare process
 eups_dist() {
     if [ -z "$1" -o -z "$2" ]; then
         echo "eups_dist requires two arguments"

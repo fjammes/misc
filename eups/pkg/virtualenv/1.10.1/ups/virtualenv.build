@@ -1,0 +1,17 @@
+# qserv build script 
+# # # # 
+@QSERV FUNCTIONS@
+
+qserv_globals @PRODUCT@ @VERSION@ &&
+qserv_prepare @PRODUCT@ @VERSION@ &&
+
+python_version=$(python -c "import distutils.sysconfig as ds; print ds.get_python_version()") &&
+
+qserv_site_packages_dir=${PRODUCT_DIR}/lib/python${python_version}/site-packages &&
+mkdir -p ${qserv_site_packages_dir} &&
+export PYTHONPATH=${qserv_site_packages_dir}:${PYTHONPATH} &&
+python setup.py install --prefix=${PRODUCT_DIR} &&
+## table file can't get python version
+ln -fs ${PRODUCT_DIR}/lib/python${python_version} ${PRODUCT_DIR}/lib/python &&
+#python virtualenv.py ${PRODUCT_DIR} &&
+qserv_ups @PRODUCT@ @VERSION@ ${PRODUCT_DIR}

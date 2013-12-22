@@ -1,11 +1,9 @@
 # qserv build script 
 # # # # 
-@QSERV UPS@
+@QSERV FUNCTIONS@
 
-product_dir=$(eups path 0)/$(eups flavor)/@PRODUCT@/@VERSION@
-
+qserv_globals @PRODUCT@ @VERSION@ &&
 # PYTHON_STDLIB_PATH=$(python -c "import traceback; import os; print os.path.dirname(traceback.__file__)")
-
-mkdir -p ${product_dir} &&
-virtualenv ${product_dir} &&
-qserv_ups @PRODUCT@ @VERSION@ ${product_dir}
+mkdir -p ${PRODUCT_DIR} &&
+virtualenv ${PRODUCT_DIR} &&
+qserv_ups @PRODUCT@ @VERSION@ ${PRODUCT_DIR}

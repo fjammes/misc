@@ -17,7 +17,7 @@ eups_dist luaexpat 1.1
 eups_dist luaxmlrpc v1.2.1-2
 
 # python
-eups_dist virtualenv 1.7
+eups_dist virtualenv 1.10.1
 #eups_dist python 2.6.6
 eups_dist python virtualenv 
 eups_dist protobuf 2.4.1
