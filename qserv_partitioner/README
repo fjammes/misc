@@ -1,3 +1,13 @@
-cd src/qserv/admin/dupr
+Installing partitioner :
+------------------------
+
+# got in qserv sources
+cd ~/src/qserv/admin/dupr
 scons
 scons --prefix=$HOME install
+# $PATH must contains $HOME/bin
+
+Running partitioner :
+---------------------
+cd DC_2013
+qserv-partition -v -c RunDeepForcedSource.cfg --out.dir=${HOME}/tmp -i /data/DC_2013/forcedPhot_csv_dir/g/1755/DeepForcedSource.csv
