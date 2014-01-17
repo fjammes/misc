@@ -1,0 +1,3 @@
+cd src/qserv/admin/dupr
+scons
+scons --prefix=$HOME install
