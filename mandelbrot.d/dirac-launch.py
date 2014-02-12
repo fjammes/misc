@@ -10,11 +10,12 @@ from DIRAC.Interfaces.API.Job import Job
 dirac = Dirac()
 
 
-N_PICT=20
+N_PICT=2000
 N_PICT_BATCH=5
 P_START=.000002
 P_STEP=.000001
 EXEC='mandelbrot'
+JOBGROUP="fjammes_%s" % EXEC
 
 
 def launch_batch_pict( pitch_start, step, n_pict ):
@@ -22,7 +23,7 @@ def launch_batch_pict( pitch_start, step, n_pict ):
 	j = Job()
 	j.setCPUTime(500)
         j.setName('%s_%f' % (EXEC, pitch_start))
-	j.setJobGroup(EXEC)
+	j.setJobGroup(JOBGROUP)
 	j.setInputSandbox([EXEC])
 	out_bmp_list=[]
 	pitch=pitch_start
@@ -31,7 +32,7 @@ def launch_batch_pict( pitch_start, step, n_pict ):
         	j.setName('mandelbrot_%d' % i)
         	out_bmp='out_%f.bmp' % pitch
         	out_bmp_list.append(out_bmp)
-		j.setExecutable(EXEC,arguments="%s -W 600 -H 600 -X -0.46490 -Y -0.56480 -P %f -M 500" % (out_bmp,pitch))
+		j.setExecutable(EXEC,arguments="-W 600 -H 600 -X -0.77568377 -Y -0.13646737 -P %f -M 500 %s" % (pitch, out_bmp))
         	pitch+=step
 		
 	j.setOutputSandbox(out_bmp_list + ["StdOut"] + ["StdErr"])

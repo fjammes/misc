@@ -1,2 +1,4 @@
-dirac-wms-job-delete --JobGroup mandelbrot --debug
-dstat --JobGroup=mandelbrot
+JOBGROUP=fjammes_mandelbrot
+
+dirac-wms-job-delete --JobGroup ${JOBGROUP} --debug
+dstat --JobGroup=${JOBGROUP}
