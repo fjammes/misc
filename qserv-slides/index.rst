@@ -2,9 +2,8 @@
 .. DVCS : principe et bonnes pratiques slides file, created by
    hieroglyph-quickstart on Wed Aug 21 10:19:52 2013.
 
-
 =================================================
-.....Qserv
+ . . . Qserv
 =================================================
 
 .. figure:: /_static/img/arton292.png
@@ -17,6 +16,9 @@ Gestion de projet agile
 * HipChat
 * Google Hangout ?
 
+.. image:: /_static/img/jira.jpeg
+   :scale: 75 %
+   :align: center
 
 Interactions distancielles efficaces
 ====================================
@@ -54,32 +56,50 @@ Maintenance et évolution des procédures :
 
 * d'installation, 
 * de configuration, (mono-noeud pour l'instant)
-* des tests d'intégration (chargement, execution, requètage)
+* de tests d'intégration (chargement, exécution, requétage)
+|
+
+.. image:: /_static/img/packaging.jpg
+   :scale: 50 %
+   :align: center
 
 
-Dans le detail
+
+Dans le détail
 ==============
 
-* Intégration et validation des fonctionnalités développées à SLAC
-* Mise en conformité des procédure de gestion des services Qserv avec la LSB => portage vers Ubuntu
-* Mise en conformité de la procédure d'installation avec les standards LSST (eups)
-* Automatisation de la procédure d'installation et de packaging : discussion à venir avec Mario Juric pour la définition d'un standard commun LSST
-* Tests de plate-forme virtuelle : Docker et OpenStack au CC => intégration continue multi plate-forme
+* Intégration et validation des fonctionnalités développées à SLAC (modules, zookeeper, partitioner)
+* Mise en conformité des procédures de gestion des services Qserv avec la LSB : multi-OS
+* Mise en conformité de la procédures d'installation avec le nouveau standard LSST : eupspkg
+
+Perspectives
+============
+
+Discussion à venir avec Mario Juric pour l'amélioration du standard logiciel LSST :
+
+* Script newinstall.sh
+* Gestion des dépendances systèmes avec eups
+* Automatisation de la procédure de distribution, avec le support des branches git de développement
+* Vers l'intégration continue multi plate-forme avec Docker et OpenStack (CC-in2p3) ?
 
 Références
 ==========
 
-| Version Control by Example, Eric Sink 
-| http://www.ericsink.com/vcbe/html/
+| Jira
+| https://jira.lsstcorp.org
 
-| Comparaison des commandes Git/Mercurial, Eric Sink
-| http://www.ericsink.com/vcbe/html/apa.html
+| Jira : Qserv board
+| https://jira.lsstcorp.org/secure/RapidBoard.jspa?rapidView=23&selectedIssue=DM-269
+
+| HipChat
+| https://lsst.hipchat.com
 
 | Utilisation de git pour LSST, Mario Juric
 | https://dev.lsstcorp.org/trac/wiki/GitDemoAndTutorial
 
-| Documentation de référence de git
-| http://git-scm.com/docs/gittutorial
+Questions
+=========
 
-| Tutorial Mercurial
-| http://mercurial.selenic.com/wiki/Tutorial
+.. image:: /_static/img/hackaton_Apr2014.jpg
+   :scale: 70 %
+   :align: center
