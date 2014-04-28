@@ -1,0 +1,85 @@
+
+.. DVCS : principe et bonnes pratiques slides file, created by
+   hieroglyph-quickstart on Wed Aug 21 10:19:52 2013.
+
+
+=================================================
+.....Qserv
+=================================================
+
+.. figure:: /_static/img/arton292.png
+   :class: fill
+
+Gestion de projet agile
+=======================
+
+* JIRA
+* HipChat
+* Google Hangout ?
+
+
+Interactions distancielles efficaces
+====================================
+
+* Meilleure visibilité sur les actions des membres de l'équipes
+* Meilleure communication autour des actions de développement
+* Meilleure traçabilité et indicateurs
+
+|
+
+.. image:: /_static/img/gitmerge.jpg
+   :scale: 75 %
+   :align: center
+
+Actions en cours à SLAC
+=======================
+
+* Modularisation du code
+* Utilisation d'un service de configuration centralisé
+* Optimisation du parseur
+* Outil de journalisation commun avec le stack
+* Optimisation de xrootd 
+
+|
+
+.. image:: /_static/img/slac_nal_logo.jpg
+   :scale: 25 %
+   :align: center
+
+
+Actions en cours à l'IN2P3
+==========================
+
+Maintenance et évolution des procédures :
+
+* d'installation, 
+* de configuration, (mono-noeud pour l'instant)
+* des tests d'intégration (chargement, execution, requètage)
+
+
+Dans le detail
+==============
+
+* Intégration et validation des fonctionnalités développées à SLAC
+* Mise en conformité des procédure de gestion des services Qserv avec la LSB => portage vers Ubuntu
+* Mise en conformité de la procédure d'installation avec les standards LSST (eups)
+* Automatisation de la procédure d'installation et de packaging : discussion à venir avec Mario Juric pour la définition d'un standard commun LSST
+* Tests de plate-forme virtuelle : Docker et OpenStack au CC => intégration continue multi plate-forme
+
+Références
+==========
+
+| Version Control by Example, Eric Sink 
+| http://www.ericsink.com/vcbe/html/
+
+| Comparaison des commandes Git/Mercurial, Eric Sink
+| http://www.ericsink.com/vcbe/html/apa.html
+
+| Utilisation de git pour LSST, Mario Juric
+| https://dev.lsstcorp.org/trac/wiki/GitDemoAndTutorial
+
+| Documentation de référence de git
+| http://git-scm.com/docs/gittutorial
+
+| Tutorial Mercurial
+| http://mercurial.selenic.com/wiki/Tutorial
