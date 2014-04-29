@@ -103,9 +103,6 @@ html_theme = 'sphinxdoc'
 #	"nosidebar": "true"
 #}
 
-# Add any paths that contain custom themes here, relative to this directory.
-#html_theme_path = []
-
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
 #html_title = None
@@ -258,7 +255,22 @@ extensions += [
 
 #slide_theme = 'slides'
 #slide_levels = 3
-slide_theme = 'single-level'
+#slide_theme = 'single-level'
+slide_theme = 'slides2'
+
+slide_theme_options = {
+    'presenters': [
+        {
+            'name': 'Fabrice Jammes',
+            'twitter': '@author',
+            'www': 'https://dev.lsstcorp.org/trac/wiki/db/Qserv',
+            'github': 'http://github.com/fjammes'
+        },
+    ],
+    'custom_css': 'custom.css'
+
+}
+
 
 # Place custom static assets in the _static directory and uncomment
 # the following lines to include them
@@ -267,8 +279,6 @@ slide_theme = 'single-level'
 #     'custom_css': 'custom.css',
 #     'custom_js': 'custom.js',
 # }
-
-slide_theme_options = {'custom_css': 'custom.css'}
 
 # ----------------------------------------------
 
