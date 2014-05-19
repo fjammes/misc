@@ -1,0 +1,11 @@
+[user]
+	name = Fabrice Jammes
+	email = fabrice.jammes@in2p3.fr
+[color]
+	branch = auto
+	diff = auto
+	interactive = auto
+	status = auto
+[alias]
+	st = status
+        pom = push origin master
