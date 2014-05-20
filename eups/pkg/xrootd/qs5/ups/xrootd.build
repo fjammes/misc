@@ -1,11 +1,13 @@
-@QSERV UPS@
 # qserv build script
 # # 
-curl -L http://www.slac.stanford.edu/exp/lsst/qserv/download/current/xrootd-@VERSION@.tar.gz > @PRODUCT@-@VERSION@.tar.gz &&
-gunzip < @PRODUCT@-@VERSION@.tar.gz | tar -xf - &&
-product_dir=$(eups path 0)/$(eups flavor)/@PRODUCT@/@VERSION@ &&
-echo $PWD &&
-cmake ./xrootd -DCMAKE_INSTALL_PREFIX=$product_dir -DENABLE_PERL=FALSE &&
+@QSERV FUNCTIONS@
+
+qserv_globals @PRODUCT@ @VERSION@ &&
+
+qserv_prepare @PRODUCT@ @VERSION@ &&
+# xrootd has to be build outside of its source directory
+cd .. &&
+cmake ./${SRC_DIR} -DCMAKE_INSTALL_PREFIX=${PRODUCT_DIR} -DENABLE_PERL=FALSE &&
 make &&
 make install  &&
-qserv_ups @PRODUCT@ @VERSION@ ${product_dir}
+qserv_ups @PRODUCT@ @VERSION@ ${PRODUCT_DIR}

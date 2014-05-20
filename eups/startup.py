@@ -12,60 +12,57 @@ def cmdHook(Eups, cmd, opts, args):
 
 eups.commandCallbacks.add(cmdHook)
 
-# How to install "ups" files for LSST third-party products (grab from git)
+# Download and extract archive source file
+# and goes in its top directory
 #
 # Third-party products' build files should contain at the top:
-# @QSERV UPS@
-# and then later:
-# qserv_ups @PRODUCT@ @VERSION@ <INSTALL-DIR> [GIT-HASH]
-hooks.config.distrib["builder"]["variables"]["QSERV UPS"] = """
-# copy remote ups directory in installdir
-# after having expanded build file
-qserv_ups() {
-
-    gitrepo="~/misc/"
-
-    if [ -z "$1" -o -z "$2" -o -z "$3" ]; then
-        echo "lsst_ups requires at least three arguments"
-        exit 1
-    fi
-    productname=$1
-    versionname=$2
-    installdir=$3
-    githash=$4
-    if [ -z "$githash" ]; then
-        githash="HEAD"
-    fi
-    currentdir=$(pwd)
-    eups_files="eups/pkg/${productname}/${versionname}/ups"
-    mkdir -p $installdir/ups &&
-    git archive --verbose --format=tar --remote=$gitrepo --prefix=tmp/ ${githash} ${eups_files} | tar --extract --verbose --directory $installdir &&
-    mv $installdir/tmp/$eups_files/* $installdir/ups/ &&
-    rm -r $installdir/tmp &&
-    echo "eups expandbuild -i ${installdir}/ups/${productname}.build -V $versionname "
-    eups expandbuild -i ${installdir}/ups/${productname}.build -V $versionname 
-    git archive --verbose --format=tar --remote=$gitrepo --prefix=ups/ ${githash} ${productname} | tar --extract --verbose --directory $installdir || echo "No additional files required: ignore error"
-}
-"""
-
 # @QSERV PREPARE@
 # and then later:
 # qserv_prepare @PRODUCT@ @VERSION@
-hooks.config.distrib["builder"]["variables"]["QSERV PREPARE"] = """
+hooks.config.distrib["builder"]["variables"]["QSERV FUNCTIONS"] = """
+
+qserv_globals() {
+    if [ -z "$1" -o -z "$2" ]; then
+        echo "qserv_globals requires two arguments"
+        false
+	return
+    fi
+
+    # Hack to make curl work with a local repository. 
+    #   note that :
+    #   1. {EUPS_PKGROOT} consistency should have already been checked by eups
+    #      => So it must exists.
+    #   2. eups doesn't support EUPS_PKGROOT starting with file:// protocol because : 
+    #      - LocalTransporter doesn't support this protocol 
+    #      - It couldn't be added to WebTransporter because urllib2.urlopen() fail while listing a directory with this protocol
+    if [ -d "${EUPS_PKGROOT}" ]; then
+        EUPS_PKGROOT_URL="file://${EUPS_PKGROOT}"
+    else
+        EUPS_PKGROOT_URL=${EUPS_PKGROOT}
+    fi
+
+    PRODUCT=$1
+    VERSION=$2
+
+    PRODUCT_DIR=$(eups path 0)/$(eups flavor)/${PRODUCT}/${VERSION} &&
+    SRC_DIR=${PRODUCT}-${VERSION}
+}
+
 # download and extract archive source file
 # and goes in its top directory
 qserv_prepare() {
     if [ -z "$1" -o -z "$2" ]; then
         echo "qserv_prepare requires at least two arguments"
-        exit 1
+        false
+	return
     fi
 
-    url=http://www.slac.stanford.edu/exp/lsst/qserv/download/current
-    
+    #url=http://www.slac.stanford.edu/exp/lsst/qserv/download/current
+
+    tarballs_url=${EUPS_PKGROOT_URL}/tarballs
+
     productname=$1
     versionname=$2
-
-    extractname=${productname}-${versionname}
 
     if [ -z "$4" ]
     then
@@ -77,7 +74,7 @@ qserv_prepare() {
     # $3 is the name of the software in the archive file
     if [ -z "$3" ]
     then
-        archivename=${extractname}.${ext}
+        archivename=${SRC_DIR}.${ext}
     else
 	archivename=$3-${versionname}.${ext}
     fi
@@ -89,16 +86,47 @@ qserv_prepare() {
     then
         tar_opt="jvf"
     else
-        echo "qserv_prepare : Error, unable to define extension for ${archivename}"
-        return 1
+        echo "qserv_prepare : Error, unable to analyse extension of ${archivename}"
+        false 
+	return
     fi
 
     # empty install dir if needed
-    rm -rf * &&
-    curl -L ${url}/${archivename} > ${archivename} &&
-    mkdir ${extractname} && 
-    tar xf ${archivename} -C ${extractname} --strip-components 1 &&
-    product_dir=$(eups path 0)/$(eups flavor)/${productname}/${versionname} &&
-    cd ${extractname}
+    # but keep current build log file
+    rm -rf ${archivename} ${SRC_DIR} &&
+    echo "Downloading ${tarballs_url}/${archivename}" &&
+    curl -L ${tarballs_url}/${archivename} > ${archivename} &&
+    mkdir ${SRC_DIR} && 
+    tar xf ${archivename} -C ${SRC_DIR} --strip-components 1 &&
+    cd ${SRC_DIR} 
+}
+
+# How to install "ups" files for Qserv third-party products
+#
+# Third-party products' build files should contain at the top:
+# @QSERV UPS@
+# and then later:
+# qserv_ups @PRODUCT@ @VERSION@
+#
+# copy remote ups directory in PRODUCT_DIR
+# after having expanded build file
+# NOTE : *.build and .table file could be also retrieved from $EUPS_PKGROOT
+# but paths would then be harder to deduce
+qserv_ups() {
+
+    if [ -z "$1" -o -z "$2" ]; then
+        echo "lsst_ups requires at least two arguments"
+	false
+	return
+    fi
+    productname=$1
+    versionname=$2
+    buildfile=${productname}-${versionname}.build
+    tablefile=${productname}-${versionname}.table
+    mkdir -p ${PRODUCT_DIR}/ups &&
+    echo "Downloading ${EUPS_PKGROOT_URL}/builds/${buildfile}" &&  
+    curl -L ${EUPS_PKGROOT_URL}/builds/${buildfile} > ${PRODUCT_DIR}/ups/${buildfile} &&
+    echo "Downloading ${EUPS_PKGROOT_URL}/tables/${tablefile}" &&
+    curl -L ${EUPS_PKGROOT_URL}/tables/${tablefile} > ${PRODUCT_DIR}/ups/${tablefile} 
 }
 """

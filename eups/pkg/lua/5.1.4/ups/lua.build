@@ -1,14 +1,14 @@
 # qserv build script 
 # # 
-@QSERV PREPARE@
-@QSERV UPS@
+@QSERV FUNCTIONS@
 
+qserv_globals @PRODUCT@ @VERSION@ &&
 qserv_prepare @PRODUCT@ @VERSION@ &&
 sed -i "s/PLAT= none/PLAT= linux/" Makefile &&
-sed -i "s,INSTALL_TOP= /usr/local,INSTALL_TOP= ${product_dir}," Makefile &&
-sed -i "s,CFLAGS= -O2,CFLAGS= -I${product_dir}/include -fPIC -O2," src/Makefile &&
-sed -i "s,LIBS= -lm,LIBS= -L${product_dir}/lib -lm," src/Makefile &&
-sed -i "s,#define LUA_ROOT\t\"/usr/local/\",#define LUA_ROOT\t\"${product_dir}/\"," src/luaconf.h &&
+sed -i "s,INSTALL_TOP= /usr/local,INSTALL_TOP= ${PRODUCT_DIR}," Makefile &&
+sed -i "s,CFLAGS= -O2,CFLAGS= -I${PRODUCT_DIR}/include -fPIC -O2," src/Makefile &&
+sed -i "s,LIBS= -lm,LIBS= -L${PRODUCT_DIR}/lib -lm," src/Makefile &&
+sed -i "s,#define LUA_ROOT\t\"/usr/local/\",#define LUA_ROOT\t\"${PRODUCT_DIR}/\"," src/luaconf.h &&
 make &&
 make install &&
-qserv_ups @PRODUCT@ @VERSION@ ${product_dir}
+qserv_ups @PRODUCT@ @VERSION@ ${PRODUCT_DIR}

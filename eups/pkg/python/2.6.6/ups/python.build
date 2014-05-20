@@ -1,4 +1,4 @@
-@QSERV UPS@
+@QSERV FUNCTIONS@
 # Qserv build script
 ##
 
@@ -7,7 +7,7 @@ curl -L \
 > @PRODUCT@-@VERSION@.tar.gz &&
 gunzip < @PRODUCT@-@VERSION@.tar.gz | tar -xf - &&
 cd Python-@VERSION@ &&
-product_dir=$(eups path 0)/$(eups flavor)/@PRODUCT@/@VERSION@ &&
+PRODUCT_DIR=$(eups path 0)/$(eups flavor)/@PRODUCT@/@VERSION@ &&
 
 ### Here follows many useful additions for configuring Python, from Ray Plante's
 ### server: LSST/DMS/servertools/tests/server/external/python/2.7.1/lsstMkSetup.sh
@@ -120,7 +120,7 @@ cp Modules/Setup.lsst Modules/Setup &&
 ### Now we can just install in the regular way...
 export CFLAGS &&
 export LDFLAGS &&
-./configure --prefix=$product_dir --enable-shared &&
+./configure --prefix=$PRODUCT_DIR --enable-shared &&
 make &&
 make install &&
 
@@ -128,9 +128,9 @@ make install &&
 curl -L \
     http://peak.telecommunity.com/dist/ez_setup.py \
 > ez_setup.py &&
-PATH=${product_dir}/bin:$PATH &&
-LD_LIBRARY_PATH=${product_dir}/lib:$LD_LIBRARY_PATH &&
-DYLD_LIBRARY_PATH=${product_dir}/lib:$DYLD_LIBRARY_PATH &&
+PATH=${PRODUCT_DIR}/bin:$PATH &&
+LD_LIBRARY_PATH=${PRODUCT_DIR}/lib:$LD_LIBRARY_PATH &&
+DYLD_LIBRARY_PATH=${PRODUCT_DIR}/lib:$DYLD_LIBRARY_PATH &&
 python ez_setup.py &&
 
-qserv_ups @PRODUCT@ @VERSION@ ${product_dir}
+qserv_ups @PRODUCT@ @VERSION@ ${PRODUCT_DIR}

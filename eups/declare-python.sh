@@ -5,7 +5,7 @@ source functions.sh
 
 # dependant packages
 ##
-eups_dist virtualenv 1.7
+eups_dist virtualenv 1.10.1
 eups_dist python virtualenv
 
 # test this on remote machine

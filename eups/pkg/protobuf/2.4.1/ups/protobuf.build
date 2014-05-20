@@ -1,12 +1,12 @@
 # qserv build script 
 # # # # 
-@QSERV PREPARE@
-@QSERV UPS@
+@QSERV FUNCTIONS@
 
+qserv_globals @PRODUCT@ @VERSION@ &&
 qserv_prepare @PRODUCT@ @VERSION@ &&
-./configure --prefix=$product_dir &&
+./configure --prefix=$PRODUCT_DIR &&
 make &&
 make install &&
 cd python &&
 python setup.py install &&
-qserv_ups @PRODUCT@ @VERSION@ ${product_dir}
+qserv_ups @PRODUCT@ @VERSION@ ${PRODUCT_DIR}

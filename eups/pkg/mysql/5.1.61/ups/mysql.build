@@ -1,10 +1,10 @@
 # qserv build script 
 # # # # 
-@QSERV PREPARE@
-@QSERV UPS@
+@QSERV FUNCTIONS@
 
+qserv_globals @PRODUCT@ @VERSION@ &&
 qserv_prepare @PRODUCT@ @VERSION@ &&
-./configure --prefix=${product_dir} --enable-local-infile --with-mysqld-user=${USER} &&
+./configure --prefix=${PRODUCT_DIR} --enable-local-infile --with-mysqld-user=${USER} &&
 make &&
 make install &&
-qserv_ups @PRODUCT@ @VERSION@ ${product_dir}
+qserv_ups @PRODUCT@ @VERSION@ ${PRODUCT_DIR}

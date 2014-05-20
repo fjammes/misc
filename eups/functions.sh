@@ -1,3 +1,5 @@
+# TODO flatten pkg subdir and 
+# study declare/undeclare process
 eups_dist() {
     if [ -z "$1" -o -z "$2" ]; then
         echo "eups_dist requires two arguments"
@@ -16,5 +18,6 @@ eups_dist() {
 }
 
 eups_undeclare_all() {
+    echo "INFO : undeclaring all packages"
     eups list  | cut -f1 |  awk '{print "eups undeclare --force "$1"  "$2}' | bash
 }
