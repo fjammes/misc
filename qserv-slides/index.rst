@@ -84,7 +84,7 @@ Dans le détail
 
 * Mise en conformité des procédures de gestion des services Qserv avec la LSB : multi-OS
 * Mise en conformité de la procédures d'installation avec le nouveau standard LSST : eupspkg
-* Procédure de développement/tests généralisé pour l'équipe
+* Procédure LSST de développement/tests généralisée à l'ensemble de l'équipe
 * Refonte de l'outil de configuration : isolation des binaires et de l'espace d'exécution
 .. image:: /_static/img/lsb.jpg
    :scale: 50 %
@@ -99,3 +99,6 @@ Perspectives
 * Chargement des données de la W14 sur le cluster du CC-IN2P3
 * Vers l'intégration continue multi plate-forme avec OpenStack (CC-in2p3)
 * Test de Qserv en cours chez Google
+.. image:: /_static/img/supernova.jpg
+   :scale: 50 %
+   :align: center
