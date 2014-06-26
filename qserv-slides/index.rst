@@ -54,7 +54,7 @@ Actions en cours à SLAC
 * Utilisation d'un service de configuration centralisé
 * Optimisation du parseur
 * Outil de journalisation commun avec le stack
-* Optimisation de xrootd 
+* Intégration de la nouvelle version de xrootd 
 
 |
 
@@ -69,7 +69,7 @@ Actions en cours à l'IN2P3
 Maintenance et évolution des procédures :
 
 * d'installation, 
-* de configuration, (mono-noeud pour l'instant)
+* de configuration, (mono-noeud ou autre)
 * de tests d'intégration (chargement, exécution, requétage)
 |
 
@@ -82,10 +82,10 @@ Maintenance et évolution des procédures :
 Dans le détail
 ==============
 
-* Intégration et validation des fonctionnalités développées à SLAC (modules, zookeeper, partitioner)
 * Mise en conformité des procédures de gestion des services Qserv avec la LSB : multi-OS
 * Mise en conformité de la procédures d'installation avec le nouveau standard LSST : eupspkg
-
+* Procédure de développement/tests généralisé pour l'équipe
+* Refonte de l'outil de configuration : isolation des binaires et de l'espace d'exécution
 .. image:: /_static/img/lsb.jpg
    :scale: 50 %
    :align: center
@@ -95,10 +95,7 @@ Dans le détail
 Perspectives
 ============
 
-Discussions à venir avec Mario Juric :
-
-* Amélioration des standards logiciel LSST pour le packaging
-* Script newinstall.sh
-* Gestion des dépendances systèmes avec eups
-* Automatisation de la procédure de distribution, avec le support des branches git de développement
-* Vers l'intégration continue multi plate-forme avec Docker et OpenStack (CC-in2p3) ?
+* Optimisation des métriques des tests d'intégration et du rapport vers l'utilisateur
+* Chargement des données de la W14 sur le cluster du CC-IN2P3
+* Vers l'intégration continue multi plate-forme avec OpenStack (CC-in2p3)
+* Test de Qserv en cours chez Google
