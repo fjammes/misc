@@ -1,8 +1,8 @@
 # load Dockerfile
-docker build - < Dockerfile
+docker build -t="fjammes/qserv:dev" - < Dockerfile
 
 # interactive
-docker run -i -t 93da0c9fbff1 /bin/bash
+docker run -i -t "fjammes/qserv:dev" /bin/bash
 
 # create image
 docker ps
