@@ -3,7 +3,7 @@ docker build -t="fjammes/qserv:dev" - < Dockerfile
 
 # interactive
 # xrootd needs hostname which start with a string
-docker run -h qserv-dev -i -t "fjammes/qserv:dev" /bin/bash
+docker run -h qserv-host -i -t "fjammes/qserv:dev" /bin/bash
 
 # create image
 docker ps
