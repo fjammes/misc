@@ -1,10 +1,22 @@
-killall mysqld mysql-proxy xrootd java python
+#!/bin/bash
+
+set -x
+set -e
+
+STACK_DIR=$HOME/stack
 QSERV_SRC_DIR=$HOME/src/qserv
-cd ${QSERV_SRC_DIR} &&
-setup -k -r . &&
-rm -rf build lib proxy bin cfg  &&
-eupspkg -e PREFIX=$PWD install &&
-qserv-configure.py --all --force &&
-~/qserv-run/2014_12/bin/qserv-start.sh &&
-qserv-test-integration.py &&
-~/qserv-run/2014_12/bin/qserv-stop.sh 
+QSERV_RUN_DIR=$HOME/qserv-run/bisect
+
+. $STACK_DIR/loadLSST.bash
+setup qserv_distrib -t qserv
+setup -k -r ${QSERV_SRC_DIR}
+
+killall mysqld mysql-proxy xrootd java pytho || printf "Unable to kill some services"
+cd ${QSERV_SRC_DIR}
+# rm -rf build lib proxy bin cfg
+# "scons install" doesn't use all proc
+eupspkg -e PREFIX=${QSERV_SRC_DIR} install
+qserv-configure.py --all --force -R ${QSERV_RUN_DIR}
+${QSERV_RUN_DIR}/bin/qserv-start.sh
+qserv-test-integration.py
+${QSERV_RUN_DIR}/bin/qserv-stop.sh
