@@ -10,7 +10,6 @@ dbSock = "/data/qserv-run-import/var/lib/mysql/mysql.sock"
 dbUser = "root"
 dbPass = "changeme"
 dbName = "LSST"
-dbName = "LSST"
 
 con = MySQLdb.connect(host="127.0.0.1",
                       port=23306,
@@ -24,8 +23,9 @@ CHILD = 'DeepForcedSource'
 DIRECTOR = 'DeepSource'
 TABLES = [ DIRECTOR, CHILD]
 CHUNKS = ['6970','7138', '7140', '7308', '7310']
+LIMIT = 1000
 
-OUTDIR=os.path.join('data', 'qserv_testdata04', 'input')
+OUTDIR=os.path.join('/', 'data', 'qserv_testcase04', 'input')
 
 def diagnose():
     cursor.execute("SHOW DATABASES");
@@ -35,8 +35,8 @@ def diagnose():
 
 def alter(tables=TABLES, chunks=CHUNKS):
 
-    sql = ['ALTER TABLE {table} DROP COLUMN IF EXISTS chunkId',
-            'ALTER TABLE {table} DROP COLUMN IF EXISTS subChunkId']
+    sql = ['ALTER TABLE {table} DROP COLUMN chunkId',
+            'ALTER TABLE {table} DROP COLUMN subChunkId']
 
     for t in tables:
         for c in chunks:
@@ -45,35 +45,56 @@ def alter(tables=TABLES, chunks=CHUNKS):
                 print "sql: {0}".format(q)
                 cursor.execute(q)
 
-def child_to_outfile(table=CHILD, chunks=CHUNKS, outdir=OUTDIR):
+def _chunks_to_oufile(tpl, chunks, table, outdir, limit):
+
+    tpl += ("INTO OUTFILE '{csvfile}' "
+            "FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"+'"'
+            "' LINES TERMINATED BY '\n'")
+
+    for c in chunks:
+        csvfile = os.path.join(outdir,
+                               "{table}_{chunk}_{limit}.csv".format(table=table,
+                                                                    chunk=c,
+                                                                    limit=limit))
+        try:
+            os.remove(csvfile)
+        except OSError:
+            pass
+
+        q = tpl.format(table=table+"_"+c, csvfile=csvfile)
+        print "sql: {0}".format(q)
+        cursor.execute(q)
+
+def child_to_outfile(table=CHILD, director=DIRECTOR, chunks=CHUNKS, outdir=OUTDIR, limit=LIMIT):
+
+    if limit:
+        tpl_join = ("(SELECT d.* from {director} d limit {limit})")
+        join_type="INNER"
+    else:
+        tpl_join = "{director}"
+        join_type="LEFT"
+    sql_join = tpl_join.format(director=director, limit=limit)
 
     tpl = ("SELECT f.*, COALESCE(s.ra, f.ra), COALESCE(s.decl, f.decl) "
-           "FROM {table} f LEFT JOIN DeepSource s ON (f.deepSourceId = s.deepSourceId) "
-           "INTO OUTFILE '{csvfile}'"
-           "FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"+'"'
-           "' LINES TERMINATED BY '\n'")
+           "FROM {table} f "
+           + join_type + " JOIN "
+           + sql_join + " s "
+           "ON (f.deepSourceId = s.deepSourceId) ")
 
-    for c in chunks:
-        q = tpl.format(table=table, csvfile=os.path.join(outdir,child+'_'+c+'.csv'))
-        print "sql: {0}".format(q)
-        cursor.execute(q)
+    _chunks_to_oufile(tpl, chunks, table, outdir, limit)
 
-def director_to_outfile(table=DIRECTOR, chunks=CHUNKS, outdir=OUTDIR):
+def director_to_outfile(table=DIRECTOR, chunks=CHUNKS, outdir=OUTDIR, limit=LIMIT):
 
     tpl = ("SELECT s.* "
-           "FROM {table} s "
-           "INTO OUTFILE '{csvfile}' "
-           "FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"+'"'
-           "' LINES TERMINATED BY '\n'")
+           "FROM {table} s ")
 
-    for c in chunks:
-        q = tpl.format(table=table, csvfile=os.path.join(outdir,table+'_'+c+'.csv'))
-        print "sql: {0}".format(q)
-        cursor.execute(q)
+    if limit:
+        tpl += "LIMIT {limit} ".format(limit=limit)
 
+    _chunks_to_oufile(tpl, chunks, table, outdir, limit)
 
 # diagnose()
-alter()
+# alter()
 child_to_outfile()
 director_to_outfile()
 
