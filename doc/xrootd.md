@@ -2,7 +2,7 @@
 
 ## Example 
 
-See /afs/slac.stanford.edu/u/sf/abh/xssitest
+See this [XrdSSi example](../cpp-examples/xrdssi_test)
 where XrdSsiCl is the client-side exqample and XrdSsiSv is the server-side
 example.
 
