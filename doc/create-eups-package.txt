@@ -1,0 +1,19 @@
+# Enable private key for the session :
+eval `ssh-agent -s`
+ssh-add ${HOME}/.ssh/id_rsa
+
+# Create an empty eups packaging shell :
+PRODUCT=flask
+VERSION=0.10.1
+
+cd dependencies &&
+mkdir -p ${PRODUCT}/upstream ${PRODUCT}/ups &&
+cd ${PRODUCT} &&
+git init &&
+git remote add origin ssh://git@dev.lsstcorp.org/contrib/eupspkg/${PRODUCT} 
+
+# update build procedure, and then :
+git add ups upstream
+git commit -a -m "eupspkg build procedure for ${PRODUCT}"
+git tagorigin ${VERSION} 
+git push --tags
