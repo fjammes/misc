@@ -6,7 +6,7 @@ See /afs/slac.stanford.edu/u/sf/abh/xssitest
 where XrdSsiCl is the client-side exqample and XrdSsiSv is the server-side
 example.
 
-## Pictore
+## Pictures
 
 * The overall flow
 http://www.slac.stanford.edu/~abh/SSI-Flow/
