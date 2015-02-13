@@ -3,7 +3,7 @@
 ## Example 
 
 See this [XrdSSi example](../cpp-examples/xrdssi_test)
-where XrdSsiCl is the client-side exqample and XrdSsiSv is the server-side
+where XrdSsiCl is the client-side example and XrdSsiSv is the server-side
 example.
 
 ## Pictures
