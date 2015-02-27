@@ -1,0 +1,2 @@
+g++ -g -I. -Isrc -Llib -Llibcl -lXrdSsi -o ssicl XrdSsiClMain.cc XrdSsiClUI.cc
+#g++ -g -I. -Isrc -Llib -lXrdUtils -shared -fPIC -o lib/myservice.so myservice.cc
