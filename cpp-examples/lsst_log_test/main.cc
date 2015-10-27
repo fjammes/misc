@@ -1,6 +1,11 @@
 // LSST headers
 #include "lsst/log/Log.h"
 
+LOG_LOGGER getLogger() {
+        static LOG_LOGGER logger = LOG_GET("testLogger");
+        return logger;
+}
+
 std::string ofName = "test.log";
 enum Layout_t { LAYOUT_SIMPLE, LAYOUT_PATTERN, LAYOUT_COMPONENT };
 
@@ -29,7 +34,11 @@ int main() {
     configure(LAYOUT_SIMPLE);
     LOGF_DEBUG("This is DEBUG");
     LOG_INFO("This is INFO %d", i);
-    LOG_INFO("This is INFO %u", i);
+    LOGF_INFO("This is INFO %u" % i);
+    LOG_INFO("This works");
+    LOG(getLogger(), LOG_LVL_INFO, "This crash the program");
+    LOGF(getLogger(), LOG_LVL_INFO, "This crash the program");
+    LOG_INFO("SUCCESS");
     return 0;
 }
 
