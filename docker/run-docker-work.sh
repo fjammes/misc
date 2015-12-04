@@ -6,5 +6,5 @@ docker run -it --rm -h $(hostname)-docker \
     -v "$SRC_DIR":/home/dev/src \
     -v "$RUN_DIR":/home/dev/qserv-run \
     -u dev \
-    fjammes/qserv:dev-uid \
+    qserv/qserv:work-uid \
     bash 
