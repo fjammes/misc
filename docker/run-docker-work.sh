@@ -34,8 +34,8 @@ IMAGE=qserv/qserv:"$IMAGE_TAG"
 
 docker run -it --rm -h "$(hostname)-docker" \
     --name my_qserv \
-    -v "$SRC_DIR":/home/dev/src \
-    -v "$RUN_DIR":/home/dev/qserv-run \
+    -v "$SRC_DIR":/home/"$DOCKER_USER"/src \
+    -v "$RUN_DIR":/home/"$DOCKER_USER"/qserv-run \
     -u "$DOCKER_USER" \
     "$IMAGE" \
     bash 
