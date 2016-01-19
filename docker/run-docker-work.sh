@@ -1,5 +1,7 @@
 #!/bin/sh
 
+DOCKER_USER=dev
+
 usage() {
   cat << EOD
 
@@ -9,6 +11,15 @@ usage() {
   local host.
 EOD
 }
+
+while getopts hu: c ; do
+    case $c in
+        h) usage ; exit 0 ;;
+        u) DOCKER_USER="$OPTARG" ;;
+        \?) usage ; exit 2 ;;
+    esac
+done
+shift "$((OPTIND-1))"
 
 if [ $# -ne 1 ] ; then
     usage
@@ -21,10 +32,10 @@ SRC_DIR=$HOME/src
 RUN_DIR=$HOME/qserv-run
 IMAGE=qserv/qserv:"$IMAGE_TAG"
 
-docker run -it --rm -h $(hostname)-docker \
+docker run -it --rm -h "$(hostname)-docker" \
     --name my_qserv \
     -v "$SRC_DIR":/home/dev/src \
     -v "$RUN_DIR":/home/dev/qserv-run \
-    -u dev \
+    -u "$DOCKER_USER" \
     "$IMAGE" \
     bash 
