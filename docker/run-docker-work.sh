@@ -7,8 +7,10 @@ usage() {
 
   Usage: $(basename "$0") image-tag
 
-  Run a docker image containing Qserv deps and which mount source directory on
-  local host.
+	-u container user which will run the shell
+
+  Run a shell inside a docker container containing Qserv deps
+  and which mount source directory on local host.
 EOD
 }
 
@@ -32,7 +34,7 @@ SRC_DIR=$HOME/src
 RUN_DIR=$HOME/qserv-run
 IMAGE=qserv/qserv:"$IMAGE_TAG"
 
-docker run -it --rm -h "$(hostname)-docker" \
+docker run -it --rm --net=host \
     --name my_qserv \
     -v "$SRC_DIR":/home/"$DOCKER_USER"/src \
     -v "$RUN_DIR":/home/"$DOCKER_USER"/qserv-run \
