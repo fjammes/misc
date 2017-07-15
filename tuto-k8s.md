@@ -1,6 +1,6 @@
 Notre formateur, Fabrice est responsable du déploiement du plus grand catalogue d'objets célestes pour le télescope LSST. Cette base de données de plusieurs PetaOctets, nommée Qserv, est développée par l'université de Stanford, et le CNRS. Elle mobilise plusieurs centaines de machines dans deux grands centres de données internationaux.
 
-Au cours de cette formation Fabrice qui a développé l'intégralité du système d'orchestration du logiciel Qserv, basé sur Kubernetes, mettra à votre disposition ses compétences et son experience en la matière.
+Au cours de cette formation, Fabrice, qui a développé avec Kubernetes l'intégralité du système d'orchestration du logiciel Qserv, mettra à votre disposition ses compétences et son experience en la matière.
  
 # Présentation
 
