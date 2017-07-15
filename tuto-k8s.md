@@ -1,13 +1,15 @@
-Notre formateur, Fabrice est responsable du déploiement du plus grand catalogue d'objets célestes pour le télescope LSST. Cette base de données de plusieurs PetaOctets est développée à l'université de Stanford, et au CNRS. Elle mobilise plusieurs centaines de machines dans deux grands centres de données internationaux.
+Notre formateur, Fabrice est responsable du déploiement du plus grand catalogue d'objets célestes pour le télescope LSST. Cette base de données de plusieurs PetaOctets, nommée Qserv, est développée par l'université de Stanford, et le CNRS. Elle mobilise plusieurs centaines de machines dans deux grands centres de données internationaux.
+
+Au cours de cette formation Fabrice qui a développé l'intégralité du système d'orchestration du logiciel Qserv, basé sur Kubernetes, mettra à votre disposition ses compétences et son experience en la matière.
  
 # Présentation
 
-Kubernetes (communément appelé « K8s ») est un système open source pour automatiser le déploiement, la mise à l'échelle et la gestion des applications conteneurisées conçues à l'origine par Google et offert à la Cloud Native Computing Foundation. Il vise à fournir une « plate-forme pour automatiser le déploiement, la mise à l'échelle et les opérations sur conteneurs d'applications à travers les grappes d'hôtes ». Il fonctionne avec des containers, supporte plusieurs technologies de containers, et est souvent utilisé avec Docker.
+Kubernetes (communément appelé « K8s ») est un logiciel libre destiné à automatiser le déploiement, la mise à l'échelle et la gestion d'applications conteneurisées. K8s a été conçu à l'origine par Google et offert à la Cloud Native Computing Foundation. Il vise à fournir une « plate-forme pour automatiser le déploiement, la mise à l'échelle et les opérations sur conteneurs d'applications à travers les grappes d'hôtes ». Il fonctionne avec des containers, supporte plusieurs technologies de containers, et est souvent utilisé avec Docker.
 
 # Objectifs
 
     Connaître les caractéristiques d’un conteneur Linux.
-    Savoir installer et utiliser Docker.
+    Savoir installer et utiliser Kubernetes.
     Maîtriser la création des images Docker et les Dockerfile.
     Savoir interagir avec le Docker Hub et des registry privés.
     Maîtriser les notions réseaux de Docker (networks, links).
@@ -54,7 +56,7 @@ Une attestation sera remise à chaque stagiaire qui aura suivi la totalité de l
 # Programme
 
  
-## Introduction aux conteneurs
+## Introduction aux micro-services
 
     Présentation du concept de conteneur Linux
     Cas d’utilisation des conteneurs Linux
@@ -62,7 +64,7 @@ Une attestation sera remise à chaque stagiaire qui aura suivi la totalité de l
     Présentation de Docker et de son architecture
 
  
-Créer ses premiers Conteneurs Docker
+## Créer ses premiers Conteneurs Docker
 
     Installation de Docker
     Le cycle de vie d’un conteneur
@@ -70,7 +72,7 @@ Créer ses premiers Conteneurs Docker
     Interagir avec un conteneur depuis le host (exec, inspect, logs…)
 
  
-Les images Docker
+## Les images Docker
 
     Qu’est-ce qu’une image Docker
     Créer une image à partir d’un conteneur
@@ -79,27 +81,27 @@ Les images Docker
     Mettre en place un registry privé et y stocker ses images
 
  
-Le réseau avec Docker
+## Le réseau avec Docker
 
     Comprendre la stack réseau de Docker
     Utiliser les links Docker
     Créer des networks Docker et connaître les drivers réseaux
 
  
-La persistance des données avec Docker
+## La persistance des données avec Docker
 
     Créer et persister des volumes Docker (host/conteneur, inter-conteneurs)
     Bonnes pratiques de persistance de données avec Docker
 
  
-L’écosystème Docker
+## L’écosystème Docker
 
     Créer des instances Docker avec Docker Machine
     Créer sa stack logicielle avec Docker Compose
     Orchestrer le déploiement de conteneurs sur plusieurs machines avec Docker Swarm
 
  
-Concepts avancés
+## Concepts avancés
 
     Mettre en place une architecture microservices avec Docker (Service Discovery, automatisation…)
     Sécuriser son infrastructure Docker (TLS, App Armor, SELinux…)
