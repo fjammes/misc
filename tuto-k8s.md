@@ -8,20 +8,21 @@ Kubernetes (communément appelé « K8s ») est un logiciel libre destiné à au
 
 # Objectifs
 
-    Connaître les caractéristiques d’un conteneur Linux.
+    Connaître les spécificités et les avantages des micro-services.
+    Savoir déployer ses applications sur des infrastructures élastiques.
     Savoir installer et utiliser Kubernetes.
-    Maîtriser la création des images Docker et les Dockerfile.
-    Savoir interagir avec le Docker Hub et des registry privés.
-    Maîtriser les notions réseaux de Docker (networks, links).
-    Maîtriser la gestion des données avec Docker (volumes).
-    Savoir utiliser Docker Swarm, Docker Compose et Docker Machine
-    Pouvoir intégrer Docker au sein de vos projets
-    Pour déployer Docker en production
+    Positionner automatiquement ses conteneurs sur un cluster ou dans le cloud.
+    Automatiser le passage à l'échelle de ses applications
+    Mettre en place la haute-disponibilité et l'auto-réparation des services logiciels
+    Optimiser le stockage de grandes masses de données avec les volumes
+    Disposer d'un monitoring avancé des services logiciels
+    Simplifier la mise à jour des versions logicielles de ses applications
+    Déployer Kubernetes en production
 
  
 # Sociétés concernées
 
-Cette formation s’adresse aux entreprises, petites ou grandes, souhaitant former ses équipes à une nouvelle technologie informatique avancée.
+Cette formation s’adresse aux entreprises, petites ou grandes, souhaitant former ses équipes à une technologie informatique utilisée par les sociétés les plus en pointe de la Silicon Valley.
 
  
 # Public visé
@@ -58,37 +59,43 @@ Une attestation sera remise à chaque stagiaire qui aura suivi la totalité de l
  
 ## Introduction aux micro-services
 
-    Présentation du concept de conteneur Linux
-    Cas d’utilisation des conteneurs Linux
-    Les différences entre conteneurs et machines virtuelles
-    Présentation de Docker et de son architecture
+    L'évolution des applications
+    Les micro-services
+    Intéragir avec une application monolithique
+    Refactoriser une application en micro-services
 
  
-## Créer ses premiers Conteneurs Docker
+## Rappels sur les conteneurs
 
-    Installation de Docker
-    Le cycle de vie d’un conteneur
-    Lancer un conteneur avec docker run (en mode interactif, en mode détaché…)
-    Interagir avec un conteneur depuis le host (exec, inspect, logs…)
-
- 
-## Les images Docker
-
-    Qu’est-ce qu’une image Docker
-    Créer une image à partir d’un conteneur
-    Créer une image à partir d’un Dockerfile
-    Stocker et récupérer des images depuis le Docker Hub
-    Mettre en place un registry privé et y stocker ses images
+    Vue d'ensemble de Docker
+    Vue d'ensemble des conteneurs logicielles
+    Installer et exécuter des images Docker
+    Intéragir avec des conteneurs
+    Créer ses propres images
+    Différence entre les dépôts privés et publics
 
  
-## Le réseau avec Docker
+## Kubernetes: les bases
 
-    Comprendre la stack réseau de Docker
-    Utiliser les links Docker
-    Créer des networks Docker et connaître les drivers réseaux
+    Créer un cluster Kubernetes
+    Déployer une application
+    Explorer une application
+    Exposer une application sur le réseau
+    Passage à l'échelle
+    Mise à jour des versions logicielle
 
  
-## La persistance des données avec Docker
+## Kubernetes: les principaux concepts
+
+    Vue d'ensembles des Pods
+    Intéragir avec les Pods
+    Configuration et sécurité d'une application
+    Vue d'ensembles des Services
+    Créer son propre service
+    Organiser ses Pods avec les Labels
+
+ 
+## Deployer ses micro-services
 
     Créer et persister des volumes Docker (host/conteneur, inter-conteneurs)
     Bonnes pratiques de persistance de données avec Docker
