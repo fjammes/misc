@@ -78,7 +78,7 @@ Une attestation sera remise à chaque stagiaire qui aura suivi la totalité de l
 ## Kubernetes: les bases
 
     Créer un cluster Kubernetes
-    Déployer une application
+    Déployer une application sur plusieurs machines
     Explorer une application
     Exposer une application sur le réseau
     Passage à l'échelle
@@ -97,19 +97,16 @@ Une attestation sera remise à chaque stagiaire qui aura suivi la totalité de l
  
 ## Deployer ses micro-services
 
-    Créer et persister des volumes Docker (host/conteneur, inter-conteneurs)
-    Bonnes pratiques de persistance de données avec Docker
+    Stratégies de déploiement
+    Cas pratique: déploiements avec kubectl et yaml
+    Stratégies de passage à l'échelle
+    Cas pratique: utilisation des réplicats
+    Stratégie de mise à jour logicielle
+    Cas pratique: Rolling update
 
- 
-## L’écosystème Docker
-
-    Créer des instances Docker avec Docker Machine
-    Créer sa stack logicielle avec Docker Compose
-    Orchestrer le déploiement de conteneurs sur plusieurs machines avec Docker Swarm
-
- 
 ## Concepts avancés
 
-    Mettre en place une architecture microservices avec Docker (Service Discovery, automatisation…)
-    Sécuriser son infrastructure Docker (TLS, App Armor, SELinux…)
-    Docker in Docker
+    Stockages volatiles et persistents
+    Containers d'initialisation
+    Techniques de réseau avancées
+    Techniques de journalisation avancées
