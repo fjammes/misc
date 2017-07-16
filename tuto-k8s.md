@@ -68,7 +68,7 @@ Une attestation sera remise à chaque stagiaire qui aura suivi la totalité de l
 ## Rappels sur les conteneurs
 
     Vue d'ensemble de Docker
-    Vue d'ensemble des conteneurs logicielles
+    Vue d'ensemble des conteneurs
     Installer et exécuter des images Docker
     Intéragir avec des conteneurs
     Créer ses propres images
@@ -82,7 +82,7 @@ Une attestation sera remise à chaque stagiaire qui aura suivi la totalité de l
     Explorer une application
     Exposer une application sur le réseau
     Passage à l'échelle
-    Mise à jour des versions logicielle
+    Mise à jour des versions logicielles
 
  
 ## Kubernetes: les principaux concepts
