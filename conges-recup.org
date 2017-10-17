@@ -1,0 +1,1563 @@
+* RECUP
+** En cours d'acceptation:
+
+** En cours
+*** 30h35: travail off
+*** 11h00 récup
+**** 1h30 20161017 pb PDAC résolu
+
+Andy Salnikov
+6:01 PM @fjammes, this is probably more for @jgates108. My latest commit was not supposed to break anything :smirk: Is there a way to get unit test logs from travis?
+Igor Gaponenko
+6:08 PM @fjammes what’s a procedure for starting/stopping Qserv at PDAC? I may just exclude these worker nodes from the configuration in order to go ahead with my parallel catalog loading attempts. At this point, I don’t need all worker nodes of the final configuration to be available.
+John Gates
+6:19 PM @iagaponenko  Pull a copy of qserv from github. I put mine on master01 as there didn't seem to be a good place to put it. The directory is something like qserv/admin/tools/docker/deployment/pdac  (not sure about the last directory name). Copy the env.sh.example to env.sh. env.sh can be edited to pull different branches, control which nodes are used, etc.  The scripts needed are  pull.sh (install docker containers on cluster), stop.sh, run.sh, and status.sh.
+Igor Gaponenko
+6:20 PM @jgates108 thanks!
+Fabrice Jammes
+6:40 PM Replace pdac with ncsa in directory tree. Thanks John :smiley: I may have to remove all data to reinitialize all nodes, would you care @Igor?
+John Gates
+7:10 PM @fjammes is there any way to get the contents of build/wsched/testSchedulers.utest.failed from travis?
+Igor Gaponenko
+7:17 PM @fjammes I wouldn’t care if you removed all data.
+John Gates
+7:18 PM This is odd. I rebased my latest ticket on master, and it is hanging on UnitTest: build/wdb/testQuerySql
+John Gates
+7:24 PM Nevermind, it looks like it really hung on  build/wsched/testSchedulers.utest.failed
+Fabrice Jammes
+8:24 PM @jgates108 you have to rebuild master on your workstation, its not possible to retrieve stuff inside Travis.
+John Gates
+8:25 PM @fjammes  I think I've figured it out.  2 threads waiting for a notify that was already sent.
+John Gates
+8:46 PM @fjammes I put a fix in my latest ticket and pushed it to master.
+Fabrice Jammes
+8:46 PM @jgates108 Thanks!
+**** 2h30 20161014 discussion avec + PDAC meeting NCSA
+Courriel:
+[LSST|dm-devel #1591] [DM Notifications] Today’s (Friday) Infrastructure Meeting 1PM PST
+
+Jason Alt
+3:53 PM @here  Everyone, clearly there is a communication issue here (not due to a lack of effort but due to different perspectives) We will discuss this on today's infrastructure call or sooner to accommodate @fjammes schedule.
+Fabio Hernandez
+4:01 PM I have a routing issue I would like to submit to NCSA network experts. Should I send an e-mail to help@ncsa.illinois.edu or discuss it here?
+Jason Alt
+4:04 PM help@ncsa.illinois.edu is the 'direct' path. If you post it here, we do something similar but also provide a sort of value-add in that we make sure it is resolved quickly
+Fabio Hernandez
+4:07 PM I will submit via e-mail to the official channel. Thanks.
+slackbot
+9:48 PM Only visible to you Welcome to Blue Jeans! Let's get started.
+Fabrice Jammes
+9:57 PM Sorry, wasn't able to come to both Qserv meeting on wednesday and infrastructure meeting tonight this week. If you required me to be available on Friday evening please let me know if possible a  day before, so that i can organize myself with jetlag.
+Jason Alt
+9:58 PM ok. well let's you and I plan to video chat on Monday then
+Fabrice Jammes
+10:00 PM Ok thanks,  is 1 PM P.S.T. fine for you?
+10:01 @billglick of course restarting crashed services is ok, but not restarting running services. I check the log of master node puppet client and I think its compliant with that, isn't it?
+Bill Glick
+10:03 PM Yes, our puppet configs are not restarting running services, unless the node is misconfigured or the service is already dead.
+Fabrice Jammes
+10:09 PM So its fine, I was thinking puppet was doing some system update sand restarting updated services and this was worrying me, but Thomas Bellembois inspect puppet log and think it isn't the case, could you please confirm it? I propose we handle Qserv high availability later, because one large part of it should be handled by Qserv application itself, but we have not worked on  it(it requires having duplicated data chunk on multiple nodes).  Your expertise on production services management will be helpful when we will get there.
+**** 1h test connection SSH avec NCSA
+Andrew Loftus
+5:15 PM I got a note from Fabrice that he was unable to access qserv-msater01.  Can someone direct him to this room or let him know the JIRA ticket was updated?  As far as I know, everything appears to be operating as expected.
+Fabrice Jammes
+6:52 PM joined #dm-pdac
+Andrew Loftus
+7:56 PM @fjammes Are you able to get to qserv-master01 now?
+Fabrice Jammes
+9:04 PM No I can't. Sorry
+9:05 No it works fine. Thanks
+9:05 was trying lsst-qserv-master01, it's a bit confusing to have different host and ssh names...
+Shall I create it in / partition?
+9:10 Or is it puppet job?
+Xiuqin Wu
+9:08 PM I agree that the different host name and ssh name are confusing.   Is there  benefit to keep them different?
+Fabrice Jammes
+9:08 PM FYI /qserv is missing in lsst-qserv-master01
+**** 1h45 20160924 install Qserv NCSA (très urgent et bloqué par JI la semaine d'après)
+https://jira.lsstcorp.org/browse/DM-7104
+https://jira.lsstcorp.org/browse/DM-7733
+commit ef252bc386c3d2a10c44e411e6c69426d39b65b9
+Author: Fabrice Jammes <fabrice.jammes@clermont.in2p3.fr>
+Date:   Sat Sep 24 06:36:42 2016 -0500
+
+    Fix common.sh
+
+commit 703686d3976a208ebf3aa8bba729e3c925fd4e85
+Author: Fabrice Jammes <fabrice.jammes@clermont.in2p3.fr>
+Date:   Sat Sep 24 06:31:53 2016 -0500
+
+    Add support to common.sh for in2p3
+
+commit ccb95e3def632f156c8cafb0f92c6b0bbc1970c4
+Author: Fabrice Jammes <fabrice.jammes@clermont.in2p3.fr>
+Date:   Sat Sep 24 06:22:25 2016 -0500
+
+    Add advanced configuration file
+
+commit 14bc6ba4b707ca418731767c3d5e77f53e07bd3c
+Author: Fabrice Jammes <fabrice.jammes@clermont.in2p3.fr>
+Date:   Sat Sep 24 06:13:55 2016 -0500
+
+    Add support for different ssh server names
+
+commit 5a9277257c8b0693cb8dd8c9aa84d42d82425e80
+Author: Fabrice Jammes <fabrice.jammes@clermont.in2p3.fr>
+Date:   Fri Sep 23 17:17:33 2016 -0500
+
+    Hack to manage different ssh name and hostname
+
+commit 620a5cd195f8ed54d6717665abe1603af7f91f26
+Author: Fabrice Jammes <fabrice.jammes@clermont.in2p3.fr>
+Date:   Fri Sep 23 16:57:10 2016 -0500
+
+    Add chown example
+
+commit 2d46fccb0faf6f59888ff8715d51e37bd7ea424e
+Author: Fabrice Jammes <fjammes@lsst-qserv-db01.ncsa.illinois.edu>
+Date:   Fri Sep 23 16:28:30 2016 -0500
+
+    Add NCSA deploy setup
+
+**** 2h 20160923 install NCSA
+https://jira.ncsa.illinois.edu/browse/LSST-785?focusedCommentId=107730&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-107730
+https://jira.lsstcorp.org/browse/DM-7104
+**** 1h 20160913 préparation install NCSA
+Courriel:
+Infrastructure requirement for Qserv cluster
+8 messages
+Expéditeur :	Fabrice Jammes
+À:	Alt, Jason
+Cc:	Fritz Mueller
+13 Septembre 2016 22:00
+
+Here's our main requirements:
+
+- qserv user/group created on all qserv nodes (and all developers being able to use this account), with UID 1000
+- Around 2TB /data directory belonging to 'qserv' user on all qserv nodes (Fritz might give you additional information on data size in order to have a better estimate)
+- git+shmux on cerberus or qserv master node
+- docker hub access on all nodes, or any local docker registry mirror you would provide us
+- github access on cerberus (seems ok now)
+- no firewall between qserv nodes
+- docker 1.12.1 on all qserv nodes
+- all developers accounts belonging to 'docker' group on all nodes
+- /var/lib/docker >1TB
+- ssh access between the shmux node and qserv nodes with no password prompt
+
+FYI, IN2P3 sysadmins use puppets in order to enforce all these constraints, and our requirements have remained stable for around 1 year now.
+On your side, could you enforce these constraints with your configuration management tool?
+On our side we would focus, in a first step, on containers deployment and orchestration for Qserv, and do our best to limit updates to your configuration management.
+Would you agree with that proposal?
+
+Cheers,
+
+**** 1h15, 20160916: Réunion PDAC avec NCSA
+[DM Notifications] Infrastructure Meeting Sept 16, 2016 1PM PST     
+               Just to confirm (after checking with @jalt </users/jalt>,
+who has been heavily occupied this morning with matters to our benefit  ): 
+
+ There will be an infrastructure meeting today (Friday) at 1PM PST. Topics
+to include (based on @jalt </users/jalt>'s posting in HipChat): 
+
+ We will cover pdac and lsst compute status, service decommissioning,
+acquisition planning updates if applicable; likely this will be a very open
+discussion because I'm sure there are many questions.
+
+ Meeting Notes (to be):
+https://confluence.lsstcorp.org/display/DM/Current-Infrastructure+Meeting+2016-09-16
+
+
+*** 20161001
+agate:
+  congés: 21/36
+  recup: 0.5/13.5
+  CET: 40
+  Enfant Malade: 4.5
+* Historique :
+*** 20160712
+agate:
+  congés: 21/35
+  recup: 2/10.5
+  CET: 40
+  Enfant Malade: 4.5
+*** 1.5 jour: astreinte juillet/aout
+*** 1.5 jour: astreinte semaine du 6 au 12 mai
+*** 20160517
+agate:
+  congés: 33/35
+  recup: 0.5/8.5
+  CET: 40
+  Enfant Malade: 4.5
+
+*** 2 jours: 15h30
+**** 30/06: debugage Openstack avec l'aide d'un ingénieur du NCSA 1h30
+Greg Daues added a comment - 30/06/2016 15h39
+
+There is a question as to whether a "snapshot" process played any role in the original incident.
+Is a "snapshot" task part of the scripted initialization of the instance, or was the snapshot in this case
+launched by hand? Nebula admins seem to think that a very early/eager snapshot may have interfered
+with proper initialization, but maybe this is a separate side matter from the error in this issue. If you think the modified command above takes of the issue (works consistently), perhaps it is resolved.
+Permalink Edit Delete
+jammes Fabrice Jammes added a comment - 30/06/2015 20h15
+
+Hi Greg Daues, Fritz Mueller,
+
+For an unknown reason, containers run fine today.
+On my side the only thing I've done differently is using a fresh Qserv container, build yesterday on my workstation.
+
+Previous container was working everywhere but not on Openstack+up to data CentOS7.2
+
+Any idea please, do you think it might come from Openstack?
+Permalink Edit Delete
+jammes Fabrice Jammes added a comment - 2 hours ago
+
+But now it fails again, but with a new error message...
+
++ docker run -e constraint:node==lsst-fabricejammes-qserv-1 --detach=true -e QSERV_MASTER=lsst-fabricejammes-qserv-0 --name lsst-fabricejammes-qserv-1 --net=host qserv/qserv:dev_worker
+
+docker: Error response from daemon: failed to register layer: no such file or directory.
+
+See 'docker run --help'.
+
+Permalink Edit Delete
+jammes Fabrice Jammes added a comment - 1 hour ago
+
+Hi Greg Daues, to answer to your question.
+
+A first script boots a "Centos latest" image, run yum update, install docker, and when inner cloud-init script has completed, it creates centos-7-qserv snapshot.
+Then, a second script launches 3 vms using this image and then download and run Qserv containers.
+
+I've launched it 3 times now, and it succeed twice and failed once with error above...
+
+I'll let you know...
+
+Permalink
+gdaues Greg Daues added a comment - 1 hour ago
+
+It is possible that some extra diligence may be needed in the script, for example, to start the snapshot after
+an extra check that the cloud-init initialization has completed its work. Its seems some problematic condition could be reached
+if it starts too early.
+
+In the original error log the message
+
+...
+
+Server socket created on IP: '::'
+
+is curious and might be indicative that proper networking is not yet setup.
+Permalink
+gdaues Greg Daues added a comment - 49 minutes ago
+
+I also see suggestions that the “failed to register layer” error with docker could indicate that the docker
+workspace/cache (e.g., /var/lib/docker) may have been corrupted by previous work, and might need
+to be cleared/re-initialized unfortunately.
+
+Fabrice Jammes
+9:23 PM
+Hi @all, it seems swarm work better today... NCSA track is that our script might be too quick to create the snapshot image we use to boot the cluster...
+So sometimes some snapshot would be inconsistent...
+Fabrice Jammes
+10:57 PM
+Seems correct as adding a 5 sec delay before creating snapshot seems to success... The lesson is to test each snapshot by running Qserv containers and multinode tests before making it "official"...
+
+**** 22/06: All Hands Meeting telecon 2h
+Bonjour,
+
+Lors du All-Hands Meeting d'aujourd'hui, Steve Kahn a présenté une re-organisation importante relative à LSST:
+les programmes LSST, Gemini et NOAO vont se rapprocher en 2016 et mutualiser leur ressources pour former une organisation matricielle.
+
+Cela notamment afin de réaliser des économies et de permettre aux personnels d'évoluer en interne.
+
+Le document de 2 pages attaché clarifie très bien la nouvelle organisation.
+
+Bonne journée,
+
+Fabrice
+
+-------- Forwarded Message --------
+Subject:	[Project] **Document** | All-Hands Meeting | June 21, 12-2pm Pacific
+Date:	Tue, 21 Jun 2016 14:51:21 +0000
+From:	Steven Kahn <SKahn@lsst.org>
+To:	project@lists.lsst.org <project@lists.lsst.org>
+
+
+Good morning,
+
+ 
+
+Please find attached the previously mentioned two-page document that we will discuss at today’s All-Hands Meeting at 12-2pm Pacific.  Please review.
+
+ 
+
+If you would like to take part in the Q&A session that will follow Steve’s discussion on the attached, please be sure to email your question(s) to Sandra at: sortiz@lsst.org.  Simultaneous participation from remote sites could prove difficult due to the lag in video streaming and the number of participants.
+
+ 
+
+As a reminder, the Blue Jeans connection information is below.
+
+ 
+
+Thank you.
+
+
+**** 25/04 Echange avec Gred Daues sur le bug Openstack rencontré par Oualid: 1h
+Greg Daues·9:06 PM
+Hi Fabrice,   I had Nebula account info ready for Oualid,   but did not see
+Oualid on the HipChat yet.   Is that info that I can convey here for you to
+pass along?
+Fabrice Jammes·9:29 PM
+Hi Greg, of course I'm ok to get nebula account for Oualid.
+Greg Daues·9:30 PM
+great -- here is the info: the login name is    lsst-aaoualid
+And the pass phrase is     xxxxxxxx
+Fabrice Jammes·9:32 PM
+Thanks ! 
+Fabrice Jammes·9:35 PM
+I met a problem while create some CentOS7-based instances in Nebula.
+Here's my cloud-config file:
+4     #cloud-config                                                                                                                                                                         
+ 55     groups:                                                                                                                                                                               
+ 56     - docker                                                                                                                                                                              
+ 57                                                                                                                                                                                           
+ 58     packages:                                                                                                                                                                             
+ 59     - docker                                                                                                                                                                              
+ 60                                                                                                                                                                                           
+ 61     runcmd:                                                                                                                                                                               
+ 62     - ['systemctl', 'enable', 'docker']
+Show more
+Greg Daues·9:38 PM
+Is the base image the standard CentOS7, or one of the the others (provided by SQRE)?
+Fabrice Jammes·9:39 PM
+Here's my settings:
+117         image_name = "CentOS 7"                                                                                                                                                          
+118         flavor_name = "m1.medium"                                                                                                                                                        
+119         network_name = "LSST-net"                                                                                                                                                        
+120         nics = [ { 'net-id': u'fc77a88d-a9fb-47bb-a65d-39d1be7a7174' } ]                                                                                                                  
+121         ssh_security_group = "Remote SSH"
+And the error log:
+JMatt Peterson joined the room
+Fabrice Jammes·9:40 PM
+Hide card
+qserv@clrinfoport09:~/src/achbal-qserv/admin/tools/provision (tickets/DM-6062)⟫ nova console-log lsst-fabricejammes-qserv | tail
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ0yZDXiczWD8Izpjl606Rwdem96Vcpd87E36xgqGllv 
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCtvwu1xuA8wONj/ISAAFcQ1r4OGoegvU9XX8QAmQCfSCUUrY74PuXTsSVAr14pYDkwCSgwAZx4Jw2xdcDIwH1n+JE5UQKTEtivKlQlGxUXrVPM/aeEr7QRmzU8aO38/RgW0CJ5tKdfOUDDQl8ICs1mSygKiX3qSm5gUBaUKyk2Wxf+0GjPJzt7Ajr4LA8oB/aeYy4/adlDMjHDlVwVVIBTdj3HL+x5Digbobekhgn7PlqPljj/QbQ7VlbZqF3C+ASdzUThf3226yhBIU01FyIIFDZ0IvXDOy76g3sx9IHH/q2FZ6GJa29A25xP5Upg6iwXstOp2QTzkp+o8/46sqHT 
+-----END SSH HOST KEY KEYS-----
+cloud-init[11152]: Cloud-init v. 0.7.5 finished at Wed, 25 May 2016 19:39:34 +0000. Datasource DataSourceOpenStack [net,ver=2].  Up 53.24 seconds
+[[32m  OK  [0m] Started Execute cloud user/final scripts.
+[[32m  OK  [0m] Reached target Multi-User System.
+         Starting Update UTMP about System Runlevel Changes...
+[[32m  OK  [0m] Started Update UTMP about System Runlevel Changes.
+[   60.202954] systemd-journald[11186]: File /run/log/journal/19d82c8902374e7caa655973bd7a6e6a/system.journal corrupted or uncleanly shut down, renaming and replacing.
+Show more
+DM-6062: Launch integration tests using Docker+Openstack jira.lsstcorp.org
+Type: Story
+Priority: Major
+Status: In Progress
+Assignee: Oualid Achbal
+Last line is an error, and it can happen sometimes during docker install, which crashes the cloud-init procedure
+This error also always happen if "package_upgrade: true" in cloud-init.txt
+Just after kmod install.
+Any idea please?
+Greg Daues·9:43 PM
+Has this worked in the past, or not yet successful on Nebula?
+Fabrice Jammes·9:44 PM
+It has work using packer instead of python-nova
+Here the error log with "package_upgrade: true"
+cloud-init[4209]: Updating   : yum-3.4.3-132.el7.centos.0.1.noarch                      103/347
+cloud-init[4209]: Updating   : kmod-libs-20-5.el7.x86_64                                104/347
+cloud-init[4209]: Updating   : kpartx-0.4.9-85.el7_2.4.x86_64                           105/347
+cloud-init[4209]: Updating   : 7:device-mapper-1.02.107-5.el7_2.2.x86_64                106/347
+cloud-init[4209]: Updating   : 7:device-mapper-libs-1.02.107-5.el7_2.2.x86_64           107/347
+cloud-init[4209]: Updating   : cryptsetup-libs-1.6.7-1.el7.x86_64                       108/347
+cloud-init[4209]: Updating   : dracut-033-360.el7_2.x86_64                              109/347
+cloud-init[4209]: Updating   : kmod-20-5.el7.x86_64                                     110/347
+[[32m  OK  [0m] Listening on udev Kernel Socket.
+[[32m  OK  [0m] Listening on udev Control Socket.
+         Starting udev Kernel Device Manager...
+[[32m  OK  [0m] Started udev Kernel Device Manager.
+[[32m  OK  [0m] Stopped Flush Journal to Persistent Storage.
+[[32m  OK  [0m] Stopped Journal Service.
+         Starting Journal Service...
+[  102.642260] systemd-journald[11103]: File /run/log/journal/19d82c8902374e7caa655973bd7a6e6a/system.journal corrupted or uncleanly shut down, renaming and replacing.
+[[32m  OK  [0m] Started Journal Service.
+[[32m  OK  [0m] Stopped Login Service.
+         Starting Login Service...
+         Starting Flush Journal to Persistent Storage...
+[[32m  OK  [0m] Started Flush Journal to Persistent Storage.
+[[32m  OK  [0m] Started Login Service.
+         Stopping Command Scheduler...
+[[32m  OK  [0m] Stopped Command Scheduler.
+[[32m  OK  [0m] Started Command Scheduler.
+         Starting Command Scheduler...
+[[32m  OK  [0m] Stopped Preprocess NFS configuration.
+         Starting Preprocess NFS configuration...
+[[32m  OK  [0m] Started Preprocess NFS configuration.
+[[32m  OK  [0m] Stopped Preprocess NFS configuration.
+         Stopping Preprocess NFS configuration...
+         Starting Preprocess NFS configuration...
+[[32m  OK  [0m] Started Preprocess NFS configuration.
+         Stopping OpenSSH server daemon...
+[[32m  OK  [0m] Stopped OpenSSH server daemon.
+[[32m  OK  [0m] Stopped OpenSSH Server Key Generation.
+[[32m  OK  [0m] Started OpenSSH server daemon.
+         Starting OpenSSH server daemon...
+         Stopping Crash recovery kernel arming...
+[[32m  OK  [0m] Stopped Crash recovery kernel arming.
+         Starting Crash recovery kernel arming...
+Show less
+And both cloud-init and package upgrade stop here...
+**** 29/04 merge DM-5209 (fin du sprint à tenir): 1h30
+Prise en compte des remarques de 19h à 23H
+Echange avec Fritz
+Hi Fritz,
+
+I've just merged it now to master. I'm happy if you can put it in the release.
+If not, next month will be ok.
+
+On 04/29/2016 09:49 PM, HipChat wrote:
+> Fritz Mueller just mentioned you in the room Qserv but you're idle:
+>  
+> Fritz Mueller
+> @FabriceJammes, would you like us to hold the monthly release for your reviewed DM-5209 ticket?
+> 12:49 PM
+> qLfLFrledqUBC7O
+> Get HipChat notifications on your phone! Download for iOS or Android.
+>  
+> To change your notification preferences, click here.
+> This message was intended for fabrice.jammes@gmail.com. If this was in error, please contact us or opt out.
+> HipChat's offices are located at 1098 Harrison St, San Francisco, CA 94103
+>
+> Too many emails? You can unsubscribe. 	
+
+Commit dans git (cf. aussi PR GitHub)
+
+commit d1e3f2310f6905017c11a486d21ccb0db34ba2d6
+Merge: 33b19d1 87b7549
+Author: Fabrice Jammes <fabrice.jammes@in2p3.fr>
+Date:   Fri Apr 29 22:35:14 2016 +0200
+
+    Merge branch 'tickets/DM-5209'
+
+commit 87b7549c34a6b114bc7a25d36e9e7e2e341bc0f7
+Author: Fabrice Jammes <fabrice.jammes@in2p3.fr>
+Date:   Fri Apr 29 10:28:20 2016 +0200
+
+    Improve formatting and style
+    
+    And also:
+    - Move checkConnection from MySqlConfig to MySqlConnection
+    - Remove parameters and connection check in mysql::MySqlConfig
+
+commit efa14027bb44e943379565485d233a710fa5286e
+Author: Fabrice Jammes <fabrice.jammes@in2p3.fr>
+Date:   Fri Apr 29 22:29:22 2016 +0200
+
+    Remove xrdssi parameters from startup script
+
+commit 736cc143ddf3e16d101df0219480d76be4cedb1a
+Author: Fabrice Jammes <fabrice.jammes@in2p3.fr>
+Date:   Sat Apr 16 00:51:00 2016 +0200
+
+    Improve configuration management on czar side
+    
+    Also add documention and code polishing
+    
+    - Add CzarConfig
+    - Manage query hints using ConfigStore
+    - Add CssConfig
+    - Build WorkerConfig from INI file
+    - Build CzarConfig from INI file
+    - Build CssConfig from a map of (string,string)
+    - Improve default value management in ConfigStore
+
+commit 7039fd8aed6ee2a7ab5a19982502972c4b51f542
+Author: Fabrice Jammes <fabrice.jammes@in2p3.fr>
+Date:   Fri Apr 29 22:27:08 2016 +0200
+
+**** 26/04 pull request DM-5209 et création DM-5864 1h30
+
+- Délais serrés fin de sprint (et stagiaire plus réunion Grenoble)
+https://jira.lsstcorp.org/browse/DM-5209?focusedCommentId=47334&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-4733
+- Contact avec Josh Hobblit suite à le multiples relances mutuelles 
+https://jira.lsstcorp.org/browse/DM-58644
+**** 30/03 finalisation DM-5187 1h30
+délais serrés (réunion Petasky le 01/04 et sprint tendu)
+Codage, build visible sur Travis et dans la messagerie (#158, #159, # 162):
+http://clicks.travis-ci.org/track/click/30007208/travis-ci.org?p=eyJzIjoiMVBfQUZGSnh1R3NQNXFvbEhzVGJ6b016cV9VIiwidiI6MSwicCI6IntcInVcIjozMDAwNzIwOCxcInZcIjoxLFwidXJsXCI6XCJodHRwczpcXFwvXFxcL3RyYXZpcy1jaS5vcmdcXFwvbHNzdFxcXC9xc2VydlxcXC9idWlsZHNcXFwvMTE5ODc3NzYzXCIsXCJpZFwiOlwiODY0NTFmZWQ4NDM2NDIzMjljODYxMDUyOGJmZmMxMjNcIixcInVybF9pZHNcIjpbXCI1Y2E3NmFjOTdkOWJjYWE2N2NiMTFmNGU4ZGI0N2NmNzk0ODQ5YTRiXCJdfSJ9
+
+**** 29/03 SLAC 30 min
+Courriel disponible dans Inbox de in2p3
+Hi John,
+
+On my side, I use scripts in qserv/admin/tools/docker/deployment/in2p3, but it shouldn't make any difference.
+
+Here's my env.sh
+
+-bash-4.2$ cat env.sh
+
+# Set nodes names
+#MASTER=ccqserv100.in2p3.fr
+#WORKERS=$(echo ccqserv1{01..24}.in2p3.fr)
+MASTER=ccqserv125.in2p3.fr
+WORKERS=$(echo ccqserv1{26..49}.in2p3.fr)
+
+# set image names
+BRANCH=dev
+DOCKER_NAMESPACE=qserv
+MASTER_IMAGE="$DOCKER_NAMESPACE/qserv:${BRANCH}_master_$MASTER"
+WORKER_IMAGE="$DOCKER_NAMESPACE/qserv:${BRANCH}_worker_$MASTER"
+CONTAINER_NAME=qserv
+
+# shmux access
+export PATH="$PATH:/opt/shmux/bin"
+
+# docker settings
+HOST_LOG_DIR=/qserv/log
+HOST_DATA_DIR=/qserv/data
+
+After run.sh, first test query pass:
+
+-bash-4.2$ ./run-test-queries.sh
++--------------------+--------------------+
+| ra                 | decl               |
++--------------------+--------------------+
+| 29.308806347275485 | -86.30884046118973 |
++--------------------+--------------------+
+
+real    0m50.799s
+user    0m0.004s
+sys    0m0.019s
+
+I've now use stop.sh so you can perform your own test. Please let me know.
+
+
+Le 29/03/2016 19:20, John Gates a écrit :
+> Hi Fabrice,
+>
+> I'm still not getting the LSST database. Here's what I'm doing. Please let me know if I am missing something, or if something is wrong with env.sh.
+> cd working/qserv/admin/tools/docker/deployment/parallel
+> git status
+>     On branch tickets/DM-5402
+>     Your branch is up-to-date with 'origin/tickets/DM-5402'.
+> ./pull.sh
+> ./run.sh
+>
+> mysql -u qsmaster -h ccqserv125 -P 4040
+>  mysql> show databases;
+>  +--------------------+
+>  | Database           |
+>  +--------------------+
+>  | information_schema |
+>  | qservCssData       |
+>  | qservMeta          |
+>  | qservResult        |
+>  | test               |
+>  +--------------------+
+>  5 rows in set (0.00 sec)
+>
+>
+> contents of env.sh:
+> # Rename this file to env.sh and edit variables
+> # Configuration file sourced by other scripts from the directory
+>
+> # VERSION can be ia git ticket branch but with _ instead of /
+> # example: u_fjammes_DM-4295
+> VERSION=dev
+>
+> # Set nodes names
+> MASTER=ccqserv125.in2p3.fr
+> WORKERS=$(echo ccqserv1{26..49}.in2p3.fr)
+>
+> # Set images names
+> DOCKER_ORG=qserv
+> MASTER_IMAGE="$DOCKER_ORG/qserv:${VERSION}_master_$MASTER"
+> WORKER_IMAGE="$DOCKER_ORG/qserv:${VERSION}_worker_$MASTER"
+>
+> CSS_FILE=nodes.css
+> CONTAINER_NAME=qserv 
+**** 25/03 SLAC 30 min
+Courriel disponible dans "Sent Mail" de Google:
+Hi John,
+
+xrootd was down on all workers, I've restarted qserv/qserv:dev container and it works fine again.
+Won't you have a problem inside your own Qserv version?
+
+Regards
+
+ccqserv149.in2p3.fr: INFO: Qserv execution directory : /qserv/run
+ccqserv149.in2p3.fr: MySQL running (149).
+ccqserv149.in2p3.fr: xrootd is running (183).
+ccqserv149.in2p3.fr: cmsd is running (220).
+ccqserv149.in2p3.fr: qserv-wmgr is running (248).
+ccqserv149.in2p3.fr! bash: /afs/in2p3.fr/home/f/fjammes/.bashrc: Permission denied
+ccqserv148.in2p3.fr: INFO: Qserv execution directory : /qserv/run
+ccqserv148.in2p3.fr: MySQL running (150).
+ccqserv148.in2p3.fr: xrootd is running (184).
+ccqserv148.in2p3.fr: cmsd is running (221).
+ccqserv148.in2p3.fr: qserv-wmgr is running (249).
+ccqserv148.in2p3.fr! bash: /afs/in2p3.fr/home/f/fjammes/.bashrc: Permission denied
+
+25 targets processed in 2 seconds.
+Summary: 25 successes
+fjammes@ccosvms0070:~/src/qserv/admin/tools/docker/deployment/in2p3 (tickets/DM-5402=)$ fg
+./run-test-queries.sh
++--------------------+--------------------+
+| ra                 | decl               |
++--------------------+--------------------+
+| 29.308806347275485 | -86.30884046118973 |
++--------------------+--------------------+
+
+real    1m21.569s
+user    0m0.006s
+sys    0m0.017s
+Output directory: /afs/in2p3.fr/home/f/fjammes/runQueries_out
+^CTraceback (most recent call last):
+  File "/afs/in2p3.fr/home/f/fjammes/src/qserv/admin/tools/docker/deployment/in2p3/runQueries.py", line 291, in <module>
+    main()
+  File "/afs/in2p3.fr/home/f/fjammes/src/qserv/admin/tools/docker/deployment/in2p3/runQueries.py", line 288, in main
+    time.sleep(60*60*48)
+KeyboardInterrupt
+fjammes@ccosvms0070:~/src/qserv/admin/tools/docker/deployment/in2p3 (tickets/DM-5402=)$ date
+Fri Mar 25 22:24:25 CET 2016
+**** 24/03 Princeton 30 min
+John Swinbank
+Mar-24 9:36 PM
+Why is Travis e-mailing me to tell me that "The command "docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"" failed and exited with 1 during ." when I push to mariadb? https://travis-ci.org/lsst/mariadb/builds/118334277 @FabriceJammes ?
+K-T Lim
+Mar-24 9:58 PM
+Because he set it up to build docker containers for Qserv?
+(Build and run to make sure they work properly)
+Fabrice Jammes
+Mar-24 10:15 PM
+@jds Travis checks that mariadb eups build succeed on both Debian and centos using docker container. At each build it try to update dependencies inside containers in case it has changed. See https://github.com/lsst/mariadb/blob/master/.travis.yml. I think this attempt to optimize but not rebuilding the container from scratch might not be required but I'm not familiar with Travis caching techniques. Hope I'm clear enough...
+Fabrice Jammes
+Mar-24 10:18 PM
+Please let me know for additional information. I've relaunched the build and it goes fine. Maybe docker hub was down when you committed?
+Fabrice Jammes
+Mar-24 10:26 PM
+Please note that build log are not displayed because Travis doesn't support so verbose output in free mode.
+John Swinbank
+Mar-24 11:25 PM
+Thanks both -- particularly @FabriceJammes for following up and checking that it builds on the second attempt.
+John Swinbank
+Mar-24 11:26 PM
+I'm a bit worried that we're sending this stuff to poor unsuspecting developers (or T/CAMs) without any explanation of what's going on, though. Why is Fabrice organizing CI for MariaDB rather than SQuaRE? Where's it documented?
+**** 15/02 SLAC 1 h
+	9:34 PM
+@vaikunth , about your latest question, does this help: http://www.slac.stanford.edu/exp/lsst/qserv/2016_03/HOW-TO
+please let me know, I'll stay online for a while.
+9:46 PM
+Fritz Mueller left the room.
+9:59 PM
+Vaikunth Thukral joined the room.
+Vaikunth Thukral
+9:59 PM
+HipChat just came back online for me, I'll try this but if you need to go to bed please don't wait up for me 
+I'll let you know how it goes, but it looks like the right thing to do
+Fabrice Jammes
+10:00 PM
+It's ok, I'm happy to help you and I have other stuff to do on cluster. Hope it'll be fine, please let me know 
+10:02 PM
+Andy Salnikov left the room.
+Fabrice Jammes
+10:17 PM
+@jgates , could I stop Qserv on ccqserv125 tomorow? Indeed I need to perform a cold copy of innodb data from ccqserv125 to ccqserv100: https://dev.mysql.com/doc/refman/5.6/en/innodb-backup.html
+Please let me know, if it's not possible I'll find and alternate solution.
+Thanks
+ John Gates
+10:22 PM
+@FabriceJammes It should be fine to stop it tomorrow.
+Fabrice Jammes
+10:22 PM
+@jgates , ok thanks so much 
+**** 08/03 SLAC 30 min
+https://jira.lsstcorp.org/browse/DM-991?focusedCommentId=45375&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-45375
+**** 03/03 SLAC 30 min
+Fabrice Jammes
+Mar-03 9:50 PM
+@jgates
+Fabrice Jammes
+Mar-03 9:55 PM
+Could you please try
+docker pull qserv/qserv:dev
+And then trade your branch on master and push it? 
+And then rerun your previous script? 
+Please let me know 😃
+s/trade/rebase/
+Fabrice Jammes
+Mar-03 10:00 PM
+Please run
+docker pull qserv/qserv:dev
+To update dependencies 
+And then rebase your branch on master and push to origin 
+And then rerun
+Fabrice Jammes
+Mar-03 10:01 PM
+3_build_tagged_image...
+Please let me know if it works fine 😃
+John Gates
+Mar-03 10:55 PM
+@FabriceJammes @vaikunth I rebuilt everything starting with 1_build-latest-image.sh to 3_build... and it worked. I'm waiting for ./4_build-configured-images.sh -i qserv/qserv:tickets_DM-5308 ccqserv125.in2p3.fr to finish.
+John Gates
+Mar-03 10:57 PM
+@FabriceJammes @vaikunth It looks like 4_build-configured-images.sh -i qserv/qserv:tickets_DM-5308 ccqserv125.in2p3.fr failed with Step 7 : RUN bash -c ". /qserv/stack/loadLSST.bash && setup qserv -t qserv-dev && /qserv/scripts/configure.sh -m ccqserv125.in2p3.fr"
+---> Running in e5885ac8d67a
+/qserv/scripts/configure.sh: line 64: /qserv/scripts/params.sh: No such file or directory
+The command '/
+...
+Show full text
+Fabrice Jammes
+Mar-03 11:08 PM
+@jgates strange do you have very same files here : https://github.com/lsst/qserv/tree/master/admin/tools/docker/configured/scripts
+Link
+Mar-03 11:08 PM
+lsst/qserv
+qserv - LSST Query Services
+Fabrice Jammes
+Mar-03 11:10 PM
+param.sh should be here
+Fabrice Jammes
+Mar-03 11:12 PM
+Yup params.sh
+John Gates
+Mar-03 11:14 PM
+It's there
+Fabrice Jammes
+Mar-03 11:23 PM
+OK there is a bug here. Could you please edit https://github.com/lsst/qserv/blob/master/admin/tools/docker/configured/Dockerfile.tpl
+And move
+COPY scripts/*.sh scripts/
+Before the RUN command
+And then rerun 3_build..
+John Gates
+Mar-03 11:25 PM
+ok,, this correct?
+{{COMMENT_ON_WORKER_OPT}}EXPOSE 2131 4040
+
+COPY scripts/*.sh scripts/
+
+RUN bash -c ". /qserv/stack/loadLSST.bash && setup qserv -t qserv-dev && /qserv/scripts/configure.sh {{NODE_TYPE_OPT}} {{MASTER_FQDN_OPT}}"
+Fabrice Jammes
+Mar-03 11:25 PM
+Thanks for your patience and for discovering this issue
+Correct 😃
+John Gates
+Mar-03 11:26 PM
+I'll let you know how it goes, thanks 
+Fabrice Jammes
+Mar-03 11:26 PM
+Thanks also for beta testing it😃
+John Gates
+Mar-03 11:27 PM
+It isn't like I have choice :-P
+Fabrice Jammes
+Mar-03 11:30 PM
+You'll soon be a docker expert 😃
+John Gates
+Mar-03 11:33 PM
+Anyone have a copy of a query that would kill the czar with large results but not crzy large results?
+Any way to stop Error response from daemon: push qserv/qserv is already in progress?
+Fabrice Jammes
+Mar-03 11:37 PM
+Maybe restart docker and rerun 3_... Should be quick and only redo the push
+Fabrice Jammes
+Mar-03 11:38 PM
+FYI pull.sh is not yet fixed so you might have to launch it several times...
+John Gates
+Mar-03 11:43 PM
+k, thanks 
+Fabrice Jammes
+Mar-03 11:59 PM
+DM-5211 kills czar
+JIRA
+Mar-03 11:59 PM
+ DM-5211 : "SELECT y_flagNegative from Object where y_flagNegative != (1)" crash Qserv master Reported by Fabrice Jammes 
+Type:   Bug   Priority:    Major   Status:  To Do 
+**** 01/03 MariaDB/SLAC 3h00
+(arrivée 19h45h départ 22h45)
+Ok, let's meet Tuesday March 1st at 11:30 am pacific.
+
+Here are connection details:
+
+To join the Meeting:
+https://bluejeans.com/454822125
+
+To join via Browser:
+https://bluejeans.com/454822125/browser
+
+To join with Lync:
+https://bluejeans.com/454822125/lync
+
+To join via Cisco Jabber Video:
+https://bluejeans.com/454822125/jabber
+
+To join via Room System:
+Video Conferencing System: bjn.vc -or- 199.48.152.152
+Meeting ID: 454822125
+
+To join via Phone:
+1) Dial:
++1.408.740.7256
++1.888.240.2560(US Toll Free)
++1.408.317.9253(Alternate number)
+(see all numbers - http://bluejeans.com/premium-numbers)
+2) Enter Conference ID: 454822125
+
+
+Jacek
+
+*** 20160506
+agate:
+  congés: 33/35
+  recup: 1/8.5
+  CET: 40
+  Enfant Malade: 4.5
+*** Astreinte avril: 1.5 jour
+*** 20160301
+agate:
+  congés: 35/35
+  recup: 6.5/7
+  CET: 40
+*** 20160208
+agate:
+  congés: 1+35
+  recup: 3.5/20
+  CET: 40
+*** 20151221
+agate:
+  congés: 6.5+35
+  recup: 3.5/20
+  CET: 40
+*** 1.5 jours: voyage stanford
+*** 2 jours:
+**** 08/02 1h30 min
+Fabrice Jammes·8:15 PM
+Hi @jgates, I'm currently testing CentOS7 nodes, and a fix to docker config has been done, will let you know soon.
+Fritz Mueller·8:27 PM
+@MichaelKelsey thanks for keeping/annotating that!  A few recommended updates:
+Primarily, the original email pre-dated the our adoption of the "qserv-dev" tag, which is supposed to be kept applied to the latest matched-set, state-of-the-art set of packages.  So in the "eups distrib install" line, you might update "-t qserv" to "-t qserv-dev".  This would, for example, obviate the need for the special xrootd section below, or anything like it.
+And yeah, as timj suggests, I'd remove mention of openssl as a prereq at this point.
+Frossie ... left the room (user disconnected)
+Brian Van Klaveren joined the room
+Frossie ... joined the room
+Fritz Mueller·8:49 PM
+@timj well, that's pretty awesome -- with pkg-config and glib added via brew, I was just able to build qserv on el cap, and all the unit tests ran.  Thanks!!
+Relatively warning free, too.  Some keyword shading noise from boost::regex (wonder if it's fixed in boost 1.60?) and other than that just a couple of unused member var warnings looks like.
+Tim Jenness·8:51 PM
+yep
+finally working again
+Frossie ...·8:51 PM
+@timj (thumbsup)
+Fritz Mueller·8:51 PM
+(corpsethumb) indeed!
+Tim Jenness·8:52 PM
+of course, no one has actually run up qserv properly on a mac to see if it doesn't crash straightaway...
+Frossie ...·8:52 PM
+@fritz may be about to :-)
+Tim Jenness·8:52 PM
+Maybe @MichaelKelsey has
+(but not El Cap)
+Frossie ... left the room
+Fabrice Jammes·8:52 PM
+@fritz , it seems docker is not compliant with xfs (found this problem on centOS7), would you please have information about this?
+Fritz Mueller·8:53 PM
+hmm, no, I don't :-(
+googling, project atomic seems to imply that it can work: http://www.projectatomic.io/docs/filesystems/
+Supported Filesystems — Project Atomic www.projectatomic.io
+
+A core part of the Docker model is the efficient use of layered images
+and containers based on images. To implement this Docker relies
+heavily on various filesystem features in the kernel. This document
+will explain how this works and give some advice in how to best use it.
+but then there's also this: https://github.com/docker/docker/issues/641
+Docker in XFS doesn't quite work. AUFS doesn't play nicely with XFS · Issue #641 · docker/docker github.com
+
+While trying to run docker natively on my system (I keep production partitions on XFS), I've got interesting errors:  daniel@delphy:~$ lxc-docker run -i -t base /bin/bash Image base not found, tryi...
+@jgates when building qserv latest under clang, it warns of a couple unused private members: UserQueryDrop.h:120 _sessionId, and BlendScheduler.h:117 _lastCmdFromScan.  Are these purposeful, or oversights?
+K-T Lim left the room (user disconnected)
+Fritz Mueller·9:00 PM
+@FabriceJammes this seems somewhat informative: http://developerblog.redhat.com/2014/09/30/overview-storage-scalability-docker/
+Thumbnail image
+Comprehensive Overview of Storage Scalability in Docker developerblog.redhat.com
+
+Backstory First, a brief backstory on the storage situation for Docker since it was open-sourced in early 2013.  At that time, Docker relied on a filesystem called AUFS (advanced multi layered unif...
+Jonathan Sick left the room (user disconnected)
+Fabrice Jammes·9:14 PM
+Ok, but it seems there is a non-compatibility on XFS+Overlay on CentOS7: https://github.com/docker/docker/issues/10294
+docker run fails with "invalid argument" when using overlay driver on top of xfs and ext4 · Issue #10294 · docker/docker github.com
+
+$ docker version Client version: 1.4.1 Client API version: 1.16 Go version (client): go1.3.3 Git commit (client): 5bc2ff8/1.4.1 OS/Arch (client): linux/amd64 Server version: 1.4.1 Server API versio...
+Have you heard about that?
+Jonathan Sick joined the room
+Fritz Mueller·9:15 PM
+No, I hadn't...
+Is it possible to use btrfs?
+also, toward the bottom of that issue report is this: "hitting this problem as well, until i updated the kernel from 3.10 to something > 3.18"
+K-T Lim joined the room
+Fabrice Jammes·9:22 PM
+I met same issue with a 4.xxx kernel on an other centos7 machine.
+will try devicemapper with loopback mode.
+**** 03/02 25 min...
+Frossie ...·8:03 AM
+Sur mon temps de 80%
+I don't think I am the one least likely to mess up, but I'm on it
+@FabriceJammes summary of the story so far: we would like to reverse the direction of the sqlalchemy fork, so that the lsst account is the upstream and your account has the fork. If that is alright, merge the open PR and then hipchat me. I am not available 11-1pm Project.
+Brian Van Klaveren joined the room
+Brian Van Klaveren left the room (user disconnected)
+Fabrice Jammes·9:25 AM
+Hi Frossie, I've merged the pull request. In order to avoid confusion I could also remove sqlalchemy from my account? I don't need it no more, it was created for test/dev purpose before square created lsst/sqlalchemy.
+@frossie there is a message for you above.
+**** 28/01 1h20
+Fabrice Jammes·8:22 PM
+@timj @josh will try to package scisql now.
+Josh Hoblitt·8:24 PM
+thanks
+Nate Pease joined the room
+Michael Kelsey joined the room
+Fritz Mueller joined the room
+Fabrice Jammes·9:16 PM
+Hi @josh , is mariadb 10.1.10 here:
+qserv@clrinfoport09:~$ eups distrib list mariadb
+  mariadb              generic    10.1.9
+  mariadb              generic    master-g01f1b67a80
+If it is the second one then I could test scisql 0.3.5 supports it.
+Josh Hoblitt·9:19 PM
+I don't think Tim published his branch. I'm at lunch but you can double check but looking at the sha on his branch
+Fabrice Jammes·9:23 PM
+Yes Tim didn't push...
+Jacek Becla·9:23 PM
+@ktl, where is the best place to discuss storage model changes? In particular I want to propose a disruptive change to the API between LDM-141 and LDM-144. At the moment  hardware needs for workers and czars are bundled all together which makes no sense, I want to be able to say that we want x TB of SSD per czar, y TB of storage across all czars, etc.
+@ktl, how about a new hipchat room for storage model changes?
+Fabrice Jammes·9:29 PM
+@josh , coudl you please review DM-4938?
+DM-4938: Update scisql to v0.3.5 jira.lsstcorp.org
+Type: Story
+Priority: Minor
+Status: In Progress
+Assignee: Fabrice Jammes
+Jacek Becla·9:29 PM
+I have a lot of topics to discuss, many relatively small (e.g., what assumptions to make wrt caching query results? All results for all HV queries for 7 days would be 1.5 TB, not bad. But caching all results for all LV queries for 7 days would be 7 PB (hehe), that is because we still have 0.5GB per HV query)
+Josh Hoblitt·9:30 PM
+@FabriceJammes  will do
+Fabrice Jammes·9:31 PM
+Ok, need to leave now...
+**** 22/01 30min
+https://jira.lsstcorp.org/browse/DM-2592?focusedCommentId=43140&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-43140
+**** 19/01 1h15...
+Fabrice Jammes·8:00 PM
+It seems nothing happen here: https://travis-ci.org/lsst/mariadbclient
+any idea please?
+Angelo Fausti joined the room
+John Swinbank left the room (user disconnected)
+John Swinbank joined the room
+Russell Owen joined the room
+Greg Daues joined the room
+Russell Owen left the room (lost connection)
+Josh Hoblitt·8:25 PM
+@FabriceJammes I don't see an open PR
+I think travis may be acting screwy today
+I have an issue with a non-lsst repo this morning.  Travis was claiming that it was not enabled for a repo when it clearly was (and it was running on PRs)
+but you couldn't access any build reports
+Steve Pietrowicz joined the room
+Josh Hoblitt·8:26 PM
+it went away after I switched it on/off... nothing was listed on the status page
+Fabrice Jammes·8:27 PM
+@josh ok thanks, let's wait travis team to fix this issue...
+Josh Hoblitt·8:27 PM
+@FabriceJammes I suggest opening a PR on that repo and seeing if you get a travis build status
+JMatt Peterson left the room (user disconnected)
+Russell Owen joined the room
+Vaikunth Thukral joined the room
+David Nidever joined the room
+Russell Owen left the room (user disconnected)
+Vaikunth Thukral left the room (user disconnected)
+Vaikunth Thukral joined the room
+Vaikunth Thukral left the room (user disconnected)
+John Swinbank·8:52 PM
+Any chance of a new weekly sometime? It's been nicely over a month since the last one.
+Ian Sullivan left the room (user disconnected)
+Vaikunth Thukral joined the room
+Frossie ...·8:59 PM
+@jds good catch, I'll do one now
+Vaikunth Thukral left the room (user disconnected)
+Vaikunth Thukral joined the room
+Colin Slater left the room (user disconnected)
+Ian Sullivan joined the room
+John Swinbank left the room (user disconnected)
+Fabrice Jammes·9:10 PM
+@josh thanks it worked, but I need to add some env variables related to docker hub auth in the travis script and I can't do it: I miss the "Settings" button.
+Josh Hoblitt·9:11 PM
+@FabriceJammes OK. I'll get it sorted as soon as I'm back from lunch
+Fabrice Jammes·9:12 PM
+Ok thanks so much and have a good lunch :-). On my side I'm going to bed.
+**** 14/01 40min:
+https://jira.lsstcorp.org/browse/DM-4295?focusedCommentId=42791&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-42791
+**** 12/01 40min:
+merge DM-4786
+https://jira.lsstcorp.org/browse/DM-4786?focusedCommentId=42720&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-42720
+**** 11/01 20min:
+Fabrice Jammes
+10:07 PM
+@AndyS , to revert to mysql, we have also to revert and re-publish scisql and mysqlproxy, and, at least, change a configuration scripts in Qserv
+Fabrice Jammes
+10:09 PM
+The problem is not really the amount of code involved (which is quite small) but the struggle with all the eups packaging and the testing of overall integration.
+10:10 PM
+Colin Slater left the room.
+Fabrice Jammes
+10:10 PM
+@AndyS, let's move to Qserv room
+Fabrice Jammes
+10:12 PM
+@AndyS, about https://mariadb.com/kb/en/mariadb/mariadb-vs-mysql-compatibility/#incompatibilities-between-maria..., FYI I've tested disabling progress report on both MariaDB server and client side thinking it would solve our problem but it didn't.
+Fabrice Jammes
+10:14 PM
+@AndyS, could we please replace, in mariadb.table, envPrepend(PATH, ${PRODUCT_DIR/bin}) with envAppend(PATH, ${PRODUCT_DIR/bin})
+Andy Salnikov
+10:14 PM
+Which problem? Bad handshake is not because of progress report, it's separate issue.
+Fabrice Jammes
+10:14 PM
+Ok, I thought it was, good to know
+
+You've done great debugging!
+Andy Salnikov
+10:16 PM
+Regarding switching back to mysql (I'm not proposing to do it now, let's wait for mariadb answer) - why do we need to re-publish scisql and mysqlproxy? They already published, it should be enough to switch the tag to old versions, or am I missing anyhting?
+Fabrice Jammes
+10:17 PM
+About my previous point, this proposal would allow removal of envPrepend(PATH, ${MYSQLCLIENT_DIR}/bin) in qserv.table, this command sometimes breaks eups.
+Fabrice Jammes
+10:18 PM
+Yes you're right, but in the long term we couldn't code inside them, so a more durable way would be to revert tip of master branch to mysql compatible code and re-publish.
+Fabrice Jammes
+10:20 PM
+1. My proposal would add regular mysql client at the beginning of the path, and mariadb client at the end, so that a setup of mysqlclient would always have precedence, not so bad, until we have a fix or go away from mysqlproxy?
+Fabrice Jammes
+10:22 PM
+Need to go to bed, will check your answer tomorrow. Sorry for the mess with mariadb, but I strictly follow the official merge procedure, and the client problem isn't blocking...
+Have a nice day:-)
+Andy Salnikov
+10:22 PM
+In the long term we should stick to just one, I don't suppose we will be switching between mysql/mariadb frequently, my question was about switching back to mysql now until mariadb fixes its broken client.
+OK, good night 
+Fabrice Jammes
+10:24 PM
+The envPrepend envAppend stuff would be cheaper, and easy to fix, if you agree with that...
+
+**** 08/01 30min:
+Fabrice Jammes
+Jan-08 7:15 PM
+@ktl, sorry for that... Will be more careful in the future
+Yes everything is called mysql, but it's mariadb...
+Jacek Becla
+Jan-08 7:45 PM
+@fritz, yes I tried that too in one of my attempts. I am kind of stuck. I will try to build a stack completely from scratch rather than doing applying "eups distrib install -t qserv-dev qserv_distrib" on top, but if that does not work, I will really need @FabriceJammes to look at this
+Jacek Becla
+Jan-08 7:47 PM
+forced push to master? How can I see/detect that a forced push to master was made?
+Fritz Mueller
+Jan-08 7:48 PM
+I don't think it's detectable, if you didn't sync out the commit in the window before it was pushed over?
+Fritz Mueller
+Jan-08 7:49 PM
+maybe some log up on github?
+Fabrice Jammes
+Jan-08 7:49 PM
+You shouldn't have a problem, it was very short '10 minutes', maybe try to pull again and see if there is error message.
+Sorry
+Jacek Becla
+Jan-08 7:49 PM
+i looked, not obvious
+Fabrice Jammes
+Jan-08 7:49 PM
+**** 07/01 2h:
+Fabrice Jammes
+Jan-07 8:55 PM
+What I usually do:
+Fritz Mueller
+Jan-07 8:55 PM
+should I right now: a) publish mariadb, or b) punt, request frossie el al publish qserv, let that pick up mariadb?
+Fabrice Jammes
+Jan-07 8:56 PM
+publish -b bXXX qserv
+publish -b bXXX qserv_distrib -t qserv-dev
+Please remove the first line above (typo)
+Fritz Mueller
+Jan-07 8:56 PM
+yup
+Fabrice Jammes
+Jan-07 8:56 PM
+and then devs have to do
+K-T Lim
+Jan-07 8:56 PM
+You can always publish a -t qserv. It doesn't have to be -t qserv_2016_01
+Which is I think what Fabrice said.
+Fabrice Jammes
+Jan-07 8:56 PM
+eups distrib install qserv -t qserv-dev
+Yes qserv-dev tag is for qserv development version (Docker image use this tag)
+and tu publish release
+publish -b bXXX qserv_distrib -t qserv_latest
+(qserv_latest now replace deprecated qserv tag, and is equivalent to stack 'current', but for qserv)
+Jan-07 8:59 PM
+Fritz Mueller decides there are too many options now, to let square sort it, and help devs used "eupspkg" locally as a workaround on as-needed basis until then...
+Vaikunth Thukral
+Jan-07 8:59 PM
+So this should solve the problem of just having mariadb with the stack normally, but in the case that we want specific versions (like we do frequently with xrootd) should we eventually not have a "eups distrib install mariadb -t <versiontag>" like command? Granted xrootd changes more frequently and I'm not sure how quickly mariadb versions will change
+Fabrice Jammes
+Jan-07 8:59 PM
+please note that we can't use current because it would replace stack settings
+K-T Lim
+Jan-07 9:00 PM
+You can't publish -t current, but you can manually fix up the current manifest if necessary.
+Fabrice Jammes
+Jan-07 9:00 PM
+After many month using qserv_latest and qserv-dev, I think this is a reasonable choice, it workds fine for our current docker images.
+Maybe we should rename qserv-dev to qserv_dev
+K-T Lim
+Jan-07 9:00 PM
+@vaikunth You can always do "eups distrib install mariadb <version>" if you want.
+Without "-t"
+But the premise is that every qserv install requires a specific mariadb version and is not certified to work with any other.
+Fabrice Jammes
+Jan-07 9:01 PM
+Yes @ktl but fixing current manifest is difficult to maintain, you don't really know what is your 'current' on distribution server.
+Vaikunth Thukral
+Jan-07 9:02 PM
+Yep, that was the point I'm bringing up, if mariadb has been updated between cycles and has breaking changes we want to be able to get that specific version (like we do many times with xrootd)
+Tim Jenness
+Jan-07 9:02 PM
+But for a local developer you can just install the published mariadb and use local Qserv build
+Consider using lsstsw
+Rather than eups distrib
+K-T Lim
+Jan-07 9:03 PM
+"current" on distribution server is whatever the "current.list" says. If you're saying that it may get overwritten by something else, yes, that is a problem.
+Vaikunth Thukral
+Jan-07 9:03 PM
+Hmm, at this point eups distrib is too ingrained, @timj, do I just replaces "eups distrib" with "lsstsw" and the rest is the same?
+K-T Lim
+Jan-07 9:04 PM
+@vaikunth The publishing system automatically selects the mariadb (or xrootd) that qserv was built with by buildbot.
+I actually wouldn't recommend lsstsw for the Qserv team.
+Vaikunth Thukral
+Jan-07 9:04 PM
+Ah, I didn't know that
+K-T Lim
+Jan-07 9:04 PM
+They have very few packages.
+Tim Jenness
+Jan-07 9:04 PM
+Ok. It s the only way I ever build Qserv
+K-T Lim
+Jan-07 9:04 PM
+Most are third-party, not git clone built
+@vaikunth lsstsw is a rather different way of working than using eups distrib.
+Vaikunth Thukral
+Jan-07 9:06 PM
+Hmm, if we are to switch to it eventually then maybe I should give it a try
+Vaikunth Thukral
+Jan-07 9:06 PM
+Any instructions on a webpage somewhere/
+K-T Lim
+Jan-07 9:06 PM
+http://docs.lsst.codes/en/latest/development/lsstsw_tutorial.html
+But that's focused on Science Pipelines.
+You need to replace "lsst_apps" with "qserv_distrib"
+Vaikunth Thukral
+Jan-07 9:07 PM
+ thanks
+K-T Lim
+Jan-07 9:08 PM
+I think for Qserv it's more overhead without a lot of benefits, but perhaps I'm wrong.
+Fritz Mueller
+Jan-07 9:08 PM
+@vaikunth it will clone and build all depended-upon packages locally, if I understood it correctly?
+K-T Lim
+Jan-07 9:08 PM
+Yes
+Vaikunth Thukral
+Jan-07 9:08 PM
+So the overhead is that it also pulls the source for all dependencies?
+Vaikunth Thukral
+Jan-07 9:09 PM
+That's significant
+Fritz Mueller
+Jan-07 9:09 PM
+Yes
+K-T Lim
+Jan-07 9:09 PM
+Well, eups distrib install is doing that too.
+But it's not checking every time.
+Fabrice Jammes
+Jan-07 9:10 PM
+I've done what I usually do, and what I have forgotten to do today (sorry):
+[lsstsw@lsst-dev [master] ~]$ publish -t qserv-dev -b b1842 mariadb
+eupspkg.create: package contents created for 'mariadb-master-g01f1b67a80', sources will be fetched via 'package'.
+^Ceups distrib: Failed to write /home/lsstsw/distserver/production/products/mariadb-master-g01f1b67a80.eupspkg: [Errno 4] Interrupted system call
+[lsstsw@lsst-dev [master] ~]$ publish -t qserv-dev -b b1842 qserv_distrib
+eupspkg.create: package contents created for 'qserv_distrib-1.0.0+479', sources will be fetched via 'package'.
+eupspkg.create: package contents created for 'doxygen-1.8.5-1-g323f995', sources will be fetched via 'package'.
+eupspkg.create: package contents created for 'mariadb-master-g01f1b67a80&
+...
+Show full text
+Heu sorry, typo again:
+[lsstsw@lsst-dev [master] ~]$ publish -t qserv-dev -b b1842 qserv_distrib
+eupspkg.create: package contents created for 'qserv_distrib-1.0.0+479', sources will be fetched via 'package'.
+eupspkg.create: package contents created for 'doxygen-1.8.5-1-g323f995', sources will be fetched via 'package'.
+eupspkg.create: package contents created for 'mariadb-master-g01f1b67a80', sources will be fetched via 'package'.
+eupspkg.cre
+ate: package contents created for 'mysqlproxy-0.8.2-1-g1478339', sources will be fetched via 'package'.
+eupspkg.create: package contents created for 'sconsUtils-2015_11.0-2-g9960fc2+1', sources will be fetched via 'package'.
+eupspkg.create: packag
+...
+Show full text
+Vaikunth Thukral
+Jan-07 9:11 PM
+Awesome so now it should be up on the distrib server, thanks Fabrice!
+Fabrice Jammes
+Jan-07 9:11 PM
+Now all of you can upgrade to Qserv cutting edge version by running:
+eups distrib install -t qserv-dev qserv_distrib
+Hope it will help
+K-T Lim
+Jan-07 9:12 PM
+Sometimes it's good to just do it instead of talking about it 
+Fabrice Jammes
+Jan-07 9:13 PM
+Yes, but I was on my phone, so it was not possible to do it easily 
+Fritz Mueller
+Jan-07 9:13 PM
+thanks!
+Fabrice Jammes
+Jan-07 9:16 PM
+It seems there is a problem
+K-T Lim
+Jan-07 9:16 PM
+Uh oh
+Fabrice Jammes
+Jan-07 9:16 PM
+scisql tip of the master is tagged 0.3.4.lsst1
+and buildbot only build 0.3.4
+do you know why?
+FYI mariadb doesn't run whith 0.3.4
+Fabrice Jammes
+Jan-07 9:19 PM
+(so I'll have to re-publish after this problem is fixzd)
+K-T Lim
+Jan-07 9:21 PM
+It's not the tip of master.
+K-T Lim
+Jan-07 9:23 PM
+You never pushed master. I think you tagged locally and then pushed the tag, which got the commit to GH, but master wasn't updated to point to it.
+Fabrice Jammes
+Jan-07 9:26 PM
+ok correct, but I thought gut push --tags was also pushing code...
+K-T Lim
+Jan-07 9:27 PM
+Just tags, not branches.
+Fabrice Jammes
+Jan-07 9:29 PM
+ok done, thanks
+Fabrice Jammes
+Jan-07 9:30 PM
+@all, please let's wait for the next build and I'll re-publish, hope it'll work...
+Fritz Mueller
+Jan-07 9:30 PM
+kk, thx again!
+Fabrice Jammes
+Jan-07 9:31 PM
+Also sorry for breaking it....
+Fabrice Jammes
+Jan-07 9:38 PM
+Hope integration tests will pass, I've done intensive tests in my branches, but not yet on current qserv-dev release...
+Fritz Mueller
+Jan-07 9:46 PM
+oh man, qserv-dev tagged a whole new version of doxygen...
+Fritz Mueller
+Jan-07 9:51 PM
+meh, only 9M in the stack directory. Thought it was bigger than that.
+Fabrice Jammes
+Jan-07 10:02 PM
+Ok I've re-publish with latest scisql and mysqlproxy version, should be fine now please let me know 
+Fabrice Jammes
+Jan-07 10:05 PM
+use
+eups distrib install -t qserv-dev qserv_distrib
+to install cutting-edge dependency version
+Fritz Mueller
+Jan-07 10:07 PM
+(--onlydepend is useful there, too, if you are always gonna build qserv on top from source)
+Fritz Mueller
+Jan-07 10:21 PM
+Cool -- I was actually able to "eups remove mysql" after that. And integration tests passed. Nice work, @FabriceJammes
+Frossie ...
+Jan-07 10:21 PM
+you guys want that as the release?
+Fabrice Jammes
+Jan-07 10:21 PM
+Nice, thanks for letting me know 
+Thanks Frossie, on my side, I would be ok, @JacekBecla do you think it'll be fine?
+Fritz Mueller
+Jan-07 10:23 PM
+Good for me
+Fabrice Jammes
+Jan-07 10:24 PM
+Need to sleep, see you 
+Fritz Mueller
+Jan-07 10:25 PM
+g'night fabrice
+Jacek Becla
+Jan-07 10:45 PM
+Yes, let's do a release out of this. Thanks!
+**** 15/12     : Qserv meeting 20h45 -> 24H45 (4h) (avant la réunion avec E. Gangler)
+**** 06/01     : Qserv meeting 20h45 -> 24H15 (3h30)  (avant la réunion avec E. Gangler)
+
+*** 1.5 jour:
+    Astreinte semaine 20/11/2015
+    Récupérée par congés du 16-17-18/12/2015 après-midis
+*** 2 jours de 20151203:
+- 15/10     : Qserv meeting 20h45 -> 24H45 (4h)
+- 29/10     : Qserv meeting 20h45 -> 24H15 (3h30)
+- 26/11     : Qserv meeting 20h45 -> 01H00 (4H15)
+- 03/12     : Qserv meeting 20h45 -> 01H00 (4H15)
+*** 20151203
+agate:
+  congés: 16.5
+  recup: 1.5/18
+  CET: 30
+*** 20151122
+agate:
+  congés: 19
+  recup: 2.5/18
+  CET: 30
+*** 20151027
+agate:
+  congés: 19
+  recup: 1/15.5
+  CET: 30
+*** 2.5 jours :
+- Semaine du 2 novembre: 1 jour de récupération pour le 80%
+- Semaine du 9 novembre: 1 jour de récupération pour le 11 novembre, férié +
+  0.5 jour de récupération pour le 80% (une après-midi du 80% tombe le 11
+novembre, c'est pourquoi je l'ai déduite).
+*** 20151015
+agate:
+  congés: 19
+  recup: 1.5/15.5
+  CET: 30
+*** 2 jours de 20150909:
+- 09/09     : Qserv meeting 20h45 -> 24H15 (3h30)
+- 17/09     : Qserv meeting 20h45 -> 24H30 (3h45)
+- 23/09     : Qserv meeting 20h45 -> 24H15 (3h30)
+- 30/09     : Qserv meeting 20h45 -> 24H15 (3h30)
+- 07/10     : Qserv meeting 20h45 -> 24H15 (3h30)
+*** 20151008
+agate:
+  congés: 19 
+  recup: 0/13.5
+  CET: 30
+*** 20150909
+agate:
+  congés: 21.5
+  recup: 0/13.5
+  CET: 30
+*** 2 jours:
+- 26/08     : Qserv meeting 20h45 -> 24H15 (3h30)
+- 12/08     : Qserv meeting 20h45 -> 24H15 (3h30)
+- 22/07     : Qserv meeting 20h45 -> 24H15 (3h30)
+- 12/07     : Qserv meeting 20h45 -> 24H15 (3h30)
+*** 2 jours:
+- 17/06     : Qserv meeting 20h45 -> 24H15 (3h30)
+- 24/06     : Qserv meeting 20h45 -> 24H15 (3h30)
+- 01/07     : Qserv meeting 20h45 -> 24H00 (3h15)
+- 08/07     : Qserv meeting 20h45 -> 23H30 (2h45)
+- 15/07     : Qserv meeting 20h45 -> 24H00 (3h15)
+*** Etat 20150715: 
+agate:
+  congés: 24.5
+  recup: 2.5/6.5
+  CET: 30
+*** Etat 20150624: 
+agate:
+  congés: 24.5
+  recup: 3/6.5
+  CET: 30
+*** 1.5 jours recup astreinte semaine du 01/07
+*** 2 jours de 20150611:
+- 13/05     : Qserv meeting 20h45 -> 24H15 (3h30)
+- 28/05     : Qserv meeting 20h45 -> 24H15 (3h30)
+- 03/06     : CC-IN2P3 meeting 10H45 -> 11H30 (1H45)
+- 03/06     : Qserv meeting 20h45 -> 24H15 (3h30)
+- 10/06     : Entretien d'embauche + Qserv meeting 20h45 -> 24H30 (3h45)
+*** Etat 20150610: 
+agate:
+  congés: 24.5
+  recup: 2.5/4.5
+  CET: 30
+*** Etat 20150513: 
+agate:
+  congés: 24.5
+  recup: 4
+  CET: 30
+*** Etat 20150507: 
+recup:
+  agate: 1.5 jours
+en attente: 2 jours (20150507
+            -0.5 11/05/2015
+            1 jour récup du 20/05 à demander.
+*** 2 jours de 20150507:
+- 9/10/2014 : Qserv meeting 21h30 -> 24H30 (3h)
+- 15/04     : Qserv meeting 21h00 -> 24H00 (3h)
+- 21/04     : Qserv meeting 22h00 -> 1H00 (3h)
+- 22/04     : Qserv meeting 21h00 -> 22H00 (1h)
+- 29/04     : Qserv meeting 21h00 -> 23H30 (2h30)
+- 6/05     : Qserv meeting 21h00 -> 23H30 (2h30)
+
++ récup astreinte 23 - 30 avril
++ récup mercredi XLDB     
+*** 2 jours de 20141002 :
+- 2/10  : Qserv meeting (eups) 19h -> 01h00 (6h)
+- 1/10  : Qserv support (release S14) 20h -> 21H30 (2h30)
+- 24/09 : Qserv meeting 20h30 -> 24h00 (3h30)
+- 17/09 : Qserv meeting 20h30 -> 24h00 (3h30)
+- 10/09 : Qserv meeting 20h30 -> 23h30 (3h)
+  
+*** 2 jours de 20141002 :
+- 2/10  : Qserv meeting (eups) 19h -> 01h00 (6h)
+- 1/10  : Qserv support (release S14) 20h -> 21H30 (2h30)
+- 24/09 : Qserv meeting 20h30 -> 24h00 (3h30)
+- 17/09 : Qserv meeting 20h30 -> 24h00 (3h30)
+- 10/09 : Qserv meeting 20h30 -> 23h30 (3h)
+*** 2 jours de 20140903 :
+- 03/09 : Qserv meeting 20h30 -> 23h30 (3h)
+- 28/08 : Qserv meeting 21h30 -> 24h30 (3h)
+- 20/08 : Qserv meeting 20h00 -> 24h00 (4h)
+- 06/08 : Qserv meeting 21h30 -> 24h00 (2h30)
+- 16/07 : Qserv meeting 21h30 -> 24h00 (2h30)
+- 09/07 : Qserv meeting 21h30 -> 24h00 (2h30)
+*** 2 jours au 20140703
+- 03/07 : Qserv meeting 21h30 -> 24h00 (2h30)
+- 19/06 : Qserv meeting 21h30 -> 24h00 (2h30)
+- 12/06 : Qserv meeting 21h30 -> 24h00 (2h30)
+- 04/06 : Qserv meeting 21h30 -> 23h00 (1h30)
+- 28/05 : Qserv meeting 21h30 -> 23h30 (2h00)
+- 21/05 : Qserv meeting 21h30 -> 24h00 (2h30)
+- 14/05 : Qserv meeting 21h30 -> 24h00 (2h30)
+- 24/04 : Qserv meeting 21h30 -> 23h30 (2h)
+*** 1 jour 20140612
+habilitation électrique
+*** 3.5 jours 20140519
+- 02/05 : Qserv swt dev week (Mario Juric) : 18h -> 23h30 (5h30)
+- 02/05 : Préparation (packaging antlr, et kazoo) : 9h -> 12h (3h)
+- 01/05 : Qserv swt dev week (Mario Juric) : 18h -> 23h00 (5h00)
+- 01/05 : Préparation (packaging partition) : 9h -> 12h (3h)
+- 30/04 : Qserv software developper week : 18h -> 22h30 (4h30)
+- 30/04 : Préparation (tests d'intégration pour CSS) : 8h -> 12h (4h)
+- 29/04 : Qserv software developper week : 19h -> 23h00 (4h00)
+*** 1 jour  20140417
+- 17/04 : Qserv meeting 21h30 -> 23h30 (2h)
+- 10/04 : Qserv meeting 21h30 -> 23h30 (2h)
+- 03/04 : Qserv meeting 21h30 -> 23h (1h30)
+- 27/03 : Qserv meeting 20h30 -> 23h (2h30)
+*** 1 jour 20140327
+attention : 9h
+- 20/02 : Qserv meeting 21h30 -> 23h30 (2h) (+2h ensuite, non déclarées)
+- 24/02 : Qserv (install+build) mtg -> 21h30 -> 23h30 (2h)
+- 27/02 : Qserv (install+build) mtg -> 21h30 -> 24h00 (2h30)
+- 06/03 : Qserv meeting + JIRA Agile training -> 21h30 -> 23h30 (2h00)
+*** 1 jour 
+- 23/01 : Qserv meeting 21h45 -> 22h45 (1h)
+- 28/01 : Daniel Wang 21h45 -> 00h20 (2h30)
+- 30/01 : Qserv Meeting 21h40 -> 23h40 (2h00)
+-  6/01 : Qserv Meeting 21h45 -> 22h45 (1h00)
+- 13/01 : Qserv meeting 21h45 -> 23h15 (1h30)
+*** 1 jour : formation Irods du mercredi 12/02
+*** 1 jour :
+- 19/12 : Qserv meeting 21h45 -> 23h45 (2h)
+- 9/01 : Qserv meeting 21h45 -> 23h45 (2h)
+- 13/01 : Daniel Wang 21h30 -> 23h30 (2h)
+- 16/01 : Qserv meeting 21h45 -> 23h30 (1h45)
+*** 2013
+**** 18/12 : 1 journée (mercredi)
+**** 1 à 2 journées : voyage à SLAC
+- 0.5 jours : (compteur courant +1)
+- -0.5 jours : congé du 16/12 non posé
+- jeudi  5/12 : 21h50-00h15 (2h25)
+- mardi 10/12 : 21h50-23h00 (1h10)
+- jeudi 12/12 : 21h50-23h (1h10)
+  
+*** 20150818: 
+agate:
+  congés: 24.5
+  recup: 0.5/10
+  CET: 30
+*** 20150722: 
+agate:
+  congés: 24.5
+  recup: 4/10
+  CET: 30
+** 20141105
+conges : 0.5
+recup : 0
+CET : 15+22=37
+** 20140916
+conges : 26.5
+recup : 0.5
+CET : 15
+** 20140916
+conges : 26.5
+recup : 1.5
+CET : 10
+** 20140703
+conges : 28.5
+recup : 4.5
+CET : 15
+** 20140612
+conges : 28.5
+recup : 6
+CET : 15
+** 20140519
+conges : 28.5
+recup : 6
+CET : 15 
+** 20140429
+conges : 28.5
+recup : 8.5 (-6 séjour SLAC annulé)
+CET : 15
+** 20140327
+conges : 28.5
+recup : 6
+CET : 15
+** 20140307 : 
+conges : 30.5
+recup : 6
+CET : 15
+** 20140217 : 
+conges : 34
+recup : 6
+CET : 15
+** 20140214 : 
+conges : 34
+recup : 5
+CET : 15
+** 20140131 : 
+conges : 34
+recup : 4
+CET : 15
+
+** 20131222 :
+recup : 2.5
+CET : 15
+=> + 1.5 jours
+Explication (à valider) :
+  + 1 jour de récup en attente LSST-France (non demandé)
+  + 0.5 jour voyage SLAC ? ou non décompte congé du 16 am ? ou Marie s'est trompé et me l'a mis sur le CET ?
+
+** 20131219 :
+recup : 1.5
+CET : 14.5
+- 0.5 en attente de décompte
++ 0.5 jour de récup en attente
+  
