@@ -75,6 +75,14 @@ func main() {
 	fmt.Printf("beta\n")
 	printmat(beta)
 
+	zbeta := mat64.NewDense(nbline, 1, nil)
+	zbeta.Mul(z, beta)
+
+	final := mat64.NewDense(nbline, 1, nil)
+	final.Sub(zbeta, y)
+
+	norm := mat64.Norm(final, 2)
+	fmt.Printf("Norm %v\n", norm*norm)
 }
 
 func printmat(x mat64.Matrix) {
