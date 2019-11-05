@@ -1,0 +1,201 @@
+2019-11-05 23:06:22.668 org.sleuthkit.autopsy.core.Installer <init>
+INFO: core installer created
+2019-11-05 23:06:22.879 org.sleuthkit.autopsy.core.Installer validate
+INFO: validate()
+2019-11-05 23:06:22.879 org.sleuthkit.autopsy.core.Installer validate
+INFO: org.sleuthkit.autopsy.coreutils.Installer validate()
+2019-11-05 23:06:22.879 org.sleuthkit.autopsy.core.Installer validate
+INFO: org.sleuthkit.autopsy.corecomponents.Installer validate()
+2019-11-05 23:06:22.879 org.sleuthkit.autopsy.core.Installer validate
+INFO: org.sleuthkit.autopsy.datamodel.Installer validate()
+2019-11-05 23:06:22.896 org.sleuthkit.autopsy.core.Installer validate
+INFO: org.sleuthkit.autopsy.ingest.Installer validate()
+2019-11-05 23:06:22.896 org.sleuthkit.autopsy.core.Installer validate
+INFO: org.sleuthkit.autopsy.centralrepository.eventlisteners.Installer validate()
+2019-11-05 23:06:22.896 org.sleuthkit.autopsy.core.Installer validate
+INFO: org.sleuthkit.autopsy.healthmonitor.Installer validate()
+2019-11-05 23:06:23.097 org.sleuthkit.autopsy.timeline.TimeLineModule onStart
+INFO: Setting up TimeLine listeners
+2019-11-05 23:06:23.132 org.sleuthkit.autopsy.core.Installer <init>
+INFO: core installer created
+2019-11-05 23:06:23.23 org.sleuthkit.autopsy.coreutils.Installer restored
+INFO: Default charset: US-ASCII
+2019-11-05 23:06:23.23 org.sleuthkit.autopsy.coreutils.Installer restored
+INFO: Default file encoding: ANSI_X3.4-1968
+2019-11-05 23:06:23.23 org.sleuthkit.autopsy.coreutils.Installer restored
+INFO: Java runtime version: 1.8.0_201-b09
+2019-11-05 23:06:23.23 org.sleuthkit.autopsy.coreutils.Installer restored
+INFO: Netbeans Platform build: 201609300101
+2019-11-05 23:06:23.23 org.sleuthkit.autopsy.coreutils.Installer restored
+INFO: Application name: Autopsy, version: 4.13.0, build: RELEASE
+2019-11-05 23:06:23.23 org.sleuthkit.autopsy.coreutils.Installer restored
+INFO: os.name: Linux
+2019-11-05 23:06:23.23 org.sleuthkit.autopsy.coreutils.Installer restored
+INFO: os.arch: amd64
+2019-11-05 23:06:23.235 org.sleuthkit.autopsy.coreutils.Installer restored
+INFO: PID: 1050
+2019-11-05 23:06:23.236 org.sleuthkit.autopsy.coreutils.Installer restored
+INFO: Process Virtual Memory Used: 11308457984
+2019-11-05 23:06:23.236 org.sleuthkit.autopsy.core.Installer restored
+INFO: org.sleuthkit.autopsy.coreutils.Installer restore succeeded
+2019-11-05 23:06:23.236 org.sleuthkit.autopsy.core.Installer restored
+INFO: org.sleuthkit.autopsy.corecomponents.Installer restore succeeded
+2019-11-05 23:06:23.236 org.sleuthkit.autopsy.core.Installer restored
+INFO: org.sleuthkit.autopsy.datamodel.Installer restore succeeded
+2019-11-05 23:06:23.237 org.sleuthkit.autopsy.core.Installer restored
+INFO: org.sleuthkit.autopsy.ingest.Installer restore succeeded
+2019-11-05 23:06:23.238 org.sleuthkit.autopsy.core.Installer restored
+INFO: org.sleuthkit.autopsy.centralrepository.eventlisteners.Installer restore succeeded
+2019-11-05 23:06:23.251 org.sleuthkit.autopsy.core.Installer restored
+INFO: org.sleuthkit.autopsy.healthmonitor.Installer restore succeeded
+2019-11-05 23:06:23.251 org.sleuthkit.autopsy.core.Installer restored
+INFO: Autopsy Core restore completed
+2019-11-05 23:06:23.258 org.sleuthkit.autopsy.keywordsearch.KeywordSearchSettings setDefaults
+INFO: Detecting default settings.
+2019-11-05 23:06:23.42 org.sleuthkit.autopsy.keywordsearch.Server <init>
+INFO: Created Server instance using Java at java
+2019-11-05 23:06:23.421 org.sleuthkit.autopsy.keywordsearch.Server start
+INFO: Starting Solr server from: /opt/autopsy-4.13.0/autopsy/solr
+2019-11-05 23:06:23.421 org.sleuthkit.autopsy.keywordsearch.Server start
+INFO: Port [23,232] available, starting Solr
+2019-11-05 23:06:23.422 org.sleuthkit.autopsy.keywordsearch.Server runSolrCommand
+INFO: Running Solr command: [java, -Xmx512m, -DSTOP.PORT=34343, -Djetty.port=23232, -DSTOP.KEY=jjk#09s, -jar, start.jar, -Dbootstrap_confdir=../solr/configsets/AutopsyConfig/conf, -Dcollection.configName=AutopsyConfig]
+2019-11-05 23:06:23.423 org.sleuthkit.autopsy.keywordsearch.Server start
+SEVERE: Could not start Solr server process!
+java.io.IOException: Cannot run program "java" (in directory "/opt/autopsy-4.13.0/autopsy/solr"): error=2, No such file or directory
+	java.lang.ProcessBuilder.start(ProcessBuilder.java:1048)
+	org.sleuthkit.autopsy.keywordsearch.Server.runSolrCommand(Server.java:395)
+	org.sleuthkit.autopsy.keywordsearch.Server.start(Server.java:477)
+	org.sleuthkit.autopsy.keywordsearch.Installer.restored(Installer.java:49)
+	org.netbeans.core.startup.NbInstaller.loadCode(NbInstaller.java:468)
+	org.netbeans.core.startup.NbInstaller.loadImpl(NbInstaller.java:391)
+	org.netbeans.core.startup.NbInstaller.access$000(NbInstaller.java:102)
+	org.netbeans.core.startup.NbInstaller$1.run(NbInstaller.java:343)
+	org.openide.filesystems.FileUtil$2.run(FileUtil.java:437)
+	org.openide.filesystems.EventControl.runAtomicAction(EventControl.java:127)
+	org.openide.filesystems.FileSystem.runAtomicAction(FileSystem.java:519)
+	org.openide.filesystems.FileUtil.runAtomicAction(FileUtil.java:421)
+	org.openide.filesystems.FileUtil.runAtomicAction(FileUtil.java:441)
+	org.netbeans.core.startup.NbInstaller.load(NbInstaller.java:340)
+	org.netbeans.ModuleManager.enable(ModuleManager.java:1365)
+	org.netbeans.ModuleManager.enable(ModuleManager.java:1170)
+	org.netbeans.core.startup.ModuleList.installNew(ModuleList.java:340)
+	org.netbeans.core.startup.ModuleList.trigger(ModuleList.java:276)
+	org.netbeans.core.startup.ModuleSystem.restore(ModuleSystem.java:301)
+	org.netbeans.core.startup.Main.getModuleSystem(Main.java:181)
+	org.netbeans.core.startup.Main.getModuleSystem(Main.java:150)
+	org.netbeans.core.startup.Main.start(Main.java:307)
+	org.netbeans.core.startup.TopThreadGroup.run(TopThreadGroup.java:123)
+	java.lang.Thread.run(Thread.java:748)
+java.io.IOException: error=2, No such file or directory
+	java.lang.ProcessBuilder.start(ProcessBuilder.java:1048)
+	org.sleuthkit.autopsy.keywordsearch.Server.runSolrCommand(Server.java:395)
+	org.sleuthkit.autopsy.keywordsearch.Server.start(Server.java:477)
+	org.sleuthkit.autopsy.keywordsearch.Installer.restored(Installer.java:49)
+	org.netbeans.core.startup.NbInstaller.loadCode(NbInstaller.java:468)
+	org.netbeans.core.startup.NbInstaller.loadImpl(NbInstaller.java:391)
+	org.netbeans.core.startup.NbInstaller.access$000(NbInstaller.java:102)
+	org.netbeans.core.startup.NbInstaller$1.run(NbInstaller.java:343)
+	org.openide.filesystems.FileUtil$2.run(FileUtil.java:437)
+	org.openide.filesystems.EventControl.runAtomicAction(EventControl.java:127)
+	org.openide.filesystems.FileSystem.runAtomicAction(FileSystem.java:519)
+	org.openide.filesystems.FileUtil.runAtomicAction(FileUtil.java:421)
+	org.openide.filesystems.FileUtil.runAtomicAction(FileUtil.java:441)
+	org.netbeans.core.startup.NbInstaller.load(NbInstaller.java:340)
+	org.netbeans.ModuleManager.enable(ModuleManager.java:1365)
+	org.netbeans.ModuleManager.enable(ModuleManager.java:1170)
+	org.netbeans.core.startup.ModuleList.installNew(ModuleList.java:340)
+	org.netbeans.core.startup.ModuleList.trigger(ModuleList.java:276)
+	org.netbeans.core.startup.ModuleSystem.restore(ModuleSystem.java:301)
+	org.netbeans.core.startup.Main.getModuleSystem(Main.java:181)
+	org.netbeans.core.startup.Main.getModuleSystem(Main.java:150)
+	org.netbeans.core.startup.Main.start(Main.java:307)
+	org.netbeans.core.startup.TopThreadGroup.run(TopThreadGroup.java:123)
+	java.lang.Thread.run(Thread.java:748)
+2019-11-05 23:06:23.424 org.sleuthkit.autopsy.keywordsearch.Installer restored
+SEVERE: Failed to start Keyword Search server: 
+org.sleuthkit.autopsy.keywordsearch.KeywordSearchModuleException: Could not start Solr server process
+	org.sleuthkit.autopsy.keywordsearch.Server.start(Server.java:516)
+	org.sleuthkit.autopsy.keywordsearch.Installer.restored(Installer.java:49)
+	org.netbeans.core.startup.NbInstaller.loadCode(NbInstaller.java:468)
+	org.netbeans.core.startup.NbInstaller.loadImpl(NbInstaller.java:391)
+	org.netbeans.core.startup.NbInstaller.access$000(NbInstaller.java:102)
+	org.netbeans.core.startup.NbInstaller$1.run(NbInstaller.java:343)
+	org.openide.filesystems.FileUtil$2.run(FileUtil.java:437)
+	org.openide.filesystems.EventControl.runAtomicAction(EventControl.java:127)
+	org.openide.filesystems.FileSystem.runAtomicAction(FileSystem.java:519)
+	org.openide.filesystems.FileUtil.runAtomicAction(FileUtil.java:421)
+	org.openide.filesystems.FileUtil.runAtomicAction(FileUtil.java:441)
+	org.netbeans.core.startup.NbInstaller.load(NbInstaller.java:340)
+	org.netbeans.ModuleManager.enable(ModuleManager.java:1365)
+	org.netbeans.ModuleManager.enable(ModuleManager.java:1170)
+	org.netbeans.core.startup.ModuleList.installNew(ModuleList.java:340)
+	org.netbeans.core.startup.ModuleList.trigger(ModuleList.java:276)
+	org.netbeans.core.startup.ModuleSystem.restore(ModuleSystem.java:301)
+	org.netbeans.core.startup.Main.getModuleSystem(Main.java:181)
+	org.netbeans.core.startup.Main.getModuleSystem(Main.java:150)
+	org.netbeans.core.startup.Main.start(Main.java:307)
+	org.netbeans.core.startup.TopThreadGroup.run(TopThreadGroup.java:123)
+	java.lang.Thread.run(Thread.java:748)
+java.io.IOException: Cannot run program "java" (in directory "/opt/autopsy-4.13.0/autopsy/solr"): error=2, No such file or directory
+	org.sleuthkit.autopsy.keywordsearch.Server.start(Server.java:516)
+	org.sleuthkit.autopsy.keywordsearch.Installer.restored(Installer.java:49)
+	org.netbeans.core.startup.NbInstaller.loadCode(NbInstaller.java:468)
+	org.netbeans.core.startup.NbInstaller.loadImpl(NbInstaller.java:391)
+	org.netbeans.core.startup.NbInstaller.access$000(NbInstaller.java:102)
+	org.netbeans.core.startup.NbInstaller$1.run(NbInstaller.java:343)
+	org.openide.filesystems.FileUtil$2.run(FileUtil.java:437)
+	org.openide.filesystems.EventControl.runAtomicAction(EventControl.java:127)
+	org.openide.filesystems.FileSystem.runAtomicAction(FileSystem.java:519)
+	org.openide.filesystems.FileUtil.runAtomicAction(FileUtil.java:421)
+	org.openide.filesystems.FileUtil.runAtomicAction(FileUtil.java:441)
+	org.netbeans.core.startup.NbInstaller.load(NbInstaller.java:340)
+	org.netbeans.ModuleManager.enable(ModuleManager.java:1365)
+	org.netbeans.ModuleManager.enable(ModuleManager.java:1170)
+	org.netbeans.core.startup.ModuleList.installNew(ModuleList.java:340)
+	org.netbeans.core.startup.ModuleList.trigger(ModuleList.java:276)
+	org.netbeans.core.startup.ModuleSystem.restore(ModuleSystem.java:301)
+	org.netbeans.core.startup.Main.getModuleSystem(Main.java:181)
+	org.netbeans.core.startup.Main.getModuleSystem(Main.java:150)
+	org.netbeans.core.startup.Main.start(Main.java:307)
+	org.netbeans.core.startup.TopThreadGroup.run(TopThreadGroup.java:123)
+	java.lang.Thread.run(Thread.java:748)
+java.io.IOException: error=2, No such file or directory
+	org.sleuthkit.autopsy.keywordsearch.Server.start(Server.java:516)
+	org.sleuthkit.autopsy.keywordsearch.Installer.restored(Installer.java:49)
+	org.netbeans.core.startup.NbInstaller.loadCode(NbInstaller.java:468)
+	org.netbeans.core.startup.NbInstaller.loadImpl(NbInstaller.java:391)
+	org.netbeans.core.startup.NbInstaller.access$000(NbInstaller.java:102)
+	org.netbeans.core.startup.NbInstaller$1.run(NbInstaller.java:343)
+	org.openide.filesystems.FileUtil$2.run(FileUtil.java:437)
+	org.openide.filesystems.EventControl.runAtomicAction(EventControl.java:127)
+	org.openide.filesystems.FileSystem.runAtomicAction(FileSystem.java:519)
+	org.openide.filesystems.FileUtil.runAtomicAction(FileUtil.java:421)
+	org.openide.filesystems.FileUtil.runAtomicAction(FileUtil.java:441)
+	org.netbeans.core.startup.NbInstaller.load(NbInstaller.java:340)
+	org.netbeans.ModuleManager.enable(ModuleManager.java:1365)
+	org.netbeans.ModuleManager.enable(ModuleManager.java:1170)
+	org.netbeans.core.startup.ModuleList.installNew(ModuleList.java:340)
+	org.netbeans.core.startup.ModuleList.trigger(ModuleList.java:276)
+	org.netbeans.core.startup.ModuleSystem.restore(ModuleSystem.java:301)
+	org.netbeans.core.startup.Main.getModuleSystem(Main.java:181)
+	org.netbeans.core.startup.Main.getModuleSystem(Main.java:150)
+	org.netbeans.core.startup.Main.start(Main.java:307)
+	org.netbeans.core.startup.TopThreadGroup.run(TopThreadGroup.java:123)
+	java.lang.Thread.run(Thread.java:748)
+2019-11-05 23:06:24.008 org.sleuthkit.autopsy.coreutils.ModuleSettings getConfigSetting
+INFO: File did not exist. Created file [Case.properties]
+2019-11-05 23:06:24.021 org.sleuthkit.autopsy.casemodule.StartupWindowProvider init
+INFO: Will use the default startup window: org.sleuthkit.autopsy.casemodule.StartupWindow[dialog0,0,24,483x314,invalid,hidden,layout=java.awt.BorderLayout,APPLICATION_MODAL,title=Welcome,defaultCloseOperation=HIDE_ON_CLOSE,rootPane=javax.swing.JRootPane[,5,25,473x284,layout=javax.swing.JRootPane$RootLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=16777673,maximumSize=,minimumSize=,preferredSize=],rootPaneCheckingEnabled=true]
+2019-11-05 23:06:24.095 org.sleuthkit.autopsy.corecomponents.DataContentViewerHex <init>
+INFO: Created HexView instance: org.sleuthkit.autopsy.corecomponents.DataContentViewerHex[,0,0,0x0,invalid,layout=javax.swing.GroupLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=java.awt.Dimension[width=100,height=58]]
+2019-11-05 23:06:24.182 org.sleuthkit.autopsy.coreutils.StringExtract$StringExtractUnicodeTable init
+INFO: initialized, unicode table loaded
+2019-11-05 23:06:24.424 org.sleuthkit.autopsy.contentviewers.MediaFileViewer <init>
+INFO: Created MediaView instance: org.sleuthkit.autopsy.contentviewers.MediaFileViewer[,0,0,0x0,invalid,layout=java.awt.CardLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2019-11-05 23:06:24.444 org.sleuthkit.autopsy.contentviewers.FileViewer <init>
+INFO: Created ApplicationContentViewer instance: org.sleuthkit.autopsy.contentviewers.FileViewer[,0,0,0x0,invalid,layout=javax.swing.OverlayLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2019-11-05 23:06:24.515 org.sleuthkit.autopsy.corecomponents.DataContentTopComponent <init>
+INFO: Created DataContentTopComponent instance: org.sleuthkit.autopsy.corecomponents.DataContentTopComponent[Data Content,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=256,maximumSize=,minimumSize=,preferredSize=]
+2019-11-05 23:07:03.456 org.sleuthkit.autopsy.casemodule.Case openAsCurrentCase
+INFO: Opening test (test_20191105_230703) in /home/fjammes/test as the current case

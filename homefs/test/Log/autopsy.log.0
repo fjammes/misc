@@ -1,0 +1,130 @@
+2019-11-05 23:07:04.032 org.sleuthkit.autopsy.coreutils.ModuleSettings getConfigSetting
+INFO: File did not exist. Created file [Tags.properties]
+2019-11-05 23:07:04.228 org.sleuthkit.autopsy.casemodule.Case openAppServiceCaseResources
+SEVERE: Solr Keyword Search Service failed to open case resources for test
+java.util.concurrent.ExecutionException: org.sleuthkit.autopsy.appservices.AutopsyService$AutopsyServiceException: Failed to open or create core for /home/fjammes/test
+	java.util.concurrent.FutureTask.report(FutureTask.java:122)
+	java.util.concurrent.FutureTask.get(FutureTask.java:192)
+	org.sleuthkit.autopsy.casemodule.Case.openAppServiceCaseResources(Case.java:2260)
+	org.sleuthkit.autopsy.casemodule.Case.open(Case.java:1891)
+	org.sleuthkit.autopsy.casemodule.Case.lambda$open$5(Case.java:1779)
+	java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	java.lang.Thread.run(Thread.java:748)
+org.sleuthkit.autopsy.appservices.AutopsyService$AutopsyServiceException: Failed to open or create core for /home/fjammes/test
+	java.util.concurrent.FutureTask.report(FutureTask.java:122)
+	java.util.concurrent.FutureTask.get(FutureTask.java:192)
+	org.sleuthkit.autopsy.casemodule.Case.openAppServiceCaseResources(Case.java:2260)
+	org.sleuthkit.autopsy.casemodule.Case.open(Case.java:1891)
+	org.sleuthkit.autopsy.casemodule.Case.lambda$open$5(Case.java:1779)
+	java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	java.lang.Thread.run(Thread.java:748)
+org.sleuthkit.autopsy.keywordsearch.KeywordSearchModuleException: Failed to connect to Solr server: Server refused connection at: http://localhost:23232/solr
+	java.util.concurrent.FutureTask.report(FutureTask.java:122)
+	java.util.concurrent.FutureTask.get(FutureTask.java:192)
+	org.sleuthkit.autopsy.casemodule.Case.openAppServiceCaseResources(Case.java:2260)
+	org.sleuthkit.autopsy.casemodule.Case.open(Case.java:1891)
+	org.sleuthkit.autopsy.casemodule.Case.lambda$open$5(Case.java:1779)
+	java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	java.lang.Thread.run(Thread.java:748)
+org.apache.solr.client.solrj.SolrServerException: Server refused connection at: http://localhost:23232/solr
+	java.util.concurrent.FutureTask.report(FutureTask.java:122)
+	java.util.concurrent.FutureTask.get(FutureTask.java:192)
+	org.sleuthkit.autopsy.casemodule.Case.openAppServiceCaseResources(Case.java:2260)
+	org.sleuthkit.autopsy.casemodule.Case.open(Case.java:1891)
+	org.sleuthkit.autopsy.casemodule.Case.lambda$open$5(Case.java:1779)
+	java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	java.lang.Thread.run(Thread.java:748)
+java.net.ConnectException: Connection refused (Connection refused)
+	java.util.concurrent.FutureTask.report(FutureTask.java:122)
+	java.util.concurrent.FutureTask.get(FutureTask.java:192)
+	org.sleuthkit.autopsy.casemodule.Case.openAppServiceCaseResources(Case.java:2260)
+	org.sleuthkit.autopsy.casemodule.Case.open(Case.java:1891)
+	org.sleuthkit.autopsy.casemodule.Case.lambda$open$5(Case.java:1779)
+	java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	java.lang.Thread.run(Thread.java:748)
+2019-11-05 23:07:04.238 org.sleuthkit.autopsy.imagegallery.PerCaseProperties getConfigSetting
+INFO: File did not exist. Created file [Image Gallery.properties]
+2019-11-05 23:07:04.335 org.sleuthkit.autopsy.imagegallery.datamodel.DrawableDB setPragmas
+INFO: sqlite-jdbc version 3.25.2 loaded in native mode
+2019-11-05 23:07:04.366 org.sleuthkit.autopsy.casemodule.Case openAsCurrentCase
+INFO: Opened test (test_20191105_230703) in /home/fjammes/test as the current case
+2019-11-05 23:07:04.574 org.sleuthkit.autopsy.ingest.IngestModuleFactoryLoader addFactory
+INFO: Found ingest module factory: name = Correlation Engine, version = 4.13.0
+2019-11-05 23:07:04.585 org.sleuthkit.autopsy.ingest.IngestModuleFactoryLoader addFactory
+INFO: Found ingest module factory: name = Data Source Integrity, version = 4.13.0
+2019-11-05 23:07:04.593 org.sleuthkit.autopsy.ingest.IngestModuleFactoryLoader addFactory
+INFO: Found ingest module factory: name = Embedded File Extractor, version = 4.13.0
+2019-11-05 23:07:04.6 org.sleuthkit.autopsy.ingest.IngestModuleFactoryLoader addFactory
+INFO: Found ingest module factory: name = Encryption Detection, version = 4.13.0
+2019-11-05 23:07:04.607 org.sleuthkit.autopsy.ingest.IngestModuleFactoryLoader addFactory
+INFO: Found ingest module factory: name = Exif Parser, version = 4.13.0
+2019-11-05 23:07:04.615 org.sleuthkit.autopsy.ingest.IngestModuleFactoryLoader addFactory
+INFO: Found ingest module factory: name = Extension Mismatch Detector, version = 4.13.0
+2019-11-05 23:07:04.622 org.sleuthkit.autopsy.ingest.IngestModuleFactoryLoader addFactory
+INFO: Found ingest module factory: name = File Type Identification, version = 4.13.0
+2019-11-05 23:07:04.63 org.sleuthkit.autopsy.ingest.IngestModuleFactoryLoader addFactory
+INFO: Found ingest module factory: name = Hash Lookup, version = 4.13.0
+2019-11-05 23:07:04.637 org.sleuthkit.autopsy.ingest.IngestModuleFactoryLoader addFactory
+INFO: Found ingest module factory: name = Interesting Files Identifier, version = 4.13.0
+2019-11-05 23:07:04.644 org.sleuthkit.autopsy.ingest.IngestModuleFactoryLoader addFactory
+INFO: Found ingest module factory: name = PhotoRec Carver, version = 7.0
+2019-11-05 23:07:04.652 org.sleuthkit.autopsy.ingest.IngestModuleFactoryLoader addFactory
+INFO: Found ingest module factory: name = Plaso, version = 4.13.0
+2019-11-05 23:07:04.659 org.sleuthkit.autopsy.ingest.IngestModuleFactoryLoader addFactory
+INFO: Found ingest module factory: name = Virtual Machine Extractor, version = 4.13.0
+2019-11-05 23:07:04.659 org.sleuthkit.autopsy.ingest.IngestModuleFactoryLoader addFactory
+INFO: Found ingest module factory: name = Keyword Search, version = 4.13.0
+2019-11-05 23:07:04.66 org.sleuthkit.autopsy.ingest.IngestModuleFactoryLoader addFactory
+INFO: Found ingest module factory: name = Email Parser, version = 4.13.0
+2019-11-05 23:07:04.661 org.sleuthkit.autopsy.ingest.IngestModuleFactoryLoader addFactory
+INFO: Found ingest module factory: name = Recent Activity, version = 4.13.0
+2019-11-05 23:07:10.041 org.sleuthkit.autopsy.ingest.IngestModuleFactoryLoader getIngestModuleFactories
+INFO: Found ingest module factory: name = Android Analyzer, version = 4.13.0
+2019-11-05 23:07:10.041 org.sleuthkit.autopsy.coreutils.ModuleSettings setConfigSetting
+INFO: File did not exist. Created file [org.sleuthkit.autopsy.casemodule.AddImageWizardIngestConfigPanel.properties]
+2019-11-05 23:07:10.111 org.sleuthkit.autopsy.keywordsearch.KeywordSearchGlobalSearchSettingsPanel customizeComponents
+WARNING: Could not get number of indexed files/chunks
+2019-11-05 23:07:10.194 org.sleuthkit.autopsy.coreutils.ModuleSettings getConfigSetting
+INFO: File did not exist. Created file [LastDspUsed.properties]
+2019-11-05 23:07:10.195 org.sleuthkit.autopsy.casemodule.AddImageWizardSelectDspPanel getComponent
+WARNING: There was no properties file containing the last DataSourceProcessor used, Disk Image or VM will be selected as default selection
+2019-11-05 23:08:22.636 org.sleuthkit.autopsy.casemodule.Case closeCurrentCase
+INFO: Closing current case test (test_20191105_230703) in /home/fjammes/test
+2019-11-05 23:08:24.644 org.sleuthkit.autopsy.casemodule.Case closeAppServiceCaseResources
+SEVERE: Solr Keyword Search Service service failed to open case resources
+java.util.concurrent.ExecutionException: java.lang.IllegalArgumentException: missing event subscriber for an annotated method. Is org.sleuthkit.autopsy.keywordsearch.SolrSearchService@b8fc5cf registered?
+	java.util.concurrent.FutureTask.report(FutureTask.java:122)
+	java.util.concurrent.FutureTask.get(FutureTask.java:192)
+	org.sleuthkit.autopsy.casemodule.Case.closeAppServiceCaseResources(Case.java:2487)
+	org.sleuthkit.autopsy.casemodule.Case.close(Case.java:2436)
+	org.sleuthkit.autopsy.casemodule.Case.lambda$close$8(Case.java:2365)
+	java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	java.lang.Thread.run(Thread.java:748)
+java.lang.IllegalArgumentException: missing event subscriber for an annotated method. Is org.sleuthkit.autopsy.keywordsearch.SolrSearchService@b8fc5cf registered?
+	java.util.concurrent.FutureTask.report(FutureTask.java:122)
+	java.util.concurrent.FutureTask.get(FutureTask.java:192)
+	org.sleuthkit.autopsy.casemodule.Case.closeAppServiceCaseResources(Case.java:2487)
+	org.sleuthkit.autopsy.casemodule.Case.close(Case.java:2436)
+	org.sleuthkit.autopsy.casemodule.Case.lambda$close$8(Case.java:2365)
+	java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	java.lang.Thread.run(Thread.java:748)
+2019-11-05 23:08:24.648 org.sleuthkit.autopsy.imagegallery.ImageGalleryController shutDown
+INFO: Shutting down image gallery controller for case test (test_20191105_230703)
+2019-11-05 23:08:24.653 org.sleuthkit.autopsy.imagegallery.datamodel.DrawableDB close
+INFO: Closing the drawable.db
+2019-11-05 23:08:24.654 org.sleuthkit.autopsy.imagegallery.ImageGalleryController shutDown
+INFO: Completed shut down of image gallery controller for case test (test_20191105_230703)
