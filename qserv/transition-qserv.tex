@@ -1,54 +1,96 @@
-\documentclass[french]{article}
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
+\documentclass[french] {article}
+\usepackage[T1] {fontenc}
+\usepackage[utf8] {inputenc}
 \usepackage{lmodern}
-\usepackage[a4paper]{geometry}
+\usepackage[a4paper] {geometry}
 \usepackage{babel}
-	
-\title{Transition en douceur et continuité des opérations avec \textit{qserv-ingest} et \textit{qserv-operator}}
 
+\title{Transition en douceur et continuité des opérations avec \textit{qserv-ingest} et \textit{qserv-operator}}
 \author{Fabrice Jammes}
+\date{\today\\v2}
 
 \begin{document}
-	
-	\maketitle
-	
-	\section{Introduction}
-	
-	Conformément à la demande de Johan Brégeon et de Philippe Gris, vous trouverez ci-dessous un plan concernant ma sortie du projet d'ici à la fin de l'année, en prenant en compte les éléments suivants: 
-	
-	\begin{itemize}
-		\item Inclusion de \textit{qserv-ingest} et \textit{qserv-operator} dans \textit{Qserv}
-		\item Appropriation des outils par Igor
-		\item Utilisation des outils en production par Igor et d'autres membres de l'équipe.
-	\end{itemize}
 
-	\section{Amélioration de la documentation de \textit{qserv-ingest} et \textit{qserv-operator}}
-	
-	La première étape consistera à vérifier et à améliorer la documentation de \textit{qserv-ingest} et \textit{qserv-operator}. Cette documentation inclut des instructions étape par étape sur leur fonctionnement, leur configuration, les bonnes pratiques, ainsi que des exemples d'utilisation. Afin de s'assurer que la documentation est claire et facilement compréhensible, il serait idéal que les nouveaux développeurs utilisent l'outil et fassent des retours à Fabrice Jammes concernant la qualité de la documentation. Cette méthode de travail a été mise en oeuvre par le passé avec les équipes du CC-IN2P3 et du UK-DAC et elle a démontré son efficacité. En plus de ce processus, Fabrice propose également d'effectuer une relecture minutieuse de la documentation de ces deux composants.
-	
-	\section{Formation et transfert des compétences}
-	
-	Fabrice Jammes propose d'organiser une session de formation dédiée aux nouveaux développeurs (c'est à dire Igor, ou tout autre personne intéressée), au cours de laquelle il présentera les fonctionnalités et les concepts clés de \textit{qserv-ingest} et \textit{qserv-operator}. Pendant la formation, Fabrice présentera et mettra en œuvre des cas d'utilisation simples.
-	
-	\section{Collaboration et support}
-	
-	Lorsque le(s) futur(s) développeur(s) du code auront été identifiés, Fabrice Jammes propose de mettre en place une période de collaboration et de support durant laquelle il travaillera main dans la main avec ces derniers afin de résoudre les problèmes potentiels et répondre à leurs questions. Fabrice Jammes propose de planifier des réunions régulières pour discuter des progrès, partager des retours d'expérience et offrir une assistance technique si nécessaire. Cette période de collaboration permettra aux nouveaux développeurs de gagner en confiance et d'acquérir une expérience pratique avec les outils.
-	
-	\section{Test en conditions réelles}
-	
-	 Une fois que les futurs développeur(s) seront à l'aise avec \textit{qserv-ingest} et \textit{qserv-operator}, Fabrice Jammes planifiera une phase de test en conditions réelles. Il identifiera un ensemble de tâches ou de projets appropriés où les développeurs(s) pourront utiliser les outils dans un environnement de production simulé. Cela leur permettra d'acquérir une expérience pratique et de résoudre les problèmes éventuels sous la supervision de Fabrice Jammes.
-	 
-	 \section{Transition progressive}
-	
-	Au fur et à mesure que la confiance et l'expérience des nouveaux développeurs avec \textit{qserv-ingest} et \textit{qserv-operator} augmenteront, Fabrice Jammes leur déléguera de plus en plus de responsabilité et se retirera progressivement du projet.
-	
-	\section{Suivi et support post-transition}
-	
-	Suite à sa sortie du projet, Fabrice Jammes communiquera ponctuellement avec les nouveaux développeurs via les canaux de communication ouverts de LSSTC afin que ces derniers puissent poser des questions ou demander de l'aide en cas de besoin.
-	
-	\section{Conclusion}
-	
-	En suivant ce plan, l'IN2P3 devrait être en mesure de favoriser une transition en douceur et de permettre à l'équipe Qserv de prendre en charge la gestion du départ de Fabrice Jammes tout en assurant la continuité des opérations avec \textit{qserv-ingest} et \textit{qserv-operator}.
-	
+\maketitle
+
+\section{Introduction}
+
+Conformément à la demande de Johan Brégeon et de Philippe Gris, vous trouverez ci-dessous un plan concernant ma sortie du projet d'ici à la fin de l'année, en prenant en compte les éléments suivants:
+
+\begin{itemize}
+\item Inclusion de \textit{qserv-ingest} et \textit{qserv-operator} dans \textit{Qserv}
+\item Appropriation des outils par Igor
+\item Utilisation des outils en production par Igor et d'autres membres de l'équipe.
+\end{itemize}
+
+\section{Engagements à terme}
+
+\subsection{Chargement des données \textit{DP02} générées au CC-IN2P3}
+
+Fabrice Jammes s'engage à apporter son expertise technique pour le chargement dans \textit{Qserv} des données astronomiques \textit{DP02} ayant été générés lors du dernier semestre 2022 et du premier semestre
+2023 au \textit{CC-IN2P3}.
+Il s'assurera que toutes les données requises, telles que les observations, les mesures, les catalogues, etc., sont correctement intégrées dans \textit{Qserv}. En outre, il contribuera aux éventuelles
+opérations de débogage et de mise au point de la pile logicielle \textit{Qserv} nécessaire à l'ingestion de ces données.
+
+\subsection{Formation Kubernetes pour les équipes d'Edimbourg}
+
+De plus, Fabrice Jammes  s'engage également à former les équipes d'Edimbourg sur l'utilisation de Kubernetes, la plateforme de gestion de conteneurs sous-jacente à \textit{Qserv}. La formation portera sur les
+concepts fondamentaux de Kubernetes, son architecture, les déploiements de conteneurs, la gestion des ressources et d'autres aspects pertinents. L'objectif est de permettre aux équipes d'Edimbourg de prendre
+en charge et de maintenir le système \textit{Qserv} en utilisant Kubernetes de manière efficace et autonome.
+
+\section{Gestion de la transition}
+
+\subsection{Amélioration de la documentation de \textit{qserv-ingest} et \textit{qserv-operator}}
+
+La première étape consistera à vérifier et à améliorer la documentation de \textit{qserv-ingest} et \textit{qserv-operator}.
+Cette documentation inclut des instructions étape par étape sur leur fonctionnement, leur configuration, les bonnes pratiques, ainsi que des exemples d'utilisation.
+Afin de s'assurer que la documentation est claire et facilement compréhensible, il serait idéal que les nouveaux développeurs utilisent l'outil et fassent des retours à Fabrice Jammes concernant
+la qualité de la documentation. Cette méthode de travail a été mise en oeuvre par le passé avec les équipes du CC-IN2P3 et du UK-DAC et elle a démontré son efficacité. En plus de ce processus,
+Fabrice propose également d'effectuer une relecture minutieuse de la documentation de ces deux composants.
+
+\subsection{Formation et transfert des compétences}
+
+Fabrice Jammes propose d'organiser une session de formation dédiée aux nouveaux développeurs (c'est à dire Igor, ou tout autre personne intéressée), au cours de laquelle il présentera les fonctionnalités
+et les concepts clés de \textit{qserv-ingest} et \textit{qserv-operator}. Pendant la formation, Fabrice présentera et mettra en œuvre des cas d'utilisation simples.
+
+\subsection{Collaboration et support}
+
+Lorsque le(s) futur(s) développeur(s) du code auront été identifiés, Fabrice Jammes propose de mettre en place une période de collaboration et de support durant laquelle il travaillera main dans la main
+avec ces derniers afin de résoudre les problèmes potentiels et répondre à leurs questions. Fabrice Jammes propose de planifier des réunions régulières pour discuter des progrès, partager des retours
+d'expérience et offrir une assistance technique si nécessaire. Cette période de collaboration permettra aux nouveaux développeurs de gagner en confiance et d'acquérir une expérience pratique avec les outils.
+
+\subsection{Test en conditions réelles}
+
+Une fois que les futurs développeur(s) seront à l'aise avec \textit{qserv-ingest} et \textit{qserv-operator}, Fabrice Jammes planifiera une phase de test en conditions réelles. Il identifiera un
+ensemble de tâches ou de projets appropriés où les développeurs(s) pourront utiliser les outils dans un environnement de production simulé. Cela leur permettra d'acquérir une expérience pratique
+et de résoudre les problèmes éventuels sous la supervision de Fabrice Jammes.
+
+\subsection{Transition progressive}
+
+Au fur et à mesure que la confiance et l'expérience des nouveaux développeurs avec \textit{qserv-ingest} et \textit{qserv-operator} augmenteront, Fabrice Jammes leur déléguera de plus en plus de
+responsabilité et se retirera progressivement du projet.
+
+\subsection{Suivi et support post-transition}
+
+Suite à sa sortie du projet, Fabrice Jammes communiquera ponctuellement avec les nouveaux développeurs via les canaux de communication ouverts de LSSTC afin que ces derniers puissent poser
+des questions ou demander de l'aide en cas de besoin.
+
+\section{Alternative}
+
+Fabrice Jammes est prêt à s'engager à plus long terme sur les aspects R\&D de Qserv en tant qu'expert technique, à condition que l'équipe R\&D de Qserv en France puisse se renforcer. À ce jour, Fabrice considère
+que l'équipe R\&D de Qserv en France est largement sous-dimensionnée par rapport à la complexité du projet, ce qui rend la situation difficilement tenable. En tant qu'expert technique,  Fabrice souligne la nécessité
+d'une équipe R\&D de Qserv en France solide, motivée et compétente pour faire face à la complexité du projet de manière durable.
+
+La proposition de Fabrice repose sur l'idée que si l'équipe R\&D de Qserv en France peut être renforcée en termes de personnel qualifié, il serait prêt à continuer à apporter son expertise technique
+à plus long terme. Cela permettrait d'assurer une stabilité et une continuité dans les activités de R\&D, ainsi qu'un soutien technique de haut niveau à l'équipe.
+
+Si cette piste était retenue, Fabrice Jamme souhaite prendre part au processus de sélection des futurs développeurs Qserv.
+
+Cette solution permettrait à Fabrice de travailler à la fois sur Qserv et sur Fink, qui demande lui aussi la présence d'un développeur confirmé et d'un expert Kubernetes. De plus, il serait plus sain pour le projet que les compétences R\&D de \textit{Qserv} soient réparties entre plusieurs ingénieurs de l'IN2P3.
+
+\section{Conclusion}
+
+En suivant ce plan, l'IN2P3 devrait être en mesure de favoriser une transition en douceur et de permettre à l'équipe Qserv de prendre en charge la gestion du départ potentiel de Fabrice Jammes tout en
+assurant la continuité des opérations avec \textit{qserv-ingest} et \textit{qserv-operator}.
+
 \end{document}
