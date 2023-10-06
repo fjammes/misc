@@ -1,0 +1,66 @@
+Slide 1: Titre
+
+    Titre : Utilisation de GitHub Copilot pour les Ingénieurs en Informatique
+    Sous-titre : Une introduction à GitHub Copilot
+
+Slide 2: Introduction
+
+    Objectif : Comprendre comment utiliser GitHub Copilot pour améliorer le flux de travail du développement logiciel.
+    GitHub Copilot : Un outil d'assistance à la programmation basé sur l'IA développé par GitHub en collaboration avec OpenAI.
+
+Slide 3: Installation
+
+    Étape 1 : Assurez-vous d'avoir une licence GitHub Copilot.
+    Étape 2 : Installez l'extension Copilot dans votre éditeur de code préféré (VS Code pris en charge actuellement).
+
+Slide 4: Configuration de Copilot
+
+    Connectez votre compte GitHub à Copilot.
+    Personnalisez les paramètres et les préférences selon vos besoins.
+
+Slide 5: Utilisation de GitHub Copilot
+
+    Fonctionnalités Clés :
+        Autocomplétion de code intelligente.
+        Suggestion de documentation.
+        Détection d'erreurs et de bogues potentiels.
+        Génération de tests unitaires.
+
+Slide 6: Flux de Travail avec Copilot
+
+    Étape 1 : Commencez à écrire votre code.
+    Étape 2 : Observez les suggestions de Copilot.
+    Étape 3 : Acceptez, personnalisez ou ignorez les suggestions.
+    Étape 4 : Gagnez du temps et améliorez la qualité du code.
+
+Slide 7: Utilisation Avancée
+
+    Collaboration : Partagez vos suggestions Copilot avec votre équipe.
+    Personnalisation : Adaptez Copilot à votre style de codage.
+    Apprentissage : Copilot s'améliore avec chaque utilisation, apprend de votre code.
+
+Slide 8: Bonnes Pratiques
+
+    Restez impliqué : Ne remplacez pas votre réflexion par Copilot.
+    Comprenez le code généré : Assurez-vous de comprendre le code que Copilot génère.
+    Révisez et testez : Toujours vérifier et tester le code généré.
+
+Slide 9: Avantages de GitHub Copilot
+
+    Augmentation de la productivité.
+    Réduction des erreurs de code.
+    Accélération du développement.
+    Amélioration de la collaboration au sein de l'équipe.
+
+Slide 10: Conclusion
+
+    Récapitulation des avantages de GitHub Copilot.
+    Encouragez les ingénieurs à l'essayer pour améliorer leur flux de travail de développement.
+
+Slide 11: Questions
+
+    Ouvrez la session pour des questions et des discussions.
+
+Slide 12: Ressources Supplémentaires
+
+    Fournissez des liens vers la documentation, les tutoriels, et les ressources pour en savoir plus sur GitHub Copilot.
