@@ -1,6 +1,0 @@
-setupRequired(mysql)
-setupRequired(lua)
-setupRequired(libevent)
-
-envPrepend(PATH, ${PRODUCT_DIR}/bin)
-envPrepend(MANPATH, ${PRODUCT_DIR}/man)

@@ -1,5 +1,0 @@
-setupRequired(mysql)
-setupRequired(xrootd)
-setupRequired(protobuf)
-setupRequired(luaxmlrpc)
-setupRequired(twisted)

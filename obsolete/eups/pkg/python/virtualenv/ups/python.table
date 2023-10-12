@@ -1,2 +1,0 @@
-setupRequired(virtualenv)
-envPrepend(PATH, ${PRODUCT_DIR}/bin)

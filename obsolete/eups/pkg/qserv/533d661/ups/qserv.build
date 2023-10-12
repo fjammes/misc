@@ -1,4 +1,0 @@
-@QSERV FUNCTIONS@
-
-qserv_globals @PRODUCT@ @VERSION@ &&
-qserv_ups @PRODUCT@ @VERSION@ ${PRODUCT_DIR}

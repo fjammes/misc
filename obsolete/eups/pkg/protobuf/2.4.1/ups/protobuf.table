@@ -1,3 +1,0 @@
-setupRequired(python)
-envPrepend(PATH, ${PRODUCT_DIR}/bin)
-envPrepend(MANPATH, ${PRODUCT_DIR}/man)

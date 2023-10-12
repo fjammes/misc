@@ -1,3 +1,0 @@
-- build dynamic library .so in lib/
-- distutils.sh will build swig interface and install python module
-- source env-run.sh then test : python test.py 

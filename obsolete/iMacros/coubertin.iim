@@ -1,4 +1,0 @@
-﻿VERSION BUILD=8601111 RECORDER=FX
-TAB T=1
-URL GOTO=http://www.leboncoin.fr/ventes_immobilieres/offres/auvergne/?f=a&th=1&pe=4&sqs=1&sqe=7&q=coubertin&location=Clermont-Ferrand
-SAVEAS TYPE=CPL FOLDER=/home/fjammes/tmp/ FILE=coubertin.txt

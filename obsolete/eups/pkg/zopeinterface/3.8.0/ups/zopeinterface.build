@@ -1,9 +1,0 @@
-# qserv build script 
-# # # # 
-@QSERV FUNCTIONS@
-
-qserv_globals @PRODUCT@ @VERSION@ &&
-qserv_prepare @PRODUCT@ @VERSION@ "zope.interface" &&
-python setup.py build &&
-python setup.py install &&
-qserv_ups @PRODUCT@ @VERSION@ ${PRODUCT_DIR}
