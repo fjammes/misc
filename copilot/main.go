@@ -1,49 +1,103 @@
-// Créer un client kubernetes qui compte de nombre de pod dans le namesace kube-system
+// Create a golang program which count number of pod in kube-system namespace
+// and print the result to console
+// Use kubernetes go-client library
 
 package main
 
 import (
 	"context"
 	"fmt"
+	"log"
 	"os"
+	"path/filepath"
+	"time"
 
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/clientcmd"
 )
 
-// createClient crée un client kubernetes
-func createClient() (*kubernetes.Clientset, error) {
-	// Créer un client kubernetes
-	config, err := clientcmd.BuildConfigFromFlags("", os.Getenv("KUBECONFIG"))
+// Create a function which create a Kubernetes clientset from kubeconfig file
+// and return the clientset
+func createClientset() (*kubernetes.Clientset, error) {
+	// Get kubeconfig file path from environment variable
+	kubeconfig := os.Getenv("KUBECONFIG")
+	if kubeconfig == "" {
+		return nil, fmt.Errorf("KUBECONFIG environment variable is not set")
+	}
+
+	// Get absolute path of kubeconfig file
+	kubeconfig, err := filepath.Abs(kubeconfig)
 	if err != nil {
 		return nil, err
 	}
-	return kubernetes.NewForConfig(config)
+
+	// Build config from kubeconfig file
+	config, err := clientcmd.BuildConfigFromFlags("", kubeconfig)
+	if err != nil {
+		return nil, err
+	}
+
+	// Create kubernetes clientset
+	clientset, err := kubernetes.NewForConfig(config)
+	if err != nil {
+		return nil, err
+	}
+
+	return clientset, nil
 }
 
-// countPods compte le nombre de pod dans le namespace kube-system
-func countPods(client *kubernetes.Clientset) (int, error) {
-	// Compter le nombre de pod dans le namespace kube-system
-	pods, err := client.CoreV1().Pods("kube-system").List(context.TODO(), metav1.ListOptions{})
-	if err != nil {
-		return 0, err
+// Create a factorial function
+func factorial(n int) int {
+	if n == 0 {
+		return 1
 	}
-	return len(pods.Items), nil
+	return n * factorial(n-1)
+}
+
+// Create a fibonacci function
+func fibonacci(n int) int {
+	if n <= 1 {
+		return n
+	}
+	return fibonacci(n-1) + fibonacci(n-2)
 }
 
 func main() {
-
-	config, err := createClient()
-	if err != nil {
-		panic(err)
-	}
-	client, err := kubernetes.NewForConfig(config)
-	if err != nil {
-		panic(err)
+	// Get kubeconfig file path from environment variable
+	kubeconfig := os.Getenv("KUBECONFIG")
+	if kubeconfig == "" {
+		log.Fatal("KUBECONFIG environment variable is not set")
 	}
 
-	// Compter le nombre de pod dans le namespace kube-system
-	nbpods, err := countPods(client)
-	fmt.Printf("There are %d pods in the cluster\n", nbpods)
+	// Get absolute path of kubeconfig file
+	kubeconfig, err := filepath.Abs(kubeconfig)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Build config from kubeconfig file
+	config, err := clientcmd.BuildConfigFromFlags("", kubeconfig)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Create kubernetes clientset
+	clientset, err := kubernetes.NewForConfig(config)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Create context with timeout
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	// Get pods in kube-system namespace
+	pods, err := clientset.CoreV1().Pods("kube-system").List(ctx, metav1.ListOptions{})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Print number of pods
+	fmt.Printf("Number of pods in kube-system namespace: %d\n", len(pods.Items))
 }
