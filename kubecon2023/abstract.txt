@@ -1,0 +1,10 @@
+Fink, a community-driven project, runs machine learning algorithms crafted by cosmologists in order to
+efficiently process large-scale astronomical alert streams and contribute to advancing astrophysical discovery.
+
+New telescopes, like ZTF and Rubin LSST, ingest real-time alert streams into Kafka servers. Fink analyzes theses
+alerts and stream the results to other telescopes, fostering interoperability and real-time data exchange.
+
+With a Spark-based architecture running on Kubernetes, Fink is poised to scale effectively to handle the massive
+volume of alerts from upcoming astronomical surveys. Fink's upcoming deployment at the CC-IN2P3 scientific data center
+for collaboration with the Vera C. Rubin Observatory is heavily based on Kubernetes and modern devops techniques.
+Finally, Fink's complex software stack is rigorously tested in a self-hosted CI/CD environment on Kubernetes and OpenStack.
