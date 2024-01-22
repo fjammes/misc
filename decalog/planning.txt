@@ -20,12 +20,14 @@ Comme je te disais :
    Ma préférence allait à la seconde méthode, qui permet de contribuer
    partiellement, mais à plus de missions.
 
-2) Un entretien avec la direction IN2P3 à l'automne, ce qui demande un petit
+2) Un entretien avec la direction IN2P3 à l'automne: EAP, ce qui demande un petit
    travail de collecte des ETPs, publications, realisations marquantes,
    en s'appuyant sur les porteurs de Decalog et Reprises.
    L'idéal étant de demander à ces derniers de tenir à jour ces
    informations au fil de l'année. Mais en vrai c'est généralement
    fait à lárrach;ee les 15 jours qui precedent la reunion ;)
+   Bilan de l'année et demande de budget pour l'année suivante.
+
 
 > - une estimation de la charge de travail en équivalent temps plein (FTE)
 
@@ -49,6 +51,6 @@ laboratoire n'est pas censé taxer en amont, dixit Sabine.
 Oui.
 Tient moi au courant.
 
--- 
+--
 Adieu l'Ami
 https://www.in2p3.cnrs.fr/fr/personne/berrie-giebels

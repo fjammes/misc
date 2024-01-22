@@ -1,0 +1,26 @@
+Projet bénévole
+
+Mettre un point régulier avec les gestionnaires de GT, 1x par mois par 2mois
+- Mettre des jalons
+- Objectif de l'année
+- Ouvert au monde extérieur
+- Soumettre un projet Openlab
+- Organiser un workshop
+
+Organisations européennes:
+EGFA, NUMPEC, APEC
+Réunion JENA
+Jena spécifique computing
+Suivre cela avec David
+
+HSF?
+Openlab: CERN travaux avec les entreprises privées
+- Informatique quantique
+- Informatique hétérogène
+ESCAPE: projet européen
+
+
+Nouveau arrivants:
+- Vincent Reverdy
+- Adriano Di Florio: calcul hétérogène: l'intégrer à l'atelier, l'inviter aux réunions et workshops (vient de CMS)
+- Bertrand Simon: systèmes batch, intégrer à l'atelier, l'inviter aux réunions et workshops (vient de CMS)
