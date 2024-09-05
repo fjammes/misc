@@ -1,3 +1,4 @@
+# PAT require access to "Content"
 name: Triggered by Local Job
 
 on:
@@ -9,7 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: dispatch trigger
+    - name: success
+      if: ${{ github.event.client_payload.unit }} == true
+      run: |
+        echo "repository_dispatch triggered"
+    - name: failure
       if: ${{ github.event.client_payload.unit }} == true
       run: |
         echo "repository_dispatch triggered"
