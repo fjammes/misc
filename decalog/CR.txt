@@ -1,0 +1,74 @@
+Reprise
+-------
+
+L'école "Grey Scott Battle Reloaded" avance bien
+
+Ecole programmation hétérogène: début juillet 2023 https://indico.in2p3.fr/event/29755/timetable/#all
+12 jours de formation
+Sponsoring DELL
+Pas de fees pour éviter de passer par Azure-Colloque qui ne fonctionne pas bien.
+Trop long pour une ANF donc pas de financement ANF
+
+Ecole est dans EVERSE et OSCAR EuroCC EuroHPC
+
+Teratec: est une association qui repertorie les formations en calcul intensif animée par des industriels, en lien avec euroHPT
+Campus à côté du TGCC (Très Grand Centre de Calcul) à Bruyères-le-Châtel
+EuroCC-fr: https://cc-fr.eu/
+
+Embarquer les mesocentres francophones: INRIA CERFACS
+40 personnes en présentiel
+
+Avoir une personne par centre partenaire pour le support
+Streaming sur youtube en direct + chat persistent (au moins 200 personnes)
+
+- Utilisation du budget REPRISE pour défrayer les formateurs?
+
+- L'année prochaine: europe + francophonie +  conteneurs + orchestration
+
+- Budget: 6000 Reprise + 4000 ComputeOps + 2000 Vincent Reverdy
+
+
+ComputeOps
+----------
+
+1er semestre:
+CSAN: EdgeNet: catalogue de conteneurs pour kubernetes converger avec eux
+Martin OK, Jérôme
+KubeCon
+Quay.io scan de sécu.
+
+Pierre va voir avec Giovanni Lamanna pour voir si CSAN est intéressant pour les projets européens.
+
+TODO : Faire une fiche CSAN pour les nuls
+
+Workshop ou école sur les conteneurs: rejouer la partie conteneurs de l'ANF sur une journée aux utilisateurs et aux scientifiques
+au deuxième semestre 2023
+
+INFOS CSAN:
+https://gitlab.in2p3.fr/CodeursIntensifs/ComputeOps/-/wikis/csan
+https://gitlab.in2p3.fr/csan/csan
+https://groupes.renater.fr/sympa/info/csan
+
+https://csanhub.org/account/sign-in?redirect_url=%2Fharbor%2Fprojects
+
+Budget prévisionnel:
+
+- Workshop ComputeOps 2000
+- Info administrative pour le virement à transmettre à David (liste type des infos)
+
+
+TODO:
+    Code Labintel : UMR????
+    Code division : ????
+    Domaine fonctionnel : ??????
+    Délégation régionale : DR??\
+
+Nouveau arrivants:
+- Vincent Reverdy: ok intégré
+- Adriano Di Florio: calcul hétérogène: l'intégrer à l'atelier, l'inviter aux réunions et workshops (vient de CMS): à intégrer à REPRISE (il faisait du GPU pour CMS)
+- Bertrand Simon: systèmes batch, intégrer à l'atelier, l'inviter aux réunions et workshops (vient de CMS): déjà invité à Reprise à refaire
+  plutôt orienté sur la théorie
+
+Communication
+- Gitlag Decalog: https://gitlab.in2p3.fr/CodeursIntensifs/DecaLog: mettre à jour + page ComputeOps et Reprise
+- Wiki ComputeOps: créer un domaine computeops.in2p3.fr + decalog.in2p3.fr , voir avec Aurélien? Je gère les noms de domaines et lui le gitlab pages

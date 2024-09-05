@@ -17,7 +17,8 @@ alias kubectx="kubectl ctx"
 
 alias vi="nvim"
 
+alias cdm="cd ~/src/github.com/fjammes/linux-mao"
 alias cdl="cd ~/src/l1p5-vuejs/"
-alias cdks="cd ~/src/k8s-school"
-alias cdls="cd ~/src/lsst"
-alias cdas="cd ~/src/astrolabsoftware"
+alias cdls="cd ~/src/github.com/lsst"
+alias cdas="cd ~/src/github.com/astrolabsoftware"
+alias cdm="cd ~/src/github.com/fjammes/linux-mao"

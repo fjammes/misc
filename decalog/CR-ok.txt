@@ -1,0 +1,83 @@
+# Participants
+- Aurélien Bailly-Reyre
+- David Chamont
+- Pierre Aubert
+- Fabrice Jammes
+
+# Reprise
+
+## École de programmation hétérogène "Grey Scott Battle Reloaded":
+
+- Progression satisfaisante.
+- Prévue début juillet 2023
+    - Durée de 12 jours de formation
+    - Présence de 40 participants en présentiel
+    - Diffusion en streaming sur YouTube avec un chat persistant (au moins 200 personnes)
+
+    - Aucun frais pour éviter Azure-Colloque en raison de problèmes antérieurs
+    - Non-financement ANF en raison de la durée excessive
+    - Détails à préciser sur le sponsoring DELL
+
+    - Implication dans EVERSE, OSCAR, EuroCC et EuroHPC
+
+Partenariat solide avec Teratec:
+
+    - Association répertoriant les formations en calcul intensif
+    - Animation par des industriels, en lien avec EuroHPT
+    - Campus situé près du TGCC à Bruyères-le-Châtel
+    - EuroCC-fr: [lien](https://cc-fr.eu/)
+
+L'objectif est d'embarquer les mesocentres francophones:
+
+    - L'INRIA et le CERFACS ont confirmé leur participation.
+    - Chaque centre partenaire mettra en œuvre sa plate-forme pédagogique, avec un correspondant assurant le support.
+
+Points à aborder:
+
+    - Étude de l'utilisation du budget REPRISE pour défrayer les formateurs.
+    - L'année prochaine, l'école visera l'Europe + la francophonie, avec une introduction sur les conteneurs.
+
+# ComputeOps
+
+## 1er semestre:
+
+    - Aurélien organisera prochainement des réunions CSAN et ComputeOps
+
+### CSAN:
+    - Étudier une convergence avec EdgeNet - catalogue de conteneurs pour Kubernetes
+    - Relancer Martin et Jérôme
+    - Pierre consulte Giovanni Lamanna sur l'intérêt de CSAN pour les projets européens
+
+    - Quay.io scan de sécurité
+
+    - TODO : Faire une fiche CSAN pour les nuls
+https://gitlab.in2p3.fr/CodeursIntensifs/ComputeOps/-/wikis/csan
+https://gitlab.in2p3.fr/csan/csan
+https://groupes.renater.fr/sympa/info/csan
+https://csanhub.org/account/sign-in?redirect_url=%2Fharbor%2Fprojects
+
+### KubeCon
+
+Forte participation des membres de ComputeOps à la KubeCon avec en prime un talk sur le projet Fink
+
+## 2ème semestre
+    - Workshop ou école sur les conteneurs
+
+# Budget prévisionnel:
+
+    - Budget: 6000 Reprise + 4000 ComputeOps + 2000 Vincent Reverdy
+    - Workshop ComputeOps 2000€ ?
+
+## TODO
+    - Fabrice: Transmettre les codes Labintel du LPC à David: UMR, code division, domaine fonctionnel, délégation régionale
+
+# Nouveaux arrivants:
+
+    - Vincent Reverdy: bien intégré à Reprise
+    - Adriano Di Florio: Calcul hétérogène - à intégrer à l'atelier et aux réunions/workshops Reprise en raison de son expertise GPU
+    - Bertrand Simon: Systèmes batch - à intégrer à l'atelier et aux réunions/workshops (re-inviter à Reprise)
+
+# Communication:
+
+    - TODO Gitlag Decalog: [lien](https://gitlab.in2p3.fr/CodeursIntensifs/DecaLog) mise à jour + page ComputeOps et Reprise
+    - TODO Wiki ComputeOps: créer un domaine computeops.in2p3.fr + decalog.in2p3.fr, voir avec Aurélien? Je gère les noms de domaines et lui le gitlab pages

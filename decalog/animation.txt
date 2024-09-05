@@ -8,19 +8,25 @@ Mettre un point régulier avec les gestionnaires de GT, 1x par mois par 2mois
 - Organiser un workshop
 
 Organisations européennes:
-EGFA, NUMPEC, APEC
-Réunion JENA
-Jena spécifique computing
+ECFA, NuPECC, APPEC
+Réunion JENAS: https://indico.cern.ch/event/1040535/
+Jenas spécifique computing
 Suivre cela avec David
 
 HSF?
-Openlab: CERN travaux avec les entreprises privées
-- Informatique quantique
-- Informatique hétérogène
-ESCAPE: projet européen
+- CERN Openlab: travaux avec les entreprises privées https://home.cern/fr/science/computing/cern-openlab
+    - Informatique quantique
+    - Informatique hétérogène
+ESCAPE: projet européen https://projectescape.eu/
+EVERSE: projet européen https://everse.software/
 
 
 Nouveau arrivants:
-- Vincent Reverdy
-- Adriano Di Florio: calcul hétérogène: l'intégrer à l'atelier, l'inviter aux réunions et workshops (vient de CMS)
-- Bertrand Simon: systèmes batch, intégrer à l'atelier, l'inviter aux réunions et workshops (vient de CMS)
+- Vincent Reverdy: ok intégré
+- Adriano Di Florio: calcul hétérogène: l'intégrer à l'atelier, l'inviter aux réunions et workshops (vient de CMS): à intégrer à REPRISE (il faisait du GPU pour CMS)
+- Bertrand Simon: systèmes batch, intégrer à l'atelier, l'inviter aux réunions et workshops (vient de CMS): déjà invité à Reprise à refaire
+  plutôt orienté sur la théorie
+
+ComputOPS
+- CSAN
+- Aurélien Aubert va être papa, a t-il besoin d'aide de ma part?
