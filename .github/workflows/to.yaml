@@ -1,7 +1,7 @@
-name: dispatch receiver
+name: Triggered by Local Job
 
 on:
-  repository_dispatch
+  repository_dispatch:
     types: [e2e-science]
 
 jobs:
