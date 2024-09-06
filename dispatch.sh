@@ -1,3 +1,7 @@
+#!/bin/bash
+
+set -euxo pipefail
+
 curl -L \
   -X POST \
   -H "Accept: application/vnd.github+json" \
