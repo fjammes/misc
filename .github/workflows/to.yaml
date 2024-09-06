@@ -11,11 +11,10 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: success
-      if: ${{ github.event.client_payload.unit }} == true
       run: |
-        echo "repository_dispatch triggered ${{ github.event.client_payload.unit }} "
-        echo "repository_dispatch triggered ${{ github.event.client_payload }} "
-    - name: failure
-      if: ${{ github.event.client_payload.unit }} == false
-      run: |
-        echo "repository_dispatch triggered"
+        if [ "${{ github.event.client_payload.unit }}" == "true" ]; then
+          echo "build success"
+        else
+          echo "build failed"
+          exit 1
+        fi
