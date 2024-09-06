@@ -1,0 +1,27 @@
+# PAT require access to "Content"
+name: Triggered by Local Job
+
+on:
+  repository_dispatch:
+    types: [e2e-science]
+
+jobs:
+  e2e-science:
+    runs-on: ubuntu-latest
+    steps:
+    - name: build
+      run: |
+        if [ "${{ github.event.client_payload.build }}" == "true" ]; then
+          echo "build success"
+        else
+          echo "build failed"
+          exit 1
+        fi
+    - name: e2e
+      run: |
+        if [ "${{ github.event.client_payload.e2e }}" == "true" ]; then
+          echo "e2e test success"
+        else
+          echo "e2e test failed"
+          exit 1
+        fi
