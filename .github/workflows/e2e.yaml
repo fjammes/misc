@@ -1,5 +1,5 @@
 # PAT require access to "Content"
-name: Triggered by Local Job
+name: Self-hosted CI
 
 on:
   repository_dispatch:
@@ -20,8 +20,16 @@ jobs:
     - name: e2e
       run: |
         if [ "${{ github.event.client_payload.e2e }}" == "true" ]; then
-          echo "e2e test success"
+          echo "Succeed to run e2e tests"
         else
-          echo "e2e test failed"
+          echo "Failed to run e2e tests"
+          exit 1
+        fi
+    - name: push
+      run: |
+        if [ "${{ github.event.client_payload.push }}" == "true" ]; then
+          echo "Succeed in pushing image"
+        else
+          echo "Failed to push image"
           exit 1
         fi
