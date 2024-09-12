@@ -10,8 +10,9 @@ build=true
 e2e=true
 push=true
 cluster_name="kind"
+image="fjammes/science:latest"
 
-payload="{\"build\": $build,\"e2e\": $e2e,\"push\": $push, \"cluster_name\": \"$cluster_name\"}"
+payload="{\"build\": $build,\"e2e\": $e2e,\"push\": $push, \"cluster_name\": \"$cluster_name\", \"image\": \"$image\"}"
 echo "Payload: $payload"
 
 if [ -z "$token" ]; then
