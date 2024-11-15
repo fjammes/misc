@@ -1,0 +1,3 @@
+Au niveau des actions, il y a eu tes tests sur Fink, le projet Openlab. L'essentiel du travail s'est porté sur CSAN avec le maintient du site csan-hub (mises a jour et ajout de Trivy), la connection au S3, la "kubernetisation" en cours de CSAN, la réunion avec Kay Graf et le recrutement de CDD en cours.
+zsh: no such file or directory: https://ijclab.zoom.us/my/david.chamontPour
+zsh: no matches found: (mises a jour et ajout de Trivy),

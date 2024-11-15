@@ -1,3 +1,7 @@
+12000
+- 2000: C++
+- 6000: Gray Scott
+
 Les conférences doivent être financées par les labos, en informer Sabine pour une demande exceptionnelle.
 De même pour les formations.
 Ok pour les workshops!
