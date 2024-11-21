@@ -1,0 +1,8 @@
+Créduits Scaleway
+
+ComputeOps -> CSAN (WP)
+
+Que deviennent les master-projects de type calcul et données
+- est-ce qu'ils vont perdurer ?
+- est-ce qu'il y a moyen d'avoir des financement de these par ce biais ?
+- est-ce qu'on doit tous se transformer en Cellules d'Expertise pour survivre ?
